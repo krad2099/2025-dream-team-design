@@ -2,8 +2,6 @@
 # Make any changes here to set up your build environment (e.g., installing crypto
 # libraries, dependencies, the compiler for a different language)
 
-RUN python -m pip install pycrypto
-
 FROM ubuntu:24.04
 
 LABEL version="0.2"
