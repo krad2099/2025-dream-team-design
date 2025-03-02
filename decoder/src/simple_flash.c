@@ -1,18 +1,4 @@
-/**
- * @file "simple_flash.c"
- * @author Samuel Meyers
- * @brief Simple Flash Interface Implementation 
- * @date 2025
- *
- * This source file is part of an example system for MITRE's 2025 Embedded System CTF (eCTF).
- * This code is being provided only for educational purposes for the 2025 MITRE eCTF competition,
- * and may not meet MITRE standards for quality. Use this code at your own risk!
- *
- * @copyright Copyright (c) 2025 The MITRE Corporation
- */
-
 #include "simple_flash.h"
-
 #include <stdio.h>
 
 #include "flc.h"
@@ -45,7 +31,7 @@ void flash_simple_irq(void) {
  * 
  * This function registers the interrupt for the flash system,
  * enables the interrupt, and disables ICC
-*/
+ */
 void flash_simple_init(void) {
     // Setup Flash
     MXC_NVIC_SetVector(FLC0_IRQn, flash_simple_irq);
@@ -65,7 +51,7 @@ void flash_simple_init(void) {
  * Flash memory can only be erased in a large block size called a page.
  * Once erased, memory can only be written one way e.g. 1->0.
  * In order to be re-written the entire page must be erased.
-*/
+ */
 int flash_simple_erase_page(uint32_t address) {
     return MXC_FLC_PageErase(address);
 }
@@ -79,7 +65,7 @@ int flash_simple_erase_page(uint32_t address) {
  * 
  * This function reads data from the specified flash page into the buffer
  * with the specified amount of bytes
-*/
+ */
 void flash_simple_read(uint32_t address, void* buffer, uint32_t size) {
     MXC_FLC_Read(address, (uint32_t *)buffer, size);
 }
@@ -97,7 +83,7 @@ void flash_simple_read(uint32_t address, void* buffer, uint32_t size) {
  * with the specified amount of bytes. Flash memory can only be written in one
  * way e.g. 1->0. To rewrite previously written memory see the 
  * flash_simple_erase_page documentation.
-*/
+ */
 int flash_simple_write(uint32_t address, void* buffer, uint32_t size) {
     return MXC_FLC_Write(address, size, (uint32_t *)buffer);
 }
