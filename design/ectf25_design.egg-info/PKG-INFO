@@ -1,0 +1,5 @@
+Metadata-Version: 2.2
+Name: ectf25_design
+Version: 2025.0+example
+Requires-Python: >=3.11
+Requires-Dist: loguru
