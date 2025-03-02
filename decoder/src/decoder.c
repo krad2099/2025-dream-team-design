@@ -1,16 +1,3 @@
-/**
- * @file    decoder.c
- * @author  Samuel Meyers
- * @brief   eCTF Decoder Example Design Implementation
- * @date    2025
- *
- * This source file is part of an example system for MITRE's 2025 Embedded System CTF (eCTF).
- * This code is being provided only for educational purposes for the 2025 MITRE eCTF competition,
- * and may not meet MITRE standards for quality. Use this code at your own risk!
- *
- * @copyright Copyright (c) 2025 The MITRE Corporation
- */
-
 /*********************** INCLUDES *************************/
 #include <stdio.h>
 #include <stdint.h>
@@ -170,7 +157,6 @@ void boot_flag(void) {
     print_debug(output_buf);
 }
 
-
 /**********************************************************
  ********************* CORE FUNCTIONS *********************
  **********************************************************/
@@ -327,49 +313,6 @@ void init() {
     }
 }
 
-/* Code between this #ifdef and the subsequent #endif will
-*  be ignored by the compiler if CRYPTO_EXAMPLE is not set in
-*  the projectk.mk file. */
-#ifdef CRYPTO_EXAMPLE
-void crypto_example(void) {
-    // Example of how to utilize included simple_crypto.h
-
-    // This string is 16 bytes long including null terminator
-    // This is the block size of included symmetric encryption
-    char *data = "Crypto Example!";
-    uint8_t ciphertext[BLOCK_SIZE];
-    uint8_t key[KEY_SIZE];
-    uint8_t hash_out[HASH_SIZE];
-    uint8_t decrypted[BLOCK_SIZE];
-
-    char output_buf[128] = {0};
-
-    // Zero out the key
-    bzero(key, BLOCK_SIZE);
-
-    // Encrypt example data and print out
-    encrypt_sym((uint8_t*)data, BLOCK_SIZE, key, ciphertext);
-    print_debug("Encrypted data: \n");
-    print_hex_debug(ciphertext, BLOCK_SIZE);
-
-    // Hash example encryption results
-    hash(ciphertext, BLOCK_SIZE, hash_out);
-
-    // Output hash result
-    print_debug("Hash result: \n");
-    print_hex_debug(hash_out, HASH_SIZE);
-
-    // Decrypt the encrypted message and print out
-    decrypt_sym(ciphertext, BLOCK_SIZE, key, decrypted);
-    sprintf(output_buf, "Decrypted message: %s\n", decrypted);
-    print_debug(output_buf);
-}
-#endif  //CRYPTO_EXAMPLE
-
-/**********************************************************
- *********************** MAIN LOOP ************************
- **********************************************************/
-
 int main(void) {
     char output_buf[128] = {0};
     uint8_t uart_buf[100];
@@ -399,35 +342,28 @@ int main(void) {
         // Handle the requested command
         switch (cmd) {
 
-        // Handle list command
         case LIST_MSG:
             STATUS_LED_CYAN();
 
             #ifdef CRYPTO_EXAMPLE
                 // Run the crypto example
-                // TODO: Remove this from your design
                 crypto_example();
             #endif // CRYPTO_EXAMPLE
 
-            // Print the boot flag
-            // TODO: Remove this from your design
             boot_flag();
             list_channels();
             break;
 
-        // Handle decode command
         case DECODE_MSG:
             STATUS_LED_PURPLE();
             decode(pkt_len, (frame_packet_t *)uart_buf);
             break;
 
-        // Handle subscribe command
         case SUBSCRIBE_MSG:
             STATUS_LED_YELLOW();
             update_subscription(pkt_len, (subscription_update_packet_t *)uart_buf);
             break;
 
-        // Handle bad command
         default:
             STATUS_LED_ERROR();
             sprintf(output_buf, "Invalid Command: %c\n", cmd);
