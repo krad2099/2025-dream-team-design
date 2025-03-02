@@ -1,16 +1,3 @@
-/**
- * @file "simple_crypto.c"
- * @author Ben Janis
- * @brief Simplified Crypto API Implementation
- * @date 2025
- *
- * This source file is part of an example system for MITRE's 2025 Embedded System CTF (eCTF).
- * This code is being provided only for educational purposes for the 2025 MITRE eCTF competition,
- * and may not meet MITRE standards for quality. Use this code at your own risk!
- *
- * @copyright Copyright (c) 2025 The MITRE Corporation
- */
-
 #if CRYPTO_EXAMPLE
 
 #include "simple_crypto.h"
@@ -105,4 +92,4 @@ int hash(void *data, size_t len, uint8_t *hash_out) {
     return wc_Md5Hash((uint8_t *)data, len, hash_out);
 }
 
-#endif
+#endif // CRYPTO_EXAMPLE
