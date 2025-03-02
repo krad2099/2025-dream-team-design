@@ -1,15 +1,3 @@
-"""
-Author: Ben Janis
-Date: 2025
-
-This source file is part of an example system for MITRE's 2025 Embedded System CTF
-(eCTF). This code is being provided only for educational purposes for the 2025 MITRE
-eCTF competition, and may not meet MITRE standards for quality. Use this code at your
-own risk!
-
-Copyright: Copyright (c) 2025 The MITRE Corporation
-"""
-
 import argparse
 import json
 from pathlib import Path
@@ -18,31 +6,21 @@ from loguru import logger
 
 
 def gen_secrets(channels: list[int]) -> bytes:
-    """Generate the contents secrets file
+    """Generate the contents of the secrets file
 
-    This will be passed to the Encoder, ectf25_design.gen_subscription, and the build
-    process of the decoder
-
-    :param channels: List of channel numbers that will be valid in this deployment.
-        Channel 0 is the emergency broadcast, which will always be valid and will
-        NOT be included in this list
-
-    :returns: Contents of the secrets file
+    :param channels: List of channel numbers
+    :returns: Contents of the secrets file as bytes
     """
-    # TODO: Update this function to generate any system-wide secrets needed by
-    #   your design
+    # TODO: Include any additional cryptographic material or configuration data
+    # in the secrets file for use in the encoder/decoder, ensuring proper handling 
+    # of cryptographic material, keys, or other sensitive data.
 
-    # Create the secrets object
-    # You can change this to generate any secret material
-    # The secrets file will never be shared with attackers
     secrets = {
         "channels": channels,
-        "some_secrets": "EXAMPLE",
+        "some_secrets": "EXAMPLE",  # Replace with actual secret generation process
     }
 
-    # NOTE: if you choose to use JSON for your file type, you will not be able to
-    # store binary data, and must either use a different file type or encode the
-    # binary data to hex, base64, or another type of ASCII-only encoding
+    # Return the secrets as a JSON-encoded byte string
     return json.dumps(secrets).encode()
 
 
