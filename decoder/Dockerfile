@@ -19,6 +19,8 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     binutils-arm-none-eabi \
     make \
     python3.10 \
+    python3-pip \
+    python3-venv \
     git \
     wget \
     libtool \
@@ -34,6 +36,12 @@ RUN apt-get install -y unzip && \
 ENV MAXIM_PATH=/root/msdk-2024_02
 
 WORKDIR /decoder
+RUN python3 -m venv venv && \
+    . venv/bin/activate && \
+    pip install --upgrade pip && \
+    pip install pycryptodome
+
+# Ensure the virtual environme
 
 ENTRYPOINT ["bash", "-c", "make release DECODER_ID=${DECODER_ID} && cp build/max78000.elf build/max78000.bin /out"]
 
