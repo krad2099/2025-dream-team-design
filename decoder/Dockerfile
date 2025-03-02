@@ -36,10 +36,12 @@ RUN apt-get install -y unzip && \
 ENV MAXIM_PATH=/root/msdk-2024_02
 
 WORKDIR /decoder
-RUN python3 -m venv venv && \
-    . venv/bin/activate && \
-    pip install --upgrade pip && \
-    pip install pycryptodome
+# Install Python dependencies globally
+RUN pip3 install --no-cache-dir --upgrade pip && \
+    pip3 install --no-cache-dir pycryptodome
+
+# Verify that 'Crypto' module is available
+RUN python3 -c "from Crypto.Cipher import AES; print('PyCryptodome is installed and working.')"
 
 # Ensure the virtual environme
 
