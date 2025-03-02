@@ -1,16 +1,3 @@
-/**
- * @file "simple_uart.c"
- * @author Samuel Meyers
- * @brief UART Interrupt Handler Implementation 
- * @date 2025
- *
- * This source file is part of an example system for MITRE's 2025 Embedded System CTF (eCTF).
- * This code is being provided only for educational purposes for the 2025 MITRE eCTF competition,
- * and may not meet MITRE standards for quality. Use this code at your own risk!
- *
- * @copyright Copyright (c) 2025 The MITRE Corporation
- */
-
 #include "simple_uart.h"
 #include <stdio.h>
 #include <stdint.h>
@@ -26,7 +13,7 @@
  * 
  *  @note This function should be called once upon startup.
  *  @return 0 upon success.  Negative if error.
-*/
+ */
 int uart_init(void){
     int ret;
 
@@ -42,7 +29,7 @@ int uart_init(void){
  * 
  *  @return The character read.  Otherwise see MAX78000 Error Codes for
  *      a list of return codes.
-*/
+ */
 int uart_readbyte_raw(void){
     int data = MXC_UART_ReadCharacterRaw(MXC_UART_GET_UART(CONSOLE_UART));
     return data;
@@ -52,7 +39,7 @@ int uart_readbyte_raw(void){
  * 
  *  @return The character read.  Otherwise see MAX78000 Error Codes for
  *      a list of return codes.
-*/
+ */
 int uart_readbyte(void){
     int data = MXC_UART_ReadCharacter(MXC_UART_GET_UART(CONSOLE_UART));
     return data;
@@ -61,7 +48,7 @@ int uart_readbyte(void){
 /** @brief Writes a byte to UART.
  * 
  *  @param data The byte to be written.
-*/
+ */
 void uart_writebyte(uint8_t data) {
     while (MXC_UART_GET_UART(CONSOLE_UART)->status & MXC_F_UART_STATUS_TX_FULL) {
     }
@@ -69,7 +56,7 @@ void uart_writebyte(uint8_t data) {
 }
 
 /** @brief Flushes UART.
-*/
+ */
 void uart_flush(void){
     MXC_UART_ClearRXFIFO(MXC_UART_GET_UART(CONSOLE_UART));
     MXC_UART_ClearTXFIFO(MXC_UART_GET_UART(CONSOLE_UART));
