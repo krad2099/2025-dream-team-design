@@ -1,3 +1,4 @@
+/*********************** INCLUDES *************************/
 #include <stdio.h>
 #include <stdint.h>
 #include <string.h>
@@ -10,6 +11,9 @@
 #include "simple_uart.h"
 #include "simple_crypto.h"
 
+/**********************************************************
+ ******************* PRIMITIVE TYPES **********************
+ **********************************************************/
 #define MAX_CHANNELS 8
 #define FRAME_SIZE 64
 #define FLASH_STATUS_ADDR ((MXC_FLASH_MEM_BASE + MXC_FLASH_MEM_SIZE) - (2 * MXC_FLASH_PAGE_SIZE))
@@ -18,7 +22,7 @@ typedef struct {
     uint32_t channel;
     uint64_t start;
     uint64_t end;
-    uint8_t key[32];  // Store derived AES keys securely
+    uint8_t key[32];  // AES encryption key per channel
 } subscription_t;
 
 typedef struct {
@@ -32,20 +36,19 @@ static subscription_data_t decoder_subscriptions;
 int verify_hmac(const uint8_t *data, size_t data_len, const uint8_t *mac, const uint8_t *key) {
     uint8_t computed_mac[32];
     compute_hmac_sha256(data, data_len, key, 32, computed_mac);
-
-    return memcmp(mac, computed_mac, 16) == 0;  // Compare first 16 bytes
+    return memcmp(mac, computed_mac, 16) == 0;
 }
 
 /** @brief Decode encrypted frame securely */
 int decode_frame(uint16_t pkt_len, uint8_t *frame_data) {
     uint32_t channel;
     uint64_t timestamp;
-    uint8_t encrypted_frame[FRAME_SIZE + 16]; // AES-GCM tag included
+    uint8_t encrypted_frame[FRAME_SIZE + 16];
     uint8_t decrypted_frame[FRAME_SIZE];
     uint8_t mac[16];
 
     if (pkt_len < sizeof(channel) + sizeof(timestamp) + sizeof(mac)) {
-        return -1; // Invalid size
+        return -1;
     }
 
     memcpy(&channel, frame_data, sizeof(channel));
@@ -61,12 +64,11 @@ int decode_frame(uint16_t pkt_len, uint8_t *frame_data) {
             break;
         }
     }
+    if (!key) return -1;
 
-    if (!key) return -1; // Not subscribed
-
-    // Verify message integrity
+    // Verify integrity
     if (!verify_hmac(frame_data, pkt_len - 16, mac, key)) {
-        return -1; // Integrity check failed
+        return -1;
     }
 
     // Decrypt frame
@@ -77,14 +79,13 @@ int decode_frame(uint16_t pkt_len, uint8_t *frame_data) {
     return 0;
 }
 
-/** @brief Securely handle subscription updates */
+/** @brief Handle subscription updates */
 int update_subscription(uint16_t pkt_len, uint8_t *data) {
     if (pkt_len < sizeof(subscription_t)) return -1;
 
     subscription_t new_sub;
     memcpy(&new_sub, data, sizeof(subscription_t));
 
-    // Store subscription securely
     if (decoder_subscriptions.n_channels < MAX_CHANNELS) {
         decoder_subscriptions.channels[decoder_subscriptions.n_channels++] = new_sub;
         flash_simple_write(FLASH_STATUS_ADDR, &decoder_subscriptions, sizeof(subscription_data_t));
@@ -99,10 +100,8 @@ int main(void) {
     msg_type_t cmd;
     uint16_t pkt_len;
 
-    // Load stored subscriptions
     flash_simple_read(FLASH_STATUS_ADDR, &decoder_subscriptions, sizeof(subscription_data_t));
 
-    // UART loop
     while (1) {
         if (read_packet(&cmd, uart_buf, &pkt_len) < 0) continue;
 
