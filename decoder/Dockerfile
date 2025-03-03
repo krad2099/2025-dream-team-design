@@ -1,6 +1,4 @@
-# Dockerfile for the 2025 eCTF
-# Ensures Python dependencies are installed globally and inside the virtual environment
-
+# Dockerfile for the 2025 eCTF Secure Decoder
 FROM ubuntu:24.04
 
 LABEL version="0.3"
@@ -9,7 +7,7 @@ LABEL description="Secure Decoder Docker Container for the 2025 eCTF"
 ARG DEBIAN_FRONTEND=noninteractive
 WORKDIR /root
 
-# Install Requisite Packages (Updated)
+# Install system dependencies FIRST
 RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     gdb \
     gdb-multiarch \
@@ -32,6 +30,10 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     libssl-dev \
     && rm -rf /var/lib/apt/lists/*
 
+# 🔹 Install `cryptography` BEFORE running `gen_secrets.py`
+RUN pip3 install --upgrade pip && \
+    pip3 install cryptography loguru
+
 # Install MSDK
 RUN wget https://github.com/analogdevicesinc/msdk/archive/refs/tags/v2024_02.zip && \
     unzip v2024_02.zip && \
@@ -39,18 +41,14 @@ RUN wget https://github.com/analogdevicesinc/msdk/archive/refs/tags/v2024_02.zip
 
 ENV MAXIM_PATH=/root/msdk-2024_02
 
-# Install Python Virtual Environment and Dependencies
+# Install Python Virtual Environment
 WORKDIR /decoder
 RUN python3 -m venv venv && \
     . venv/bin/activate && \
     pip install --upgrade pip && \
     pip install cryptography loguru
 
-# Also install cryptography globally (to avoid venv activation issues)
-RUN pip3 install --upgrade pip && \
-    pip3 install cryptography loguru
-
-# Ensure the virtual environment is activated in the container
+# Ensure the virtual environment is activated inside the container
 ENV VIRTUAL_ENV=/decoder/venv
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
@@ -66,6 +64,9 @@ RUN git clone --depth 1 --branch v5.6.0-stable https://github.com/wolfSSL/wolfss
 # Set environment variables for wolfSSL
 ENV PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
 ENV LD_LIBRARY_PATH=/usr/local/lib
+
+# ✅ Ensure cryptography is installed BEFORE submission
+RUN python3 -c "import cryptography; print('Cryptography is installed correctly')"
 
 # Ensure the decoder builds successfully
 ENTRYPOINT ["bash", "-c", "source /decoder/venv/bin/activate && make release DECODER_ID=${DECODER_ID} && cp build/max78000.elf build/max78000.bin /out"]
