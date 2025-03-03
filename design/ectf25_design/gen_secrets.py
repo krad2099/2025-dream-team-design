@@ -2,7 +2,21 @@ import argparse
 import json
 import os
 import base64
-import hashlib
+from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
+from cryptography.hazmat.primitives import hashes
+from cryptography.hazmat.backends import default_backend
+
+
+def derive_key(master_key: bytes, salt: bytes) -> bytes:
+    """Derives a secure 32-byte AES key from a master key using PBKDF2-HMAC."""
+    kdf = PBKDF2HMAC(
+        algorithm=hashes.SHA256(),
+        length=32,
+        salt=salt,
+        iterations=100000,
+        backend=default_backend()
+    )
+    return kdf.derive(master_key)
 
 
 def gen_secrets(channels: list[int]) -> bytes:
@@ -13,12 +27,10 @@ def gen_secrets(channels: list[int]) -> bytes:
 
     :returns: Securely encoded secrets file.
     """
-    # Generate a strong master key
-    master_key = base64.b64encode(os.urandom(32)).decode()
+    master_key = os.urandom(32)
 
-    # Encrypt keys securely using HKDF
     secrets = {
-        "master_key": master_key,
+        "master_key": base64.b64encode(master_key).decode(),
         "channels": channels
     }
 
