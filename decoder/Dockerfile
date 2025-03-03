@@ -1,5 +1,5 @@
 # Dockerfile for the 2025 eCTF
-# Updated to support secure cryptographic operations
+# Updated to ensure Python virtual environment is always activated
 
 FROM ubuntu:24.04
 
@@ -45,8 +45,9 @@ RUN python3 -m venv venv && \
     pip install --upgrade pip && \
     pip install cryptography loguru
 
-# Ensure the virtual environment is activated in the container
-ENV PATH="/decoder/venv/bin:$PATH"
+# Ensure the virtual environment is activated inside the container
+ENV VIRTUAL_ENV=/decoder/venv
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
 # Install wolfSSL for C-based AES-GCM and HMAC
 RUN git clone --depth 1 --branch v5.6.0-stable https://github.com/wolfSSL/wolfssl.git && \
@@ -62,7 +63,7 @@ ENV PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
 ENV LD_LIBRARY_PATH=/usr/local/lib
 
 # Ensure the decoder builds successfully
-ENTRYPOINT ["bash", "-c", "make release DECODER_ID=${DECODER_ID} && cp build/max78000.elf build/max78000.bin /out"]
+ENTRYPOINT ["bash", "-c", "source /decoder/venv/bin/activate && make release DECODER_ID=${DECODER_ID} && cp build/max78000.elf build/max78000.bin /out"]
 
 # Sample run command:
 # docker run -v ./decoder/:/decoder -v ./global.secrets:/global.secrets:ro -v ./deadbeef_build:/out -e DECODER_ID=0xdeadbeef build-decoder
