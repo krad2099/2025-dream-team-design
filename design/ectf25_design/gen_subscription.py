@@ -4,6 +4,21 @@ import struct
 import hmac
 import hashlib
 import base64
+from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
+from cryptography.hazmat.primitives import hashes
+from cryptography.hazmat.backends import default_backend
+
+
+def derive_key(master_key: bytes, salt: bytes) -> bytes:
+    """Derives a secure 32-byte AES key from a master key using PBKDF2-HMAC."""
+    kdf = PBKDF2HMAC(
+        algorithm=hashes.SHA256(),
+        length=32,
+        salt=salt,
+        iterations=100000,
+        backend=default_backend()
+    )
+    return kdf.derive(master_key)
 
 
 def gen_subscription(secrets: bytes, device_id: int, start: int, end: int, channel: int) -> bytes:
@@ -18,12 +33,11 @@ def gen_subscription(secrets: bytes, device_id: int, start: int, end: int, chann
 
     :returns: Securely generated subscription data.
     """
-    # Load secrets securely
     secrets = json.loads(secrets.decode())
-    master_key = secrets["master_key"].encode()
+    master_key = base64.b64decode(secrets["master_key"])
 
     # Derive per-channel key
-    key = hashlib.pbkdf2_hmac("sha256", master_key, str(channel).encode(), 100000)
+    key = derive_key(master_key, str(channel).encode())
 
     # Create subscription data
     subscription_data = struct.pack("<IQQI", device_id, start, end, channel)
