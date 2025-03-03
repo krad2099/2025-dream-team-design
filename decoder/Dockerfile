@@ -1,5 +1,5 @@
 # Dockerfile for the 2025 eCTF
-# Updated to ensure Python virtual environment is always activated
+# Ensures Python dependencies are installed globally and inside the virtual environment
 
 FROM ubuntu:24.04
 
@@ -19,6 +19,7 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     python3.10 \
     python3-pip \
     python3-venv \
+    python3-dev \
     git \
     wget \
     cmake \
@@ -38,14 +39,18 @@ RUN wget https://github.com/analogdevicesinc/msdk/archive/refs/tags/v2024_02.zip
 
 ENV MAXIM_PATH=/root/msdk-2024_02
 
-# Install Python Virtual Environment with Secure Dependencies
+# Install Python Virtual Environment and Dependencies
 WORKDIR /decoder
 RUN python3 -m venv venv && \
     . venv/bin/activate && \
     pip install --upgrade pip && \
     pip install cryptography loguru
 
-# Ensure the virtual environment is activated inside the container
+# Also install cryptography globally (to avoid venv activation issues)
+RUN pip3 install --upgrade pip && \
+    pip3 install cryptography loguru
+
+# Ensure the virtual environment is activated in the container
 ENV VIRTUAL_ENV=/decoder/venv
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
