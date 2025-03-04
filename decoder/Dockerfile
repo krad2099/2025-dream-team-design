@@ -34,6 +34,12 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
 RUN pip3 install --upgrade pip && \
     pip3 install cryptography loguru
 
+# Ensure necessary system libraries for `cryptography` are installed
+RUN apt-get update && apt-get install -y \
+    libffi-dev \
+    python3-cffi \
+    && rm -rf /var/lib/apt/lists/*
+
 # Install MSDK
 RUN wget https://github.com/analogdevicesinc/msdk/archive/refs/tags/v2024_02.zip && \
     unzip v2024_02.zip && \
