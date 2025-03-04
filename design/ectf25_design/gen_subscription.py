@@ -4,6 +4,7 @@ import struct
 import hmac
 import hashlib
 import base64
+import os
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.backends import default_backend
@@ -33,11 +34,21 @@ def gen_subscription(secrets: bytes, device_id: int, start: int, end: int, chann
 
     :returns: Securely generated subscription data.
     """
-    secrets = json.loads(secrets.decode())
-    master_key = base64.b64decode(secrets["master_key"])
+    try:
+        secrets = json.loads(secrets.decode())
+    except json.JSONDecodeError:
+        raise ValueError("Invalid secrets file: Ensure it is properly formatted JSON")
 
-    # Derive per-channel key
-    key = derive_key(master_key, str(channel).encode())
+    if "master_key" not in secrets or "channels" not in secrets:
+        raise ValueError("Secrets file is missing required fields")
+
+    master_key = base64.b64decode(secrets["master_key"])
+    channel_info = secrets["channels"].get(str(channel))
+
+    if not channel_info:
+        raise ValueError(f"Channel {channel} not found in secrets file")
+    
+    key = derive_key(master_key, base64.b64decode(channel_info["salt"]))
 
     # Create subscription data
     subscription_data = struct.pack("<IQQI", device_id, start, end, channel)
@@ -64,7 +75,8 @@ def main():
     args = parse_args()
     subscription = gen_subscription(args.secrets_file.read(), args.device_id, args.start, args.end, args.channel)
 
-    with open(args.subscription_file, "wb" if args.force else "xb") as f:
+    mode = "wb" if args.force else "xb"
+    with open(args.subscription_file, mode) as f:
         f.write(subscription)
 
     print(f"Subscription written to {args.subscription_file}")
