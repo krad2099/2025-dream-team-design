@@ -2,57 +2,38 @@ import argparse
 import json
 import os
 import base64
-from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 from cryptography.hazmat.primitives import hashes
-from cryptography.hazmat.backends import default_backend
+from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 
 
-def derive_key(master_key: bytes, salt: bytes) -> bytes:
-    """Derives a secure 32-byte AES key from a master key using PBKDF2-HMAC."""
-    kdf = PBKDF2HMAC(
-        algorithm=hashes.SHA256(),
-        length=32,
-        salt=salt,
-        iterations=100000,
-        backend=default_backend()
-    )
-    return kdf.derive(master_key)
+def generate_secrets(num_channels: int, output_file: str):
+    """Generates a secure secrets file with a master key and per-channel keys"""
 
+    # Generate a random master key
+    master_key = base64.b64encode(os.urandom(32)).decode()  # Store in Base64
 
-def gen_secrets(channels: list[int]) -> bytes:
-    """
-    Generate secrets with strong cryptographic security.
+    # Generate channel identifiers (e.g., 0 to num_channels-1)
+    channels = list(range(num_channels))
 
-    :param channels: List of valid channel numbers.
-
-    :returns: Securely encoded secrets file.
-    """
-    master_key = os.urandom(32)
-
+    # Create and save the secrets JSON
     secrets = {
-        "master_key": base64.b64encode(master_key).decode(),
-        "channels": channels
+        "master_key": master_key,
+        "channels": channels  # The actual keys will be derived later
     }
 
-    return json.dumps(secrets).encode()
+    with open(output_file, "w") as f:
+        json.dump(secrets, f, indent=4)
 
-
-def parse_args():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--force", "-f", action="store_true", help="Force overwrite of secrets file")
-    parser.add_argument("secrets_file", help="Path to the secrets file")
-    parser.add_argument("channels", nargs="+", type=int, help="Supported channels")
-    return parser.parse_args()
+    print(f"Secrets file generated: {output_file}")
 
 
 def main():
-    args = parse_args()
-    secrets = gen_secrets(args.channels)
+    parser = argparse.ArgumentParser(description="Generate a secrets JSON file.")
+    parser.add_argument("num_channels", type=int, help="Number of channels to generate keys for")
+    parser.add_argument("output_file", type=str, help="Path to save the secrets file")
+    args = parser.parse_args()
 
-    with open(args.secrets_file, "wb" if args.force else "xb") as f:
-        f.write(secrets)
-
-    print(f"Secrets written to {args.secrets_file}")
+    generate_secrets(args.num_channels, args.output_file)
 
 
 if __name__ == "__main__":
