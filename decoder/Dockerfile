@@ -31,6 +31,8 @@ RUN apt-get install -y unzip && \
     unzip v2024_02.zip && \
     rm -f v2024_02.zip
 
+RUN pip install pycryptodome
+
 ENV MAXIM_PATH=/root/msdk-2024_02
 
 WORKDIR /decoder
