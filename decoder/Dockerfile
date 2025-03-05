@@ -6,7 +6,7 @@ LABEL version="0.3"
 LABEL description="Example Decoder Docker Container for the 2025 eCTF with wolfSSL Integration"
 
 ARG DEBIAN_FRONTEND=noninteractive
-WORKDIR /root
+WORKDIR /decoder
 
 # Install Requisite Packages
 RUN apt-get update && apt-get upgrade -y && apt-get install -y \
