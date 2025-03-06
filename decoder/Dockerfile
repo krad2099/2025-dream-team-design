@@ -24,7 +24,8 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     wget \
     libtool \
     texinfo \
-    unzip    
+    unzip \
+    libssl-dev
 
 
 
