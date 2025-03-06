@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <string.h>
+#include <openssl/evp.h>
+#include <openssl/aes.h>
 #include "mxc_device.h"
 #include "status_led.h"
 #include "board.h"
