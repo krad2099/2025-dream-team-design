@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "host_messaging.h"
+#include <openssl/aes.h>
 
 int read_bytes(void *buf, uint16_t len);
 uint8_t read_ack(void);
