@@ -19,11 +19,16 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     binutils-arm-none-eabi \
     make \
     python3.10 \
+    python3-pip \
     git \
     wget \
     libtool \
     texinfo \
     unzip    
+
+# Upgrade pip and install Python dependencies
+RUN python3.10 -m pip install --upgrade pip setuptools wheel && \
+    python3.10 -m pip install pycryptodome
 
 # Install MSDK
 RUN apt-get install -y unzip && \
