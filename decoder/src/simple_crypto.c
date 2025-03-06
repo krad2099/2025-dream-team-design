@@ -27,20 +27,3 @@ int decrypt_sym(uint8_t *ciphertext, size_t len, uint8_t *key, uint8_t *plaintex
     return 0;
 }
 
-/** @brief AES-GCM encryption */
-int encrypt_aes_gcm(const uint8_t *plaintext, size_t len, const uint8_t *key, uint8_t *ciphertext) {
-    AES_KEY aes_key;
-    uint8_t nonce[12] = {0}; // Secure nonce
-    AES_set_encrypt_key(key, 256, &aes_key);
-    AES_GCM_encrypt(&aes_key, ciphertext, plaintext, len, nonce, 12, NULL, 0, NULL);
-    return 0;
-}
-
-/** @brief AES-GCM decryption */
-int decrypt_aes_gcm(const uint8_t *ciphertext, size_t len, const uint8_t *key, uint8_t *plaintext) {
-    AES_KEY aes_key;
-    uint8_t nonce[12] = {0};
-    AES_set_decrypt_key(key, 256, &aes_key);
-    AES_GCM_decrypt(&aes_key, plaintext, ciphertext, len, nonce, 12, NULL, 0, NULL);
-    return 0;
-}
