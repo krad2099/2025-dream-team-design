@@ -26,9 +26,7 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     texinfo \
     unzip    
 
-# Upgrade pip and install Python dependencies
-RUN pip install --upgrade pip setuptools wheel && \
-    -m pip install pycryptodome
+
 
 # Install MSDK
 RUN apt-get install -y unzip && \
