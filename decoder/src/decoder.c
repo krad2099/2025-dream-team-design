@@ -120,4 +120,32 @@ int update_subscription(uint16_t pkt_len, uint8_t *data) {
 
     if (decoder_subscriptions.n_channels < MAX_CHANNELS) {
         decoder_subscriptions.channels[decoder_subscriptions.n_channels++] = new_sub;
-        flash_simple_write(FLASH_STATUS_ADDR, &decoder_subscriptions
+        flash_simple_write(FLASH_STATUS_ADDR, &decoder_subscriptions, sizeof(subscription_data_t));
+    }
+
+    write_packet(SUBSCRIBE_MSG, NULL, 0);
+    return 0;
+}
+
+int main(void) {
+    uint8_t uart_buf[100];
+    msg_type_t cmd;
+    uint16_t pkt_len;
+
+    flash_simple_read(FLASH_STATUS_ADDR, &decoder_subscriptions, sizeof(subscription_data_t));
+
+    while (1) {
+        if (read_packet(&cmd, uart_buf, &pkt_len) < 0) continue;
+
+        switch (cmd) {
+            case DECODE_MSG:
+                decode_frame(pkt_len, uart_buf);
+                break;
+            case SUBSCRIBE_MSG:
+                update_subscription(pkt_len, uart_buf);
+                break;
+            default:
+                break;
+        }
+    }
+}
