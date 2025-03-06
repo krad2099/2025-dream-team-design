@@ -1,9 +1,9 @@
+
+
+/*********************** INCLUDES *************************/
 #include <stdio.h>
 #include <stdint.h>
-#include <string.h>  
-#include <openssl/evp.h>
-#include <openssl/hmac.h>
-#include <openssl/aes.h>
+#include <string.h>
 #include "mxc_device.h"
 #include "status_led.h"
 #include "board.h"
@@ -11,7 +11,11 @@
 #include "simple_flash.h"
 #include "host_messaging.h"
 #include "simple_uart.h"
+#include "simple_crypto.h"
 
+/**********************************************************
+ ******************* PRIMITIVE TYPES **********************
+ **********************************************************/
 #define MAX_CHANNELS 8
 #define FRAME_SIZE 64
 #define FLASH_STATUS_ADDR ((MXC_FLASH_MEM_BASE + MXC_FLASH_MEM_SIZE) - (2 * MXC_FLASH_PAGE_SIZE))
@@ -30,53 +34,14 @@ typedef struct {
 
 static subscription_data_t decoder_subscriptions;
 
+/** @brief Verify HMAC integrity of received data */
 int verify_hmac(const uint8_t *data, size_t data_len, const uint8_t *mac, const uint8_t *key) {
     uint8_t computed_mac[32];
-    unsigned int len = 32;  // Output length for HMAC-SHA256
-    HMAC_CTX *ctx = HMAC_CTX_new();
-    
-    HMAC_Init_ex(ctx, key, 32, EVP_sha256(), NULL);
-    HMAC_Update(ctx, data, data_len);
-    HMAC_Final(ctx, computed_mac, &len);
-    HMAC_CTX_free(ctx);
-    
-    return memcmp(mac, computed_mac, 16) == 0;  // Compare first 16 bytes (128 bits)
+    compute_hmac_sha256(data, data_len, key, 32, computed_mac);
+    return memcmp(mac, computed_mac, 16) == 0;
 }
 
-int decrypt_aes_gcm(const uint8_t *ciphertext, size_t ciphertext_len, const uint8_t *key, uint8_t *plaintext, uint8_t *nonce, uint8_t *tag) {
-    EVP_CIPHER_CTX *ctx;
-    int len;
-    int plaintext_len;
-
-    ctx = EVP_CIPHER_CTX_new();
-    if (!ctx) return -1;
-
-    if (1 != EVP_DecryptInit_ex(ctx, EVP_aes_256_gcm(), NULL, key, nonce)) {
-        EVP_CIPHER_CTX_free(ctx);
-        return -1;
-    }
-
-    if (1 != EVP_DecryptUpdate(ctx, plaintext, &len, ciphertext, ciphertext_len)) {
-        EVP_CIPHER_CTX_free(ctx);
-        return -1;
-    }
-    plaintext_len = len;
-
-    if (1 != EVP_CIPHER_CTX_ctrl(ctx, EVP_CTRL_GCM_SET_TAG, 16, tag)) {
-        EVP_CIPHER_CTX_free(ctx);
-        return -1;
-    }
-
-    if (1 != EVP_DecryptFinal_ex(ctx, plaintext + plaintext_len, &len)) {
-        EVP_CIPHER_CTX_free(ctx);
-        return -1;
-    }
-
-    plaintext_len += len;
-    EVP_CIPHER_CTX_free(ctx);
-    return plaintext_len;
-}
-
+/** @brief Decode encrypted frame securely */
 int decode_frame(uint16_t pkt_len, uint8_t *frame_data) {
     uint32_t channel;
     uint64_t timestamp;
@@ -93,6 +58,7 @@ int decode_frame(uint16_t pkt_len, uint8_t *frame_data) {
     memcpy(encrypted_frame, frame_data + sizeof(channel) + sizeof(timestamp), FRAME_SIZE + 16);
     memcpy(mac, frame_data + pkt_len - 16, 16);
 
+    // Find subscription
     uint8_t *key = NULL;
     for (int i = 0; i < decoder_subscriptions.n_channels; i++) {
         if (decoder_subscriptions.channels[i].channel == channel) {
@@ -102,16 +68,20 @@ int decode_frame(uint16_t pkt_len, uint8_t *frame_data) {
     }
     if (!key) return -1;
 
+    // Verify integrity
     if (!verify_hmac(frame_data, pkt_len - 16, mac, key)) {
         return -1;
     }
 
-    decrypt_aes_gcm(encrypted_frame, FRAME_SIZE, key, decrypted_frame, encrypted_frame, mac);
+    // Decrypt frame
+    decrypt_aes_gcm(encrypted_frame, FRAME_SIZE, key, decrypted_frame);
 
+    // Send decrypted data to host
     write_packet(DECODE_MSG, decrypted_frame, FRAME_SIZE);
     return 0;
 }
 
+/** @brief Handle subscription updates */
 int update_subscription(uint16_t pkt_len, uint8_t *data) {
     if (pkt_len < sizeof(subscription_t)) return -1;
 
@@ -149,3 +119,4 @@ int main(void) {
         }
     }
 }
+
