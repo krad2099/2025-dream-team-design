@@ -50,6 +50,7 @@ typedef struct {
     channel_id_t id;
     timestamp_t start_timestamp;
     timestamp_t end_timestamp;
+    uint8_t key[32];
 } channel_status_t;
 
 typedef struct {
@@ -65,10 +66,10 @@ int update_subscription(uint16_t pkt_len, subscription_update_packet_t *data);
 int decode(pkt_len_t pkt_len, frame_packet_t *new_frame, uint8_t *key) {
     uint8_t decrypted_data[FRAME_SIZE];
     
-    // Decrypt using AES (assuming simple_crypto provides the necessary functions)
+    // Decrypt using AES
     decrypt_sym(new_frame->data, FRAME_SIZE, key, decrypted_data);
 
-    // Process decrypted data (you can now use this data)
+    // Process decrypted data
     printf("Decoded frame for channel %u: ", new_frame->channel);
     for (int i = 0; i < FRAME_SIZE; i++) {
         printf("%02X ", decrypted_data[i]);
