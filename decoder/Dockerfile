@@ -24,7 +24,8 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     libtool \
     texinfo \
     unzip \
-    libssl-dev
+    libssl-dev \
+    build-essential
 
 
 
@@ -37,6 +38,8 @@ RUN apt-get install -y unzip && \
 ENV MAXIM_PATH=/root/msdk-2024_02
 
 WORKDIR /decoder
+
+RUN gcc -o /root/my_program /root/my_program.c -lssl -lcrypto
 
 ENTRYPOINT ["bash", "-c", "make release DECODER_ID=${DECODER_ID} && cp build/max78000.elf build/max78000.bin /out"]
 
