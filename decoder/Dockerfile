@@ -19,7 +19,6 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     binutils-arm-none-eabi \
     make \
     python3.10 \
-    python3-pip \
     git \
     wget \
     libtool \
@@ -36,6 +35,8 @@ RUN apt-get install -y unzip && \
     rm -f v2024_02.zip
 
 ENV MAXIM_PATH=/root/msdk-2024_02
+ENV CFLAGS="-I/usr/include/openssl"   # Include OpenSSL headers
+ENV LDFLAGS="-L/usr/lib/x86_64-linux-gnu"  # Link OpenSSL libraries
 
 WORKDIR /decoder
 
