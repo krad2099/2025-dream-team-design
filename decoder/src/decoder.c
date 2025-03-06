@@ -10,9 +10,11 @@
 #include "simple_uart.h"
 #include "simple_crypto.h"
 
+#define MAX_CHANNEL_COUNT 8
 #define FRAME_SIZE 64
 #define DEFAULT_CHANNEL_TIMESTAMP 0xFFFFFFFFFFFFFFFF
 #define FLASH_FIRST_BOOT 0xDEADBEEF
+#define FLASH_STATUS_ADDR 0xDEADBEEF
 
 typedef uint64_t timestamp_t;
 typedef uint32_t channel_id_t;
@@ -57,6 +59,9 @@ typedef struct {
 
 flash_entry_t decoder_status;
 
+int decrypt_sym(uint8_t *ciphertext, size_t len, uint8_t *key, uint8_t *plaintext);
+int update_subscription(uint16_t pkt_len, uint8_t *data);
+
 int decode(pkt_len_t pkt_len, frame_packet_t *new_frame, uint8_t *key) {
     uint8_t decrypted_data[FRAME_SIZE];
     
@@ -70,6 +75,16 @@ int decode(pkt_len_t pkt_len, frame_packet_t *new_frame, uint8_t *key) {
     }
     printf("\n");
 
+    return 0;
+}
+
+int update_subscription(uint16_t pkt_len, uint8_t *data) {
+    if (pkt_len < sizeof(subscription_update_packet_t)) return -1;
+
+    subscription_update_packet_t new_sub;
+    memcpy(&new_sub, data, sizeof(subscription_update_packet_t));
+
+    write_packet(SUBSCRIBE_MSG, NULL, 0);
     return 0;
 }
 
