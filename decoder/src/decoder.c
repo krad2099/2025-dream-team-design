@@ -103,7 +103,7 @@ int main(void) {
                 uint8_t *key = NULL;
                 for (int i = 0; i < decoder_status.first_boot; i++) {
                     if (decoder_status.subscribed_channels[i].id == ((frame_packet_t *)uart_buf)->channel) {
-                        key = decoder_status.subscribed_channels[i].id;
+                        key = decoder_status.subscribed_channels[i].key;
                         break;
                     }
                 }
