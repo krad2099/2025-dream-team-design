@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <string.h>  
+#include <openssl/evp.h>
 #include <openssl/hmac.h>
 #include <openssl/aes.h>
 #include "mxc_device.h"
