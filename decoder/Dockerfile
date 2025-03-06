@@ -27,8 +27,8 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     unzip    
 
 # Upgrade pip and install Python dependencies
-RUN python3 -m pip install --upgrade pip setuptools wheel && \
-    python3 -m pip install pycryptodome
+RUN pip install --upgrade pip setuptools wheel && \
+    -m pip install pycryptodome
 
 # Install MSDK
 RUN apt-get install -y unzip && \
