@@ -60,7 +60,7 @@ typedef struct {
 flash_entry_t decoder_status;
 
 int decrypt_sym(uint8_t *ciphertext, size_t len, uint8_t *key, uint8_t *plaintext);
-int update_subscription(uint16_t pkt_len, uint8_t *data);
+int update_subscription(uint16_t pkt_len, subscription_update_packet_t *data);
 
 int decode(pkt_len_t pkt_len, frame_packet_t *new_frame, uint8_t *key) {
     uint8_t decrypted_data[FRAME_SIZE];
@@ -78,7 +78,7 @@ int decode(pkt_len_t pkt_len, frame_packet_t *new_frame, uint8_t *key) {
     return 0;
 }
 
-int update_subscription(uint16_t pkt_len, uint8_t *data) {
+int update_subscription(uint16_t pkt_len, subscription_update_packet_t *data) {
     if (pkt_len < sizeof(subscription_update_packet_t)) return -1;
 
     subscription_update_packet_t new_sub;
@@ -100,7 +100,16 @@ int main(void) {
 
         switch (cmd) {
             case DECODE_MSG:
-                decode(pkt_len, (frame_packet_t *)uart_buf, decoder_status.subscribed_channels[0].key);
+                uint8_t *key = NULL;
+                for (int i = 0; i < decoder_status.first_boot; i++) {
+                    if (decoder_status.subscribed_channels[i].id == ((frame_packet_t *)uart_buf)->channel) {
+                        key = decoder_status.subscribed_channels[i].id;
+                        break;
+                    }
+                }
+                if (key) {
+                    decode(pkt_len, (frame_packet_t *)uart_buf, key);
+                }
                 break;
             case SUBSCRIBE_MSG:
                 update_subscription(pkt_len, (subscription_update_packet_t *)uart_buf);
