@@ -35,8 +35,8 @@ RUN apt-get install -y unzip && \
     rm -f v2024_02.zip
 
 ENV MAXIM_PATH=/root/msdk-2024_02
-ENV CFLAGS="-I/usr/include/openssl"   # Include OpenSSL headers
-ENV LDFLAGS="-L/usr/lib/x86_64-linux-gnu"  # Link OpenSSL libraries
+ENV CFLAGS="-I/usr/include/openssl"
+ENV LDFLAGS="-L/usr/lib/x86_64-linux-gnu"
 
 WORKDIR /decoder
 
