@@ -1,38 +1,74 @@
 #include "simple_crypto.h"
-#include "wolfssl/ssl.h"  // Include wolfSSL for AES
+#include <openssl/evp.h>  // OpenSSL for AES
 
-// Encrypt data using AES from wolfSSL
+// Encrypt data using AES from OpenSSL
 int encrypt_sym(uint8_t *plaintext, size_t len, uint8_t *key, uint8_t *ciphertext) {
-    WOLFSSL_AES_KEY aes_key;
+    EVP_CIPHER_CTX *ctx;
     
-    // Set AES encryption key
-    wolfSSL_AES_set_encrypt_key(&aes_key, key, 32);  // AES-256 key (32 bytes)
-    
-    // Encrypt the data
-    for (int i = 0; i < len; i += 16) {
-        wolfSSL_AES_encrypt(&aes_key, plaintext + i, ciphertext + i);
+    // Initialize OpenSSL AES context
+    ctx = EVP_CIPHER_CTX_new();
+    if (!ctx) {
+        return -1;  // Error initializing context
     }
+
+    // Initialize encryption operation
+    if (EVP_EncryptInit_ex(ctx, EVP_aes_256_cbc(), NULL, key, NULL) != 1) {
+        EVP_CIPHER_CTX_free(ctx);
+        return -1;
+    }
+
+    int len_out;
+    if (EVP_EncryptUpdate(ctx, ciphertext, &len_out, plaintext, len) != 1) {
+        EVP_CIPHER_CTX_free(ctx);
+        return -1;
+    }
+
+    int encrypted_len = len_out;
+
+    // Finalize encryption
+    if (EVP_EncryptFinal_ex(ctx, ciphertext + len_out, &len_out) != 1) {
+        EVP_CIPHER_CTX_free(ctx);
+        return -1;
+    }
+
+    encrypted_len += len_out;
+    EVP_CIPHER_CTX_free(ctx);
 
     return 0;
 }
 
-// Decrypt data using AES from wolfSSL
+// Decrypt data using AES from OpenSSL
 int decrypt_sym(uint8_t *ciphertext, size_t len, uint8_t *key, uint8_t *plaintext) {
-    WOLFSSL_AES_KEY aes_key;
+    EVP_CIPHER_CTX *ctx;
     
-    // Set AES decryption key
-    wolfSSL_AES_set_decrypt_key(&aes_key, key, 32);  // AES-256 key (32 bytes)
-    
-    // Decrypt the data
-    for (int i = 0; i < len; i += 16) {
-        wolfSSL_AES_decrypt(&aes_key, ciphertext + i, plaintext + i);
+    // Initialize OpenSSL AES context
+    ctx = EVP_CIPHER_CTX_new();
+    if (!ctx) {
+        return -1;  // Error initializing context
     }
 
-    return 0;
-}
+    // Initialize decryption operation
+    if (EVP_DecryptInit_ex(ctx, EVP_aes_256_cbc(), NULL, key, NULL) != 1) {
+        EVP_CIPHER_CTX_free(ctx);
+        return -1;
+    }
 
-// Hash using SHA256 (example)
-int hash(void *data, size_t len, uint8_t *hash_out) {
-    // We can use wolfSSL's internal hash function or use external libraries for hashing.
-    return wc_Sha256Hash(data, len, hash_out);  // SHA256 example
+    int len_out;
+    if (EVP_DecryptUpdate(ctx, plaintext, &len_out, ciphertext, len) != 1) {
+        EVP_CIPHER_CTX_free(ctx);
+        return -1;
+    }
+
+    int decrypted_len = len_out;
+
+    // Finalize decryption
+    if (EVP_DecryptFinal_ex(ctx, plaintext + len_out, &len_out) != 1) {
+        EVP_CIPHER_CTX_free(ctx);
+        return -1;
+    }
+
+    decrypted_len += len_out;
+    EVP_CIPHER_CTX_free(ctx);
+
+    return 0;
 }
