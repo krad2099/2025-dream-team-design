@@ -1,4 +1,6 @@
 #include "simple_uart.h"
+#include "uart.h"
+#include "mxc_device.h"
 #include <stdio.h>
 
 /** @brief Secure UART Initialization */
