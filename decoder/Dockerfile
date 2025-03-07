@@ -28,7 +28,8 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     unzip \
     build-essential \
     libssl-dev \
-    pkg-config
+    pkg-config \
+    libc6-dev
     
 
 
@@ -44,8 +45,7 @@ ENV MAXIM_PATH=/root/msdk-2024_02
 
 # Set OpenSSL path for libraries and includes
 ENV LIBRARY_PATH="/usr/lib/x86_64-linux-gnu:$LIBRARY_PATH"
-ENV C_INCLUDE_PATH="/usr/include:$C_INCLUDE_PATH"
-
+ENV C_INCLUDE_PATH="/usr/include:/root/msdk-2024_02/Libraries/PeriphDrivers/Include:$C_INCLUDE_PATH"
 COPY ./src /src
 
 COPY ./inc /inc
