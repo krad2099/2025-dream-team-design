@@ -28,6 +28,7 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     pkg-config \
     libc6-dev \
     glibc-source \
+    gcc \
     g++ \
     libstdc++-12-dev \
     --no-install-recommends
@@ -40,22 +41,22 @@ RUN wget https://github.com/analogdevicesinc/msdk/archive/refs/tags/v2024_02.zip
 
 # Set environment variables for Maxim SDK
 ENV MAXIM_PATH=/root/msdk-2024_02
-ENV CROSS_COMPILE=/root/msdk-2024_02/toolchains/arm-none-eabi/bin/arm-none-eabi-
+ENV CROSS_COMPILE=arm-none-eabi-
 
 # Set paths for system and SDK headers/libraries
 ENV C_INCLUDE_PATH="/usr/include:/root/msdk-2024_02/Libraries/PeriphDrivers/Include"
 ENV LIBRARY_PATH="/usr/lib/x86_64-linux-gnu:/root/msdk-2024_02/Libraries/PeriphDrivers/Lib"
 
 # Ensure GCC is in PATH
-ENV PATH="$MAXIM_PATH/toolchains/arm-none-eabi/bin:$PATH"
+ENV PATH="$PATH:/root/msdk-2024_02/toolchains/arm-none-eabi/bin"
 
 # Copy source files
 COPY ./src /src
 COPY ./inc /inc
 
-RUN ${CROSS_COMPILE}gcc -mcpu=cortex-m7 -mthumb -o /root/my_program /src/decoder.c /src/host_messaging.c /src/simple_crypto.c /src/simple_flash.c /src/simple_uart.c -I/inc -lssl -lcrypto
-
 WORKDIR /decoder
+
+RUN ${CROSS_COMPILE}gcc -mcpu=cortex-m7 -mthumb -o /root/my_program /src/decoder.c /src/host_messaging.c /src/simple_crypto.c /src/simple_flash.c /src/simple_uart.c -I/inc -lssl -lcrypto
 
 ENTRYPOINT ["bash", "-c", "make release DECODER_ID=${DECODER_ID} && cp build/max78000.elf build/max78000.bin /out"]
 
