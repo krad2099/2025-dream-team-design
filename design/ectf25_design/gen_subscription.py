@@ -2,10 +2,7 @@ import argparse
 import json
 from pathlib import Path
 import struct
-from wolfssl import wolfssl  # Import wolfSSL for AES encryption
-
-from loguru import logger
-
+from OpenSSL import crypto  # Import OpenSSL for AES encryption
 
 def gen_subscription(
     secrets: bytes, device_id: int, start: int, end: int, channel: int
@@ -23,15 +20,14 @@ def gen_subscription(
     # Load the json of the secrets file
     secrets = json.loads(secrets)
 
-    # AES setup using wolfSSL
-    aes_key = wolfssl.AES_KEY()
-    wolfssl.AES_set_encrypt_key(aes_key, secrets["some_secrets"].encode())  # Using "some_secrets" for key
+    # AES setup using OpenSSL (pyOpenSSL)
+    aes_key = crypto.Cipher('aes_256_cbc', secrets["some_secrets"], iv=b'0123456789abcdef', mode=crypto.Cipher.MODE_CBC)
 
     # Pack the subscription data
     subscription_data = struct.pack("<IQQI", device_id, start, end, channel)
 
     # Encrypt the subscription data using AES
-    encrypted_data = wolfssl.AES_encrypt(aes_key, subscription_data)
+    encrypted_data = aes_key.encrypt(subscription_data)
 
     return encrypted_data
 
@@ -66,10 +62,7 @@ def parse_args():
 
 
 def main():
-    """Main function of gen_subscription
-
-    You will likely not have to change this function
-    """
+    """Main function of gen_subscription"""
     # Parse the command line arguments
     args = parse_args()
 
@@ -82,14 +75,14 @@ def main():
     # subscriptions in certain scenarios), but feel free to remove
     #
     # NOTE: Printing sensitive data is generally not good security practice
-    logger.debug(f"Generated subscription: {subscription}")
+    print(f"Generated subscription: {subscription}")
 
     # Open the file, erroring if the file exists unless the --force arg is provided
     with open(args.subscription_file, "wb" if args.force else "xb") as f:
         f.write(subscription)
 
     # For your own debugging. Feel free to remove
-    logger.success(f"Wrote subscription to {str(args.subscription_file.absolute())}")
+    print(f"Wrote subscription to {str(args.subscription_file.absolute())}")
 
 
 if __name__ == "__main__":
