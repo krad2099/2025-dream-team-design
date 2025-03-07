@@ -28,9 +28,11 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     pkg-config \
     libc6-dev \
     glibc-source \
-    gcc \
-    g++ \
-    libstdc++-12-dev 
+    gcc-arm-none-eabi \
+    g++-arm-none-eabi \
+    libnewlib-arm-none-eabi \
+    libstdc++-12-dev \
+    --no-install-recommends
     
 
 # Install MSDK
@@ -52,6 +54,8 @@ ENV PATH="$MAXIM_PATH/toolchains/arm-none-eabi/bin:$PATH"
 # Copy source files
 COPY ./src /src
 COPY ./inc /inc
+
+RUN gcc -mcpu=cortex-m7 -mthumb -o /root/my_program /src/simple_crypto.c /src/decoder.c /src/host_messaging.c /src/simple_flash.c /src/simple_uart.c -I/inc -lssl -lcrypto
 
 WORKDIR /decoder
 
