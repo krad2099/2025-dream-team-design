@@ -40,7 +40,9 @@ ENV MAXIM_PATH=/root/msdk-2024_02
 
 COPY ./src /src
 
-RUN gcc -o /root/my_program /src/simple_crypto.c /src/decoder.c /src/host_messaging.c /src/simple_flash.c /src/simple_uart.c -lssl -lcrypto
+COPY ./inc /inc
+
+RUN gcc -o /root/my_program /src/simple_crypto.c /src/decoder.c /src/host_messaging.c /src/simple_flash.c /src/simple_uart.c -I/inc -lssl -lcrypto
 
 WORKDIR /decoder
 
