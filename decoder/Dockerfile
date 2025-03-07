@@ -53,7 +53,7 @@ ENV PATH="$MAXIM_PATH/toolchains/arm-none-eabi/bin:$PATH"
 COPY ./src /src
 COPY ./inc /inc
 
-RUN gcc -mcpu=cortex-m7 -mthumb -o /root/my_program /src/simple_crypto.c /src/decoder.c /src/host_messaging.c /src/simple_flash.c /src/simple_uart.c -I/inc -lssl -lcrypto
+RUN ${CROSS_COMPILE}gcc -mcpu=cortex-m7 -mthumb -o /root/my_program /src/decoder.c /src/host_messaging.c /src/simple_crypto.c /src/simple_flash.c /src/simple_uart.c -I/inc -lssl -lcrypto
 
 WORKDIR /decoder
 
