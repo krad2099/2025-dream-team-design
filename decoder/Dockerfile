@@ -30,7 +30,7 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     glibc-source \
     gcc \
     g++ \
-    libstdc++-12-dev \
+    libstdc++-12-dev 
     
 
 # Install MSDK
