@@ -1,10 +1,7 @@
 # Dockerfile for the 2025 eCTF
-# Make any changes here to set up your build environment (e.g., installing crypto
-# libraries, dependencies, the compiler for a different language)
-
 FROM ubuntu:24.04
 
-LABEL version="0.2"
+LABEL version="0.3"
 LABEL description="Dream Team Decoder Docker Container for the 2025 eCTF"
 
 ARG DEBIAN_FRONTEND=noninteractive
@@ -13,14 +10,13 @@ WORKDIR /root
 ENV DOCKER_BUILDKIT=1
 
 # Install Requisite Packages
-# do this first because it takes the longest
 RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     gdb \
     gdb-multiarch \
     gcc-arm-none-eabi \
     binutils-arm-none-eabi \
     make \
-    python3.10 \
+    python3 \
     python3-pip \
     git \
     wget \
@@ -30,31 +26,32 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     build-essential \
     libssl-dev \
     pkg-config \
-    libc6-dev
-    
-
-
+    libc6-dev \
+    glibc-source \
+    gcc \
+    g++ \
+    libstdc++-12-dev \
+    --no-install-recommends
 
 # Install MSDK
-RUN apt-get install -y unzip && \
-    wget https://github.com/analogdevicesinc/msdk/archive/refs/tags/v2024_02.zip && \
+RUN wget https://github.com/analogdevicesinc/msdk/archive/refs/tags/v2024_02.zip && \
     unzip v2024_02.zip && \
     rm -f v2024_02.zip
 
 # Set environment variables for Maxim SDK
 ENV MAXIM_PATH=/root/msdk-2024_02
 ENV CROSS_COMPILE=/root/msdk-2024_02/toolchains/arm-none-eabi/bin/arm-none-eabi-
-ENV C_INCLUDE_PATH="/root/msdk-2024_02/Libraries/PeriphDrivers/Include:$C_INCLUDE_PATH"
-ENV LIBRARY_PATH="/root/msdk-2024_02/Libraries/PeriphDrivers/Lib:$LIBRARY_PATH"
 
+# Set paths for system and SDK headers/libraries
+ENV C_INCLUDE_PATH="/usr/include:/root/msdk-2024_02/Libraries/PeriphDrivers/Include"
+ENV LIBRARY_PATH="/usr/lib/x86_64-linux-gnu:/root/msdk-2024_02/Libraries/PeriphDrivers/Lib"
 
-# Set OpenSSL path for libraries and includes
-ENV LIBRARY_PATH="/usr/lib/x86_64-linux-gnu:$LIBRARY_PATH"
-ENV C_INCLUDE_PATH="/usr/include:/root/msdk-2024_02/Libraries/PeriphDrivers/Include:$C_INCLUDE_PATH"
+# Ensure GCC is in PATH
+ENV PATH="$MAXIM_PATH/toolchains/arm-none-eabi/bin:$PATH"
 
+# Copy source files
 COPY ./src /src
 COPY ./inc /inc
-
 
 WORKDIR /decoder
 
