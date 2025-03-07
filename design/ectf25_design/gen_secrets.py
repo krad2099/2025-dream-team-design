@@ -1,18 +1,7 @@
 import argparse
 import json
 from pathlib import Path
-import ctypes
-from loguru import logger
-
-# Load the wolfSSL shared library using ctypes
-wolfssl = ctypes.CDLL('/usr/local/lib/libwolfssl.dylib')  # Make sure to adjust this path
-
-# Define the AES function signatures from wolfSSL
-wolfssl.AES_set_encrypt_key.argtypes = [ctypes.POINTER(ctypes.c_ubyte), ctypes.c_int]
-wolfssl.AES_set_encrypt_key.restype = ctypes.c_int
-
-wolfssl.AES_encrypt.argtypes = [ctypes.POINTER(ctypes.c_ubyte), ctypes.POINTER(ctypes.c_ubyte)]
-wolfssl.AES_encrypt.restype = ctypes.c_int
+from OpenSSL import crypto
 
 def gen_secrets(channels: list[int]) -> bytes:
     """Generate the contents of the secrets file
@@ -22,15 +11,12 @@ def gen_secrets(channels: list[int]) -> bytes:
     """
     # Define the AES key for encryption (32-byte key for AES-256)
     aes_key = b"super_secure_key_32bytes_for_aes"
-    key = (ctypes.c_ubyte * len(aes_key))(*aes_key)
+    key = aes_key
 
-    # Encrypt some data using AES from wolfSSL
+    # Encrypt some data using AES from OpenSSL (pyOpenSSL)
     data = b"secret data"
-    encrypted_data = (ctypes.c_ubyte * len(data))()
-    
-    # Set the AES key and encrypt the data
-    wolfssl.AES_set_encrypt_key(key, len(aes_key))  # Set the key
-    wolfssl.AES_encrypt(key, encrypted_data)  # Encrypt the data
+    cipher = crypto.Cipher('aes_256_cbc', key, iv=b'0123456789abcdef', mode=crypto.Cipher.MODE_CBC)
+    encrypted_data = cipher.encrypt(data)
 
     # Create the secrets dictionary
     secrets = {
@@ -72,13 +58,17 @@ def main():
     secrets = gen_secrets(args.channels)
 
     # Print the generated secrets for your own debugging
-    logger.debug(f"Generated secrets: {secrets}")
+    # Attackers will NOT have access to the output of this (although they may have
+    # subscriptions in certain scenarios), but feel free to remove
+    #
+    # NOTE: Printing sensitive data is generally not good security practice
+    print(f"Generated secrets: {secrets}")
 
     # Open the file, erroring if the file exists unless the --force arg is provided
     with open(args.secrets_file, "wb" if args.force else "xb") as f:
         f.write(secrets)
 
-    logger.success(f"Wrote secrets to {str(args.secrets_file.absolute())}")
+    print(f"Wrote secrets to {str(args.secrets_file.absolute())}")
 
 
 if __name__ == "__main__":
