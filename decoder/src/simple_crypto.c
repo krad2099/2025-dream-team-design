@@ -2,6 +2,7 @@
 #include <stdint.h>
 #include <string.h>
 #include <openssl/aes.h>
+#include <openssl/rand.h>
 
 /** @brief AES encryption */
 int encrypt_sym(uint8_t *plaintext, size_t len, uint8_t *key, uint8_t *ciphertext) {
