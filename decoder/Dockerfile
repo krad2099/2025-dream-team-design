@@ -28,9 +28,7 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     pkg-config \
     libc6-dev \
     glibc-source \
-    gcc-arm-none-eabi \
-    g++-arm-none-eabi \
-    libnewlib-arm-none-eabi \
+    g++ \
     libstdc++-12-dev \
     --no-install-recommends
     
