@@ -1,18 +1,7 @@
 import argparse
 import struct
 import json
-import ctypes
-from loguru import logger
-
-# Load the wolfSSL shared library using ctypes
-wolfssl = ctypes.CDLL('/usr/local/lib/libwolfssl.dylib')  # Make sure to adjust this path
-
-# Define the AES function signatures from wolfSSL
-wolfssl.AES_set_encrypt_key.argtypes = [ctypes.POINTER(ctypes.c_ubyte), ctypes.c_int]
-wolfssl.AES_set_encrypt_key.restype = ctypes.c_int
-
-wolfssl.AES_encrypt.argtypes = [ctypes.POINTER(ctypes.c_ubyte), ctypes.POINTER(ctypes.c_ubyte)]
-wolfssl.AES_encrypt.restype = ctypes.c_int
+from OpenSSL import crypto
 
 class Encoder:
     def __init__(self, secrets: bytes):
@@ -29,8 +18,7 @@ class Encoder:
         self.some_secrets = secrets["some_secrets"]
 
         # Define AES key for encryption (using the same key as in gen_secrets)
-        aes_key = b"super_secure_key_32bytes_for_aes"
-        self.key = (ctypes.c_ubyte * len(aes_key))(*aes_key)
+        self.key = b"super_secure_key_32bytes_for_aes"  # Use the same key
 
     def encode(self, channel: int, frame: bytes, timestamp: int) -> bytes:
         """The frame encoder function
@@ -48,12 +36,9 @@ class Encoder:
 
         :returns: The encoded frame, which will be sent to the Decoder
         """
-        # Encrypt the frame using AES from wolfSSL
-        encrypted_frame = (ctypes.c_ubyte * len(frame))()
-
-        # Set the AES key and encrypt the frame
-        wolfssl.AES_set_encrypt_key(self.key, len(self.key))  # Set the key
-        wolfssl.AES_encrypt(self.key, encrypted_frame)  # Encrypt the frame
+        # Encrypt the frame using AES from OpenSSL (pyOpenSSL)
+        cipher = crypto.Cipher('aes_256_cbc', self.key, iv=b'0123456789abcdef', mode=crypto.Cipher.MODE_CBC)
+        encrypted_frame = cipher.encrypt(frame)
 
         # Return the encoded frame with the channel and timestamp
         return struct.pack("<IQ", channel, timestamp) + encrypted_frame
