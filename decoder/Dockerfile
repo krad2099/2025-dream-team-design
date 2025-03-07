@@ -21,6 +21,7 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     binutils-arm-none-eabi \
     make \
     python3.10 \
+    python3-pip \
     git \
     wget \
     libtool \
@@ -42,12 +43,16 @@ RUN apt-get install -y unzip && \
 
 # Set environment variables for Maxim SDK
 ENV MAXIM_PATH=/root/msdk-2024_02
+ENV CROSS_COMPILE=/root/msdk-2024_02/toolchains/arm-none-eabi/bin/arm-none-eabi-
+ENV C_INCLUDE_PATH="/root/msdk-2024_02/Libraries/PeriphDrivers/Include:$C_INCLUDE_PATH"
+ENV LIBRARY_PATH="/root/msdk-2024_02/Libraries/PeriphDrivers/Lib:$LIBRARY_PATH"
+
 
 # Set OpenSSL path for libraries and includes
 ENV LIBRARY_PATH="/usr/lib/x86_64-linux-gnu:$LIBRARY_PATH"
 ENV C_INCLUDE_PATH="/usr/include:/root/msdk-2024_02/Libraries/PeriphDrivers/Include:$C_INCLUDE_PATH"
-COPY ./src /src
 
+COPY ./src /src
 COPY ./inc /inc
 
 
