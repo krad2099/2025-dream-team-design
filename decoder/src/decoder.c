@@ -8,7 +8,7 @@
 #include "simple_flash.h"
 #include "host_messaging.h"
 #include "simple_uart.h"
-#include "wolfssl/ssl.h"  // Include wolfSSL for AES decryption
+#include <openssl/evp.h>  // OpenSSL for AES decryption
 
 #define FRAME_SIZE 64
 #define DEFAULT_CHANNEL_TIMESTAMP 0xFFFFFFFFFFFFFFFF
@@ -57,27 +57,44 @@ typedef struct {
 
 flash_entry_t decoder_status;
 
-// AES decryption using wolfSSL
+// AES decryption using OpenSSL
 int decode(pkt_len_t pkt_len, frame_packet_t *new_frame, uint8_t *key) {
     uint8_t decrypted_data[FRAME_SIZE];
+    EVP_CIPHER_CTX *ctx;
+
+    // Initialize OpenSSL AES context
+    ctx = EVP_CIPHER_CTX_new();
+    if (!ctx) {
+        return -1;  // Error in initializing the context
+    }
+
+    // Initialize the decryption operation
+    if (EVP_DecryptInit_ex(ctx, EVP_aes_256_cbc(), NULL, key, NULL) != 1) {
+        EVP_CIPHER_CTX_free(ctx);
+        return -1;
+    }
+
+    int len;
+    if (EVP_DecryptUpdate(ctx, decrypted_data, &len, new_frame->data, FRAME_SIZE) != 1) {
+        EVP_CIPHER_CTX_free(ctx);
+        return -1;
+    }
+
+    int decrypted_len = len;
+
+    // Finalize the decryption
+    if (EVP_DecryptFinal_ex(ctx, decrypted_data + len, &len) != 1) {
+        EVP_CIPHER_CTX_free(ctx);
+        return -1;
+    }
+
+    decrypted_len += len;
     
-    // AES setup using wolfSSL
-    WOLFSSL_CTX *ctx;
-    WOLFSSL *ssl;
-    WC_RNG rng;
-    WOLFSSL_AES_KEY aes_key;
-    
-    wolfSSL_Init();
-    ctx = wolfSSL_CTX_new(wolfSSLv23_client_method());
-    ssl = wolfSSL_new(ctx);
-    
-    // Decrypt using AES with the key provided
-    wolfSSL_AES_set_decrypt_key(&aes_key, key, 32);  // Use 32-byte key for AES-256
-    wolfSSL_AES_decrypt(&aes_key, new_frame->data, decrypted_data);
-    
+    EVP_CIPHER_CTX_free(ctx);
+
     // Process decrypted data (you can now use this data)
     printf("Decoded frame for channel %u: ", new_frame->channel);
-    for (int i = 0; i < FRAME_SIZE; i++) {
+    for (int i = 0; i < decrypted_len; i++) {
         printf("%02X ", decrypted_data[i]);
     }
     printf("\n");
