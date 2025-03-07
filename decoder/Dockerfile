@@ -39,7 +39,7 @@ ENV MAXIM_PATH=/root/msdk-2024_02
 
 WORKDIR /decoder
 
-RUN gcc -o /root/my_program /root/my_program.c -lssl -lcrypto
+RUN gcc -o /root/my_program /src/simple_crypto.c /src/decoder.c -lssl -lcrypto
 
 ENTRYPOINT ["bash", "-c", "make release DECODER_ID=${DECODER_ID} && cp build/max78000.elf build/max78000.bin /out"]
 
