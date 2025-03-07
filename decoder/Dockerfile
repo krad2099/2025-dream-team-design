@@ -1,9 +1,9 @@
-# Dockerfile for the 2025 eCTF with wolfSSL integration
+# Dockerfile for the 2025 eCTF with OpenSSL integration
 
 FROM ubuntu:24.04
 
 LABEL version="0.3"
-LABEL description="Example Decoder Docker Container for the 2025 eCTF with wolfSSL Integration"
+LABEL description="Example Decoder Docker Container for the 2025 eCTF with OpenSSL Integration"
 
 ARG DEBIAN_FRONTEND=noninteractive
 WORKDIR /decoder
@@ -27,7 +27,6 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     pkg-config \
     wget \
     cmake \
-    libwolfssl-dev  # Install wolfSSL development files
 
 # Install MSDK (Maxim SDK)
 RUN apt-get install -y unzip && \
@@ -35,21 +34,20 @@ RUN apt-get install -y unzip && \
     unzip v2024_02.zip && \
     rm -f v2024_02.zip
 
-# Set wolfSSL installation (this will ensure it's used during the build)
-ENV WOLFSSL_PATH=/usr/include/wolfssl
+# Set OpenSSL installation
+ENV OPENSSL_PATH=/usr/include/openssl
 ENV LIBRARY_PATH="$LIBRARY_PATH:/usr/lib/x86_64-linux-gnu"
-ENV C_INCLUDE_PATH="$C_INCLUDE_PATH:/usr/include/wolfssl"
+ENV C_INCLUDE_PATH="$C_INCLUDE_PATH:/usr/include/openssl"
 
-# Install Python dependencies (if needed)
-RUN pip3 install pycryptodome  # Optional: this can be removed if not used
+# Install Python dependencies
+RUN pip3 install pyOpenSSL
+
 
 # Copy the crypto library (which includes crypto.h and crypto.c) into the container
 COPY ./crypto /root/crypto
 
-# Set environment variables for Maxim path and the crypto library
+# Set environment variables for Maxim path
 ENV MAXIM_PATH=/root/msdk-2024_02
-ENV C_INCLUDE_PATH="/root/crypto:$C_INCLUDE_PATH"
-ENV LIBRARY_PATH="/root/crypto:$LIBRARY_PATH"
 
 WORKDIR /decoder
 
