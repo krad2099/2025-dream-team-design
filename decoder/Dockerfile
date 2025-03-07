@@ -5,10 +5,12 @@
 FROM ubuntu:24.04
 
 LABEL version="0.2"
-LABEL description="Example Decoder Docker Container for the 2025 eCTF"
+LABEL description="Dream Team Decoder Docker Container for the 2025 eCTF"
 
 ARG DEBIAN_FRONTEND=noninteractive
 WORKDIR /root
+
+ENV DOCKER_BUILDKIT=1
 
 # Install Requisite Packages
 # do this first because it takes the longest
@@ -25,7 +27,8 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     texinfo \
     unzip \
     build-essential \
-    libssl-dev 
+    libssl-dev \
+    pkg-config
     
 
 
@@ -36,13 +39,17 @@ RUN apt-get install -y unzip && \
     unzip v2024_02.zip && \
     rm -f v2024_02.zip
 
+# Set environment variables for Maxim SDK
 ENV MAXIM_PATH=/root/msdk-2024_02
+
+# Set OpenSSL path for libraries and includes
+ENV LIBRARY_PATH="/usr/lib/x86_64-linux-gnu:$LIBRARY_PATH"
+ENV C_INCLUDE_PATH="/usr/include:$C_INCLUDE_PATH"
 
 COPY ./src /src
 
 COPY ./inc /inc
 
-RUN gcc -o /root/my_program /src/simple_crypto.c /src/decoder.c /src/host_messaging.c /src/simple_flash.c /src/simple_uart.c -I/inc -lssl -lcrypto
 
 WORKDIR /decoder
 
