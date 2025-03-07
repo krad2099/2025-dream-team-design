@@ -31,7 +31,7 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     gcc \
     g++ \
     libstdc++-12-dev \
-    --no-install-recommends
+    
 
 # Install MSDK
 RUN wget https://github.com/analogdevicesinc/msdk/archive/refs/tags/v2024_02.zip && \
