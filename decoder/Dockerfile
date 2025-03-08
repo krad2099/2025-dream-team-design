@@ -28,7 +28,7 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     pkg-config \
     glibc-source \
     gcc \
-    g++ \
+    g++
     
 
 # Install MSDK
