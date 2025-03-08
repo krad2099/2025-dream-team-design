@@ -55,8 +55,12 @@ COPY ./inc /inc
 
 WORKDIR /decoder
 
-RUN arm-none-eabi-gcc -mcpu=cortex-m7 -mthumb --sysroot=/usr/arm-none-eabi -o /root/dream_team_decoder /src/decoder.c /src/host_messaging.c /src/simple_crypto.c /src/simple_flash.c /src/simple_uart.c -I/inc -lwolfssl
-
+RUN SYSROOT=$(arm-none-eabi-gcc --print-sysroot) && \
+    echo "Sysroot is $SYSROOT" && \
+    arm-none-eabi-gcc -mcpu=cortex-m7 -mthumb --sysroot=$SYSROOT -o /root/dream_team_decoder \
+      /src/decoder.c /src/host_messaging.c /src/simple_crypto.c /src/simple_flash.c /src/simple_uart.c \
+      -I/inc -lwolfssl
+      
 ENTRYPOINT ["bash", "-c", "make release DECODER_ID=${DECODER_ID} && cp build/max78000.elf build/max78000.bin /out"]
 
 # Sample run command:
