@@ -1,3 +1,8 @@
+/**
+ * @file host_messaging.h
+ * @brief eCTF Host Messaging Implementation 
+ */
+
 #ifndef __HOST_MESSAGING__
 #define __HOST_MESSAGING__
 
@@ -11,12 +16,12 @@
 #define MSG_MAGIC '%'     // '%' - 0x25
 
 typedef enum {
-    DECODE_MSG = 'D',     // 'D' - 0x44
-    SUBSCRIBE_MSG = 'S',  // 'S' - 0x53
-    LIST_MSG = 'L',       // 'L' - 0x4c
-    ACK_MSG = 'A',        // 'A' - 0x41
-    DEBUG_MSG = 'G',      // 'G' - 0x47
-    ERROR_MSG = 'E',      // 'E' - 0x45
+    DECODE_MSG = 'D',     // 'D'
+    SUBSCRIBE_MSG = 'S',  // 'S'
+    LIST_MSG = 'L',       // 'L'
+    ACK_MSG = 'A',        // 'A'
+    DEBUG_MSG = 'G',      // 'G'
+    ERROR_MSG = 'E',      // 'E'
 } msg_type_t;
 
 #pragma pack(push, 1)
@@ -25,7 +30,6 @@ typedef struct {
     char cmd;      // msg_type_t
     uint16_t len;
 } msg_header_t;
-
 #pragma pack(pop)
 
 #define MSG_HEADER_SIZE sizeof(msg_header_t)
