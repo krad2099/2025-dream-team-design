@@ -1,3 +1,4 @@
+# syntax=docker/dockerfile:1.4
 # Dockerfile for the 2025 eCTF
 FROM ubuntu:24.04
 
