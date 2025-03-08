@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <string.h>
-#include <openssl/aes.h>
-#include <openssl/rand.h>
 #include "mxc_device.h"
 #include "status_led.h"
 #include "board.h"
@@ -10,13 +8,12 @@
 #include "simple_flash.h"
 #include "host_messaging.h"
 #include "simple_uart.h"
-#include "simple_crypto.h"
+#include "simple_crypto.h"  // Uses WolfSSL for crypto
 
 #define MAX_CHANNEL_COUNT 8
 #define FRAME_SIZE 64
 #define DEFAULT_CHANNEL_TIMESTAMP 0xFFFFFFFFFFFFFFFF
 #define FLASH_FIRST_BOOT 0xDEADBEEF
-#define FLASH_STATUS_ADDR 0xDEADBEEF
 
 typedef uint64_t timestamp_t;
 typedef uint32_t channel_id_t;
@@ -52,7 +49,7 @@ typedef struct {
     channel_id_t id;
     timestamp_t start_timestamp;
     timestamp_t end_timestamp;
-    uint8_t key[32];
+    uint8_t key[32];  // AES-256 key
 } channel_status_t;
 
 typedef struct {
@@ -62,14 +59,18 @@ typedef struct {
 
 flash_entry_t decoder_status;
 
+// Declaration of the WolfSSL-based decryption function (in simple_crypto.c)
 int decrypt_sym(uint8_t *ciphertext, size_t len, uint8_t *key, uint8_t *plaintext);
 int update_subscription(uint16_t pkt_len, subscription_update_packet_t *data);
 
 int decode(pkt_len_t pkt_len, frame_packet_t *new_frame, uint8_t *key) {
     uint8_t decrypted_data[FRAME_SIZE];
     
-    // Decrypt using AES
-    decrypt_sym(new_frame->data, FRAME_SIZE, key, decrypted_data);
+    // Decrypt using WolfSSL (simple_crypto.c provides decrypt_sym)
+    if (decrypt_sym(new_frame->data, FRAME_SIZE, key, decrypted_data) != 0) {
+        printf("Decryption failed.\n");
+        return -1;
+    }
 
     // Process decrypted data
     printf("Decoded frame for channel %u: ", new_frame->channel);
@@ -82,11 +83,14 @@ int decode(pkt_len_t pkt_len, frame_packet_t *new_frame, uint8_t *key) {
 }
 
 int update_subscription(uint16_t pkt_len, subscription_update_packet_t *data) {
-    if (pkt_len < sizeof(subscription_update_packet_t)) return -1;
+    if (pkt_len < sizeof(subscription_update_packet_t))
+        return -1;
 
     subscription_update_packet_t new_sub;
     memcpy(&new_sub, data, sizeof(subscription_update_packet_t));
 
+    // Here you would update your subscription list, then write to flash.
+    // For now, we simply acknowledge the update.
     write_packet(SUBSCRIBE_MSG, NULL, 0);
     return 0;
 }
@@ -99,21 +103,25 @@ int main(void) {
     flash_simple_read(FLASH_STATUS_ADDR, &decoder_status, sizeof(flash_entry_t));
 
     while (1) {
-        if (read_packet(&cmd, uart_buf, &pkt_len) < 0) continue;
+        if (read_packet(&cmd, uart_buf, &pkt_len) < 0)
+            continue;
 
         switch (cmd) {
-            case DECODE_MSG:
+            case DECODE_MSG: {
                 uint8_t *key = NULL;
+                frame_packet_t *frame = (frame_packet_t *)uart_buf;
+                // Find the subscription matching the channel in the frame.
                 for (int i = 0; i < decoder_status.first_boot; i++) {
-                    if (decoder_status.subscribed_channels[i].id == ((frame_packet_t *)uart_buf)->channel) {
+                    if (decoder_status.subscribed_channels[i].id == frame->channel) {
                         key = decoder_status.subscribed_channels[i].key;
                         break;
                     }
                 }
                 if (key) {
-                    decode(pkt_len, (frame_packet_t *)uart_buf, key);
+                    decode(pkt_len, frame, key);
                 }
                 break;
+            }
             case SUBSCRIBE_MSG:
                 update_subscription(pkt_len, (subscription_update_packet_t *)uart_buf);
                 break;
@@ -121,4 +129,5 @@ int main(void) {
                 break;
         }
     }
+    return 0;
 }
