@@ -1,7 +1,7 @@
 import argparse
 import json
 from pathlib import Path
-from OpenSSL import crypto
+import hashlib  # Use hashlib for MD5
 
 def gen_secrets(channels: list[int]) -> bytes:
     """Generate the contents of the secrets file
@@ -9,23 +9,20 @@ def gen_secrets(channels: list[int]) -> bytes:
     :param channels: List of channel numbers that will be valid in this deployment.
     :returns: Contents of the secrets file
     """
-    # Define the AES key for encryption (32-byte key for AES-256)
-    aes_key = b"super_secure_key_32bytes_for_aes"
-    key = aes_key
+    # Instead of using AES encryption, compute an MD5 digest of some secret data.
+    secret_data = b"secret data"  # The secret data to hash
+    md5 = hashlib.md5()
+    md5.update(secret_data)
+    # Use hexdigest() to get a 32-character hexadecimal string
+    digest = md5.hexdigest()  # This is a string of 32 hex characters
 
-    # Encrypt some data using AES from OpenSSL (pyOpenSSL)
-    data = b"secret data"
-    cipher = crypto.Cipher('aes_256_cbc', key, iv=b'0123456789abcdef', mode=crypto.Cipher.MODE_CBC)
-    encrypted_data = cipher.encrypt(data)
-
-    # Create the secrets dictionary
+    # Create the secrets dictionary. The "some_secrets" field now holds the MD5 hex digest.
     secrets = {
         "channels": channels,
-        "some_secrets": encrypted_data,  # Store encrypted data (not plaintext)
+        "some_secrets": digest,  # Store the MD5 hex digest as the secret
     }
 
     return json.dumps(secrets).encode()
-
 
 def parse_args():
     """Define and parse the command line arguments"""
@@ -45,11 +42,9 @@ def parse_args():
         "channels",
         nargs="+",
         type=int,
-        help="Supported channels. Channel 0 (broadcast) is always valid and will not"
-        " be provided in this list",
+        help="Supported channels. Channel 0 (broadcast) is always valid and will not be provided in this list",
     )
     return parser.parse_args()
-
 
 def main():
     """Main function of gen_secrets"""
@@ -57,19 +52,13 @@ def main():
 
     secrets = gen_secrets(args.channels)
 
-    # Print the generated secrets for your own debugging
-    # Attackers will NOT have access to the output of this (although they may have
-    # subscriptions in certain scenarios), but feel free to remove
-    #
-    # NOTE: Printing sensitive data is generally not good security practice
+    # For debugging; in production, you wouldn't print sensitive data
     print(f"Generated secrets: {secrets}")
 
-    # Open the file, erroring if the file exists unless the --force arg is provided
     with open(args.secrets_file, "wb" if args.force else "xb") as f:
         f.write(secrets)
 
     print(f"Wrote secrets to {str(args.secrets_file.absolute())}")
-
 
 if __name__ == "__main__":
     main()
