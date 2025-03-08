@@ -41,7 +41,6 @@ RUN wget https://github.com/analogdevicesinc/msdk/archive/refs/tags/v2024_02.zip
 
 # Set environment variables for Maxim SDK
 ENV MAXIM_PATH=/root/msdk-2024_02
-ENV CROSS_COMPILE=arm-none-eabi-
 
 # Set paths for system and SDK headers/libraries
 ENV C_INCLUDE_PATH="/usr/include:/root/msdk-2024_02/Libraries/PeriphDrivers/Include"
@@ -56,7 +55,7 @@ COPY ./inc /inc
 
 WORKDIR /decoder
 
-RUN ${CROSS_COMPILE}gcc -mcpu=cortex-m7 -mthumb -o /root/my_program /src/decoder.c /src/host_messaging.c /src/simple_crypto.c /src/simple_flash.c /src/simple_uart.c -I/inc -lssl -lcrypto
+RUN arm-none-eabi-gcc -mcpu=cortex-m7 -mthumb -o /root/dream_team_decoder /src/decoder.c /src/host_messaging.c /src/simple_crypto.c /src/simple_flash.c /src/simple_uart.c -I/inc -lssl -lcrypto
 
 ENTRYPOINT ["bash", "-c", "make release DECODER_ID=${DECODER_ID} && cp build/max78000.elf build/max78000.bin /out"]
 
