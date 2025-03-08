@@ -24,7 +24,7 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     texinfo \
     unzip \
     build-essential \
-    libssl-dev \
+    libwolfssl-dev \
     pkg-config \
     libc6-dev \
     glibc-source \
