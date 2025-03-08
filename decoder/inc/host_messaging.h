@@ -1,6 +1,6 @@
 /**
  * @file host_messaging.h
- * @author Dream Team
+ * @author  
  * @brief eCTF Host Messaging Implementation 
  * @date 2025
  *
