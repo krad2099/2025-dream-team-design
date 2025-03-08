@@ -14,8 +14,6 @@ ENV DOCKER_BUILDKIT=1
 RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     gdb \
     gdb-multiarch \
-    gcc-arm-none-eabi \
-    binutils-arm-none-eabi \
     make \
     python3 \
     python3-pip \
@@ -31,7 +29,6 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     glibc-source \
     gcc \
     g++ \
-    cmake
     
 
 # Install MSDK
