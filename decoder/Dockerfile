@@ -52,7 +52,7 @@ COPY ./inc /inc
 
 WORKDIR /decoder
 
-RUN gcc -o /root/dream_team_decoder /src/simple_crypto.c /src/decoder.c /src/host_messaging.c /src/simple_flash.c /src/simple_uart.c -I/inc -lwolfssl
+RUN gcc -v -o /root/dream_team_decoder /src/simple_crypto.c /src/decoder.c /src/host_messaging.c /src/simple_flash.c /src/simple_uart.c -I/inc -lwolfssl
       
 ENTRYPOINT ["bash", "-c", "make release DECODER_ID=${DECODER_ID} && cp build/max78000.elf build/max78000.bin /out"]
 
