@@ -1,7 +1,7 @@
 import argparse
 import struct
 import json
-from OpenSSL import crypto
+import hashlib  # Using Python's standard hashlib for MD5
 
 class Encoder:
     def __init__(self, secrets: bytes):
@@ -17,14 +17,13 @@ class Encoder:
         # Load the example secrets for use in Encoder.encode
         self.some_secrets = secrets["some_secrets"]
 
-        # Define AES key for encryption (using the same key as in gen_secrets)
-        self.key = b"super_secure_key_32bytes_for_aes"  # Use the same key
+        # The key is still stored but will not be used with MD5.
+        self.key = b"super_secure_key_32bytes_for_aes"  # Not used with MD5
 
     def encode(self, channel: int, frame: bytes, timestamp: int) -> bytes:
-        """The frame encoder function
+        """The frame encoder function using MD5 only.
 
-        This will be called for every frame that needs to be encoded before being
-        transmitted by the satellite to all listening TVs
+        Instead of encrypting the frame, this version computes an MD5 hash of the frame.
 
         :param channel: 16b unsigned channel number. Channel 0 is the emergency
             broadcast that must be decodable by all channels.
@@ -32,17 +31,19 @@ class Encoder:
         :param timestamp: 64b timestamp to use for encoding. **NOTE**: This value may
             have no relation to the current timestamp, so you should not compare it
             against the current time. The timestamp is guaranteed to strictly
-            monotonically increase (always go up) with subsequent calls to encode
+            monotonically increase (always go up) with subsequent calls to encode.
 
-        :returns: The encoded frame, which will be sent to the Decoder
+        :returns: The encoded frame, which consists of the channel, timestamp, and MD5 digest of the frame.
         """
-        # Encrypt the frame using AES from OpenSSL (pyOpenSSL)
-        cipher = crypto.Cipher('aes_256_cbc', self.key, iv=b'0123456789abcdef', mode=crypto.Cipher.MODE_CBC)
-        encrypted_frame = cipher.encrypt(frame)
+        # Compute MD5 hash of the frame data
+        md5 = hashlib.md5()
+        md5.update(frame)
+        digest = md5.digest()  # 16-byte MD5 hash
 
-        # Return the encoded frame with the channel and timestamp
-        return struct.pack("<IQ", channel, timestamp) + encrypted_frame
-
+        # Pack the channel (32-bit unsigned) and timestamp (64-bit unsigned)
+        header = struct.pack("<IQ", channel, timestamp)
+        # Append the MD5 digest to the header
+        return header + digest
 
 def main():
     """A test main to one-shot encode a frame"""
