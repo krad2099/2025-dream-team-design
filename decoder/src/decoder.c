@@ -331,7 +331,6 @@ int main(void) {
 #ifdef CRYPTO_EXAMPLE
             crypto_example();
 #endif
-            boot_flag();
             list_channels();
             break;
         case DECODE_MSG:
