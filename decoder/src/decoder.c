@@ -1,7 +1,7 @@
 /**
  * @file    decoder.c
  * @author  Dream Team
- * @brief   eCTF Dream Team Decoder Design Implementation
+ * @brief   eCTF Dream Team Decoder Design Implementation with Clock Synchronization
  * @date    2025
  *
  */
@@ -9,7 +9,9 @@
 /*********************** INCLUDES *************************/
 #include <stdio.h>
 #include <stdint.h>
+#include <stdbool.h>
 #include <string.h>
+#include <time.h>  // For monotonic clock
 #include "mxc_device.h"
 #include "status_led.h"
 #include "board.h"
@@ -28,14 +30,9 @@
  **********************************************************/
 void boot_flag(void);
 
-/**********************************************************
- ******************* PRIMITIVE TYPES **********************
- **********************************************************/
-
-#define timestamp_t uint64_t
-#define channel_id_t uint32_t
-#define decoder_id_t uint32_t
-#define pkt_len_t uint16_t
+/* New function declarations for clock synchronization */
+timestamp_t get_monotonic_timestamp(void);
+void process_sync_frame(frame_packet_t *sync_frame);
 
 /**********************************************************
  *********************** CONSTANTS ************************
@@ -48,6 +45,9 @@ void boot_flag(void);
 // Canary value to indicate the decoder has booted before
 #define FLASH_FIRST_BOOT 0xDEADBEEF
 
+// Define sync frame channel. Frames with this channel are treated as sync frames.
+#define SYNC_FRAME_CHANNEL 0xFFFFFFFF
+
 #ifdef CRYPTO_EXAMPLE
 // Define sizes for AES-GCM
 #define GCM_IV_SIZE    12
@@ -56,16 +56,8 @@ void boot_flag(void);
 #endif
 
 /**********************************************************
- ********************* STATE MACROS ***********************
+ *************** PACKED STRUCT DEFINITIONS ****************
  **********************************************************/
-
-// Address for persistent subscription data
-#define FLASH_STATUS_ADDR ((MXC_FLASH_MEM_BASE + MXC_FLASH_MEM_SIZE) - (2 * MXC_FLASH_PAGE_SIZE))
-
-/**********************************************************
- *********** COMMUNICATION PACKET DEFINITIONS *************
- **********************************************************/
-
 #pragma pack(push, 1)
 typedef struct {
     channel_id_t channel;
@@ -95,7 +87,6 @@ typedef struct {
 /**********************************************************
  ******************** TYPE DEFINITIONS ********************
  **********************************************************/
-
 typedef struct {
     bool active;
     channel_id_t id;
@@ -115,7 +106,7 @@ typedef struct {
 flash_entry_t decoder_status;
 
 #ifdef CRYPTO_EXAMPLE
-// Instead of a dummy, we now load the Global Secrets from flash.
+// Instead of a dummy, we now load the Global Secret from flash.
 static uint8_t global_secret[16];
 
 /**
@@ -126,10 +117,33 @@ void init_global_secret(void) {
 }
 #endif  // CRYPTO_EXAMPLE
 
+/* Global variables for timestamp synchronization */
+static int64_t timestamp_offset = 0;
+static int sync_received = 0;
+static uint64_t last_adjusted_timestamp = 0;
 
 /**********************************************************
  ******************* UTILITY FUNCTIONS ********************
  **********************************************************/
+
+/** @brief Returns a monotonic timestamp in nanoseconds.
+ */
+timestamp_t get_monotonic_timestamp(void) {
+    struct timespec ts;
+    clock_gettime(CLOCK_MONOTONIC, &ts);
+    return (timestamp_t)ts.tv_sec * 1000000000LL + ts.tv_nsec;
+}
+
+/** @brief Process a sync frame to adjust the timestamp offset.
+ *
+ *  This function calculates the offset between the encoder's clock and the local monotonic clock.
+ */
+void process_sync_frame(frame_packet_t *sync_frame) {
+    uint64_t local_time = get_monotonic_timestamp();
+    timestamp_offset = (int64_t)sync_frame->timestamp - (int64_t)local_time;
+    sync_received = 1;
+    print_debug("Sync frame received. Offset set to %lld\n", timestamp_offset);
+}
 
 /** @brief Checks whether the decoder is subscribed to a given channel.
  *
@@ -148,15 +162,10 @@ int is_subscribed(channel_id_t channel) {
     return 0;
 }
 
-
 /**********************************************************
  ********************* CORE FUNCTIONS *********************
  **********************************************************/
 
-/** @brief Lists the active subscriptions over UART.
- *
- *  @return 0 on success.
-*/
 int list_channels() {
     list_response_t resp;
     pkt_len_t len;
@@ -174,12 +183,6 @@ int list_channels() {
     return 0;
 }
 
-/** @brief Updates a channel subscription.
- *
- *  @param pkt_len Length of the incoming packet.
- *  @param update Pointer to subscription update data.
- *  @return 0 on success, -1 on error.
-*/
 int update_subscription(pkt_len_t pkt_len, subscription_update_packet_t *update) {
     int i;
     if (update->channel == EMERGENCY_CHANNEL) {
@@ -219,6 +222,13 @@ int decode(pkt_len_t pkt_len, frame_packet_t *new_frame) {
     channel_id_t channel;
     frame_size = pkt_len - (sizeof(new_frame->channel) + sizeof(new_frame->timestamp));
     channel = new_frame->channel;
+    
+    // Check if this is a sync frame.
+    if (channel == SYNC_FRAME_CHANNEL) {
+        process_sync_frame(new_frame);
+        return 0;
+    }
+    
     print_debug("Checking subscription\n");
     if (!is_subscribed(channel)) {
         STATUS_LED_RED();
@@ -226,6 +236,21 @@ int decode(pkt_len_t pkt_len, frame_packet_t *new_frame) {
         print_error(output_buf);
         return -1;
     }
+    
+    // Ensure timestamps are monotonic.
+    if (sync_received) {
+        uint64_t adjusted_timestamp = new_frame->timestamp - timestamp_offset;
+        if (adjusted_timestamp <= last_adjusted_timestamp) {
+            print_error("Non-monotonic timestamp detected, adjusting\n");
+            adjusted_timestamp = last_adjusted_timestamp + 1;
+        }
+        last_adjusted_timestamp = adjusted_timestamp;
+        print_debug("Adjusted timestamp: %llu\n", adjusted_timestamp);
+        new_frame->timestamp = adjusted_timestamp;
+    } else {
+        print_debug("Warning: Sync frame not received yet.\n");
+    }
+    
 #ifdef CRYPTO_EXAMPLE
     {
         // Derive a key from the loaded global secret using HKDF (SHA-256)
@@ -254,14 +279,11 @@ int decode(pkt_len_t pkt_len, frame_packet_t *new_frame) {
         write_packet(DECODE_MSG, plaintext, plaintext_len);
     }
 #else
-    // If cryptography is not enabled, pass the frame data directly.
     write_packet(DECODE_MSG, new_frame->data, frame_size);
 #endif
     return 0;
 }
 
-/** @brief Initializes the decoder peripherals.
- */
 void init() {
     int ret;
     flash_simple_init();
@@ -280,7 +302,6 @@ void init() {
         flash_simple_write(FLASH_STATUS_ADDR, &decoder_status, sizeof(flash_entry_t));
     }
 #ifdef CRYPTO_EXAMPLE
-    // Load the Global Secret from secure flash.
     init_global_secret();
 #endif
     ret = uart_init();
@@ -291,10 +312,6 @@ void init() {
 }
 
 #ifdef CRYPTO_EXAMPLE
-/* 
- * Crypto example using HKDF to derive a secure key from the loaded Global Secret.
- * Uses "decoder key" as the context info.
- */
 #define PLAINTEXT_LEN 16
 #define CIPHERTEXT_LEN (PLAINTEXT_LEN + GCM_IV_SIZE + GCM_TAG_SIZE)
 #define HASH_OUT_SIZE  32
@@ -340,10 +357,6 @@ void crypto_example(void) {
     print_debug(output_buf);
 }
 #endif  // CRYPTO_EXAMPLE
-
-/**********************************************************
- *********************** MAIN LOOP ************************
- **********************************************************/
 
 int main(void) {
     char output_buf[128] = {0};
