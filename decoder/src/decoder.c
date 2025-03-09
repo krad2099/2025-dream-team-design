@@ -126,9 +126,6 @@ void init_global_secret(void) {
 }
 #endif  // CRYPTO_EXAMPLE
 
-// Global variable to track the last decoded timestamp
-static timestamp_t last_timestamp = 0;
-
 
 /**********************************************************
  ******************* UTILITY FUNCTIONS ********************
