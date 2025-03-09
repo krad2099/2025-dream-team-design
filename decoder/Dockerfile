@@ -1,6 +1,7 @@
-# syntax=docker/dockerfile:1.4
-
-ARG DOCKER_BUILDKIT=1
+# syntax=docker/dockerfile:1
+FROM docker
+COPY --from=docker/buildx-bin /buildx /usr/libexec/docker/cli-plugins/docker-buildx
+RUN docker buildx version
 
 # Dockerfile for the 2025 eCTF
 # Make any changes here to set up your build environment (e.g., installing crypto
