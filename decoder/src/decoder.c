@@ -226,6 +226,16 @@ int decode(pkt_len_t pkt_len, frame_packet_t *new_frame) {
         print_error(output_buf);
         return -1;
     }
+
+    
+    // Check for strictly increasing timestamps
+    if (new_frame->timestamp <= last_timestamp) {
+        STATUS_LED_RED();
+        print_error("Frame timestamp out of order (past_timestamp)\n");
+        return -1;
+    }
+    last_timestamp = new_frame->timestamp;
+    
 #ifdef CRYPTO_EXAMPLE
     {
         // Use the first 16 bytes of global_secret directly as the key.
