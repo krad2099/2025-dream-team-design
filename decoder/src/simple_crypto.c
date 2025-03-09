@@ -21,6 +21,7 @@
 #include "simple_crypto.h"
 #include <stdint.h>
 #include <string.h>
+#include <stddef.h>
 #include <wolfssl/options.h>
 #include <wolfssl/wolfcrypt/aes.h>
 #include <wolfssl/wolfcrypt/random.h>
