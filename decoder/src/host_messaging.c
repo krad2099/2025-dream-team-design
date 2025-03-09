@@ -7,6 +7,7 @@
  */
 
 #include <stdio.h>
+#include <stddef.h>
 #include "host_messaging.h"
 
 /** @brief Read len bytes from UART, acknowledging after every 256 bytes.
