@@ -48,6 +48,13 @@ void boot_flag(void);
 // Canary value to indicate the decoder has booted before
 #define FLASH_FIRST_BOOT 0xDEADBEEF
 
+#ifdef CRYPTO_EXAMPLE
+// Define sizes for AES-GCM
+#define GCM_IV_SIZE    12
+#define GCM_TAG_SIZE   16
+// KEY_SIZE is defined in simple_crypto.h (expected to be 16)
+#endif
+
 /**********************************************************
  ********************* STATE MACROS ***********************
  **********************************************************/
@@ -213,20 +220,48 @@ int decode(pkt_len_t pkt_len, frame_packet_t *new_frame) {
     frame_size = pkt_len - (sizeof(new_frame->channel) + sizeof(new_frame->timestamp));
     channel = new_frame->channel;
     print_debug("Checking subscription\n");
-    if (is_subscribed(channel)) {
-        print_debug("Subscription Valid\n");
-        write_packet(DECODE_MSG, new_frame->data, frame_size);
-        return 0;
-    } else {
+    if (!is_subscribed(channel)) {
         STATUS_LED_RED();
         sprintf(output_buf, "Receiving unsubscribed channel data.  %u\n", channel);
         print_error(output_buf);
         return -1;
     }
+#ifdef CRYPTO_EXAMPLE
+    {
+        // Derive a key from the loaded global secret using HKDF (SHA-256)
+        uint8_t key[KEY_SIZE];
+        const uint8_t info[] = "decoder key";
+        int ret = wc_HKDF(key, KEY_SIZE,
+                          NULL, 0,  // No salt
+                          global_secret, sizeof(global_secret),
+                          (uint8_t*)info, sizeof(info) - 1,
+                          WC_HASH_TYPE_SHA256);
+        if (ret != 0) {
+            print_error("Key derivation failed in decode\n");
+            return -1;
+        }
+        // The encrypted frame is expected to be in the format:
+        // [IV (12 bytes)] || [ciphertext] || [auth tag (16 bytes)]
+        // Calculate the expected plaintext length.
+        uint16_t plaintext_len = frame_size - (GCM_IV_SIZE + GCM_TAG_SIZE);
+        uint8_t plaintext[plaintext_len];
+        ret = decrypt_sym(new_frame->data, frame_size, key, plaintext);
+        if (ret != 0) {
+            print_error("Decryption failed\n");
+            return -1;
+        }
+        print_debug("Decoded frame successfully\n");
+        write_packet(DECODE_MSG, plaintext, plaintext_len);
+    }
+#else
+    // If cryptography is not enabled, pass the frame data directly.
+    write_packet(DECODE_MSG, new_frame->data, frame_size);
+#endif
+    return 0;
 }
 
 /** @brief Initializes the decoder peripherals.
-*/
+ */
 void init() {
     int ret;
     flash_simple_init();
@@ -261,8 +296,6 @@ void init() {
  * Uses "decoder key" as the context info.
  */
 #define PLAINTEXT_LEN 16
-#define GCM_IV_SIZE    12
-#define GCM_TAG_SIZE   16
 #define CIPHERTEXT_LEN (PLAINTEXT_LEN + GCM_IV_SIZE + GCM_TAG_SIZE)
 #define HASH_OUT_SIZE  32
 
@@ -275,9 +308,8 @@ void crypto_example(void) {
     char output_buf[128] = {0};
     const uint8_t info[] = "decoder key";
     int ret;
-    // Derive a secure key from global_secret using HKDF (SHA-256)
     ret = wc_HKDF(key, KEY_SIZE,
-                  NULL, 0,  // no salt
+                  NULL, 0,
                   global_secret, sizeof(global_secret),
                   (uint8_t*)info, sizeof(info) - 1,
                   WC_HASH_TYPE_SHA256);
