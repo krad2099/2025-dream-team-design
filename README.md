@@ -1,4 +1,4 @@
-# eCTF Insecure Example
+# eCTF Dream Team Design
 
 This repository holds the insecure example design for an eCTF Satellite TV System.
 
