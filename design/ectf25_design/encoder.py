@@ -5,21 +5,13 @@ Program: encoder.py
 """
 
 import os
-from cryptography.hazmat.primitives import hashes
-from cryptography.hazmat.primitives.kdf.hkdf import HKDF
 from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 
 class Encoder:
     def __init__(self, secrets: bytes):
-        # Derive a 16-byte key using HKDF with SHA-256.
-        # Must use the same parameters ("decoder key" as context) as the decoder.
-        hkdf = HKDF(
-            algorithm=hashes.SHA256(),
-            length=16,
-            salt=None,
-            info=b"decoder key",
-        )
-        self.key = hkdf.derive(secrets)
+        # Derive a 16-byte key from the provided global secrets.
+        # (In this example we simply use the first 16 bytes.)
+        self.key = secrets[:16]
         self.aesgcm = AESGCM(self.key)
     
     def encode(self, channel: int, frame: bytes, timestamp: int) -> bytes:
