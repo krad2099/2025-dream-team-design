@@ -126,7 +126,9 @@ void init_global_secret(void) {
 }
 #endif  // CRYPTO_EXAMPLE
 
+// Global variable to track the last decoded timestamp
 static timestamp_t last_timestamp = 0;
+
 
 /**********************************************************
  ******************* UTILITY FUNCTIONS ********************
@@ -227,26 +229,26 @@ int decode(pkt_len_t pkt_len, frame_packet_t *new_frame) {
         print_error(output_buf);
         return -1;
     }
-
-    
-    // Check for strictly increasing timestamps
-    if (new_frame->timestamp <= last_timestamp) {
-        STATUS_LED_RED();
-        print_error("Frame timestamp out of order (past_timestamp)\n");
-        return -1;
-    }
-    last_timestamp = new_frame->timestamp;
-    
 #ifdef CRYPTO_EXAMPLE
     {
-        // Use the first 16 bytes of global_secret directly as the key.
+        // Derive a key from the loaded global secret using HKDF (SHA-256)
         uint8_t key[KEY_SIZE];
-        memcpy(key, global_secret, KEY_SIZE);
-
-        // Calculate the expected length.
+        const uint8_t info[] = "decoder key";
+        int ret = wc_HKDF(key, KEY_SIZE,
+                          NULL, 0,  // No salt
+                          global_secret, sizeof(global_secret),
+                          (uint8_t*)info, sizeof(info) - 1,
+                          WC_HASH_TYPE_SHA256);
+        if (ret != 0) {
+            print_error("Key derivation failed in decode\n");
+            return -1;
+        }
+        // The encrypted frame is expected to be in the format:
+        // [IV (12 bytes)] || [ciphertext] || [auth tag (16 bytes)]
+        // Calculate the expected plaintext length.
         uint16_t plaintext_len = frame_size - (GCM_IV_SIZE + GCM_TAG_SIZE);
         uint8_t plaintext[plaintext_len];
-        int ret = decrypt_sym(new_frame->data, frame_size, key, plaintext);
+        ret = decrypt_sym(new_frame->data, frame_size, key, plaintext);
         if (ret != 0) {
             print_error("Decryption failed\n");
             return -1;
@@ -307,9 +309,18 @@ void crypto_example(void) {
     uint8_t hash_out[HASH_OUT_SIZE];
     uint8_t decrypted[PLAINTEXT_LEN];
     char output_buf[128] = {0};
-    memcpy(key, global_secret, KEY_SIZE);
-
-    int ret = encrypt_sym((uint8_t*)plaintext, PLAINTEXT_LEN, key, ciphertext);
+    const uint8_t info[] = "decoder key";
+    int ret;
+    ret = wc_HKDF(key, KEY_SIZE,
+                  NULL, 0,
+                  global_secret, sizeof(global_secret),
+                  (uint8_t*)info, sizeof(info) - 1,
+                  WC_HASH_TYPE_SHA256);
+    if (ret != 0) {
+         print_error("Key derivation failed\n");
+         return;
+    }
+    ret = encrypt_sym((uint8_t*)plaintext, PLAINTEXT_LEN, key, ciphertext);
     if (ret != 0) {
          print_error("Encryption failed\n");
          return;
