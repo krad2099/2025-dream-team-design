@@ -1,16 +1,9 @@
 /**
  * @file host_messaging.c
- * @author Samuel Meyers
+ * @author Dream Team
  * @brief eCTF Host Messaging Implementation 
  * @date 2025
  *
- * This source file is part of an example system for MITRE's 2025 Embedded System CTF (eCTF).
- * It implements the UART-based messaging protocol used between the decoder and the host.
- * 
- * Note: Although our overall design now uses AES-GCM for encryption and SHA-256 for hashing,
- * the messaging protocol itself (packet formatting, ACK handling, etc.) remains unchanged.
- *
- * @copyright Copyright (c) 2025 The MITRE Corporation
  */
 
 #include <stdio.h>
