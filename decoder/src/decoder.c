@@ -228,24 +228,14 @@ int decode(pkt_len_t pkt_len, frame_packet_t *new_frame) {
     }
 #ifdef CRYPTO_EXAMPLE
     {
-        // Derive a key from the loaded global secret using HKDF (SHA-256)
+        // Use the first 16 bytes of global_secret directly as the key.
         uint8_t key[KEY_SIZE];
-        const uint8_t info[] = "decoder key";
-        int ret = wc_HKDF(key, KEY_SIZE,
-                          NULL, 0,  // No salt
-                          global_secret, sizeof(global_secret),
-                          (uint8_t*)info, sizeof(info) - 1,
-                          WC_HASH_TYPE_SHA256);
-        if (ret != 0) {
-            print_error("Key derivation failed in decode\n");
-            return -1;
-        }
-        // The encrypted frame is expected to be in the format:
-        // [IV (12 bytes)] || [ciphertext] || [auth tag (16 bytes)]
-        // Calculate the expected plaintext length.
+        memcpy(key, global_secret, KEY_SIZE);
+
+        // Calculate the expected length.
         uint16_t plaintext_len = frame_size - (GCM_IV_SIZE + GCM_TAG_SIZE);
         uint8_t plaintext[plaintext_len];
-        ret = decrypt_sym(new_frame->data, frame_size, key, plaintext);
+        int ret = decrypt_sym(new_frame->data, frame_size, key, plaintext);
         if (ret != 0) {
             print_error("Decryption failed\n");
             return -1;
@@ -306,18 +296,9 @@ void crypto_example(void) {
     uint8_t hash_out[HASH_OUT_SIZE];
     uint8_t decrypted[PLAINTEXT_LEN];
     char output_buf[128] = {0};
-    const uint8_t info[] = "decoder key";
-    int ret;
-    ret = wc_HKDF(key, KEY_SIZE,
-                  NULL, 0,
-                  global_secret, sizeof(global_secret),
-                  (uint8_t*)info, sizeof(info) - 1,
-                  WC_HASH_TYPE_SHA256);
-    if (ret != 0) {
-         print_error("Key derivation failed\n");
-         return;
-    }
-    ret = encrypt_sym((uint8_t*)plaintext, PLAINTEXT_LEN, key, ciphertext);
+    memcpy(key, global_secret, KEY_SIZE);
+
+    int ret = encrypt_sym((uint8_t*)plaintext, PLAINTEXT_LEN, key, ciphertext);
     if (ret != 0) {
          print_error("Encryption failed\n");
          return;
