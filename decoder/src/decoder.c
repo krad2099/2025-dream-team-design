@@ -36,10 +36,6 @@
 #define decoder_id_t uint32_t
 #define pkt_len_t uint16_t
 
-/* Forward declaration for custom packet types */
-typedef struct frame_packet_t frame_packet_t;
-typedef struct subscription_update_packet_t subscription_update_packet_t;
-
 /**********************************************************
  ************************ CONSTANTS ***********************
  **********************************************************/
@@ -55,7 +51,7 @@ typedef struct subscription_update_packet_t subscription_update_packet_t;
  ********* FORWARD FUNCTION PROTOTYPES ******************
  **********************************************************/
 timestamp_t get_monotonic_timestamp(void);
-void process_sync_frame(frame_packet_t *sync_frame);
+void process_sync_frame(struct frame_packet_t *sync_frame);
 
 /**********************************************************
  ***** COMMUNICATION PACKET DEFINITIONS (packed) *******
@@ -113,7 +109,7 @@ void init_global_secret(void) {
 }
 #endif  // CRYPTO_EXAMPLE
 
-/* Globals for timestamp synchronization */
+/* Global variables for timestamp synchronization */
 static int64_t timestamp_offset = 0;
 static int sync_received = 0;
 static uint64_t last_adjusted_timestamp = 0;
@@ -267,7 +263,7 @@ int decode(pkt_len_t pkt_len, frame_packet_t *new_frame) {
     return 0;
 }
 
-void init() {
+void init(void) {
     int ret;
     flash_simple_init();
     flash_simple_read(FLASH_STATUS_ADDR, &decoder_status, sizeof(flash_entry_t));
