@@ -10,6 +10,7 @@
 #define __SIMPLE_FLASH__
 
 #include <stdint.h>
+#include <stddef.h>
 
 // Define a flash region for storing Global Secrets.
 // Adjust the offset as needed so that it does not overlap with other persistent data.
