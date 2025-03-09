@@ -1,3 +1,5 @@
+#define _POSIX_C_SOURCE 199309L  // Needed for clock_gettime and CLOCK_MONOTONIC
+
 /**
  * @file    decoder.c
  * @author  Dream Team
@@ -11,7 +13,8 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include <string.h>
-#include <time.h>  // For monotonic clock
+#include <time.h>    // For clock_gettime
+#include <stdlib.h>  // For snprintf
 #include "mxc_device.h"
 #include "status_led.h"
 #include "board.h"
@@ -26,27 +29,20 @@
 #endif  // CRYPTO_EXAMPLE
 
 /**********************************************************
- ******************* FORWARD DECLARATIONS *****************
- **********************************************************/
-void boot_flag(void);
-
-/* New function declarations for clock synchronization */
-timestamp_t get_monotonic_timestamp(void);
-void process_sync_frame(frame_packet_t *sync_frame);
+ *********************** PRIMITIVE TYPES **********************/
+#define timestamp_t uint64_t
+#define channel_id_t uint32_t
+#define decoder_id_t uint32_t
+#define pkt_len_t uint16_t
 
 /**********************************************************
- *********************** CONSTANTS ************************
- **********************************************************/
-
+ *********************** CONSTANTS **************************/
 #define MAX_CHANNEL_COUNT 8
 #define EMERGENCY_CHANNEL 0
 #define FRAME_SIZE 64
-#define DEFAULT_CHANNEL_TIMESTAMP 0xFFFFFFFFFFFFFFFF
+#define DEFAULT_CHANNEL_TIMESTAMP 0xFFFFFFFFFFFFFFFFULL
 // Canary value to indicate the decoder has booted before
 #define FLASH_FIRST_BOOT 0xDEADBEEF
-
-// Define sync frame channel. Frames with this channel are treated as sync frames.
-#define SYNC_FRAME_CHANNEL 0xFFFFFFFF
 
 #ifdef CRYPTO_EXAMPLE
 // Define sizes for AES-GCM
@@ -55,9 +51,17 @@ void process_sync_frame(frame_packet_t *sync_frame);
 // KEY_SIZE is defined in simple_crypto.h (expected to be 16)
 #endif
 
+// Define sync frame channel. Frames with this channel are treated as sync frames.
+#define SYNC_FRAME_CHANNEL 0xFFFFFFFF
+
 /**********************************************************
- *************** PACKED STRUCT DEFINITIONS ****************
+ ************* FORWARD FUNCTION PROTOTYPES *****************
  **********************************************************/
+timestamp_t get_monotonic_timestamp(void);
+void process_sync_frame(frame_packet_t *sync_frame);
+
+/**********************************************************
+ *************** COMMUNICATION PACKET DEFINITIONS **********/
 #pragma pack(push, 1)
 typedef struct {
     channel_id_t channel;
@@ -85,7 +89,7 @@ typedef struct {
 #pragma pack(pop)
 
 /**********************************************************
- ******************** TYPE DEFINITIONS ********************
+ ******************** TYPE DEFINITIONS ********************/
  **********************************************************/
 typedef struct {
     bool active;
@@ -102,7 +106,6 @@ typedef struct {
 /**********************************************************
  ************************ GLOBALS *************************
  **********************************************************/
-
 flash_entry_t decoder_status;
 
 #ifdef CRYPTO_EXAMPLE
@@ -136,20 +139,24 @@ timestamp_t get_monotonic_timestamp(void) {
 
 /** @brief Process a sync frame to adjust the timestamp offset.
  *
- *  This function calculates the offset between the encoder's clock and the local monotonic clock.
+ *  This function calculates the offset between the encoder’s clock and the local monotonic clock.
  */
 void process_sync_frame(frame_packet_t *sync_frame) {
     uint64_t local_time = get_monotonic_timestamp();
     timestamp_offset = (int64_t)sync_frame->timestamp - (int64_t)local_time;
     sync_received = 1;
-    print_debug("Sync frame received. Offset set to %lld\n", timestamp_offset);
+    {
+        char dbg_buf[128];
+        snprintf(dbg_buf, sizeof(dbg_buf), "Sync frame received. Offset set to %lld\n", timestamp_offset);
+        print_debug(dbg_buf);
+    }
 }
 
 /** @brief Checks whether the decoder is subscribed to a given channel.
  *
  *  @param channel The channel number to be checked.
  *  @return 1 if subscribed, 0 otherwise.
-*/
+ */
 int is_subscribed(channel_id_t channel) {
     if (channel == EMERGENCY_CHANNEL) {
         return 1;
@@ -215,7 +222,7 @@ int update_subscription(pkt_len_t pkt_len, subscription_update_packet_t *update)
  *  @param pkt_len Length of the incoming packet.
  *  @param new_frame Pointer to the frame packet.
  *  @return 0 on success, -1 if from unsubscribed channel.
-*/
+ */
 int decode(pkt_len_t pkt_len, frame_packet_t *new_frame) {
     char output_buf[128] = {0};
     uint16_t frame_size;
@@ -241,11 +248,18 @@ int decode(pkt_len_t pkt_len, frame_packet_t *new_frame) {
     if (sync_received) {
         uint64_t adjusted_timestamp = new_frame->timestamp - timestamp_offset;
         if (adjusted_timestamp <= last_adjusted_timestamp) {
-            print_error("Non-monotonic timestamp detected, adjusting\n");
+            char dbg_buf[128];
+            snprintf(dbg_buf, sizeof(dbg_buf), "Non-monotonic timestamp detected. Last: %llu, current: %llu\n",
+                     last_adjusted_timestamp, adjusted_timestamp);
+            print_error(dbg_buf);
             adjusted_timestamp = last_adjusted_timestamp + 1;
         }
         last_adjusted_timestamp = adjusted_timestamp;
-        print_debug("Adjusted timestamp: %llu\n", adjusted_timestamp);
+        {
+            char dbg_buf[128];
+            snprintf(dbg_buf, sizeof(dbg_buf), "Adjusted timestamp: %llu\n", adjusted_timestamp);
+            print_debug(dbg_buf);
+        }
         new_frame->timestamp = adjusted_timestamp;
     } else {
         print_debug("Warning: Sync frame not received yet.\n");
@@ -267,7 +281,6 @@ int decode(pkt_len_t pkt_len, frame_packet_t *new_frame) {
         }
         // The encrypted frame is expected to be in the format:
         // [IV (12 bytes)] || [ciphertext] || [auth tag (16 bytes)]
-        // Calculate the expected plaintext length.
         uint16_t plaintext_len = frame_size - (GCM_IV_SIZE + GCM_TAG_SIZE);
         uint8_t plaintext[plaintext_len];
         ret = decrypt_sym(new_frame->data, frame_size, key, plaintext);
@@ -312,6 +325,10 @@ void init() {
 }
 
 #ifdef CRYPTO_EXAMPLE
+/* 
+ * Crypto example using HKDF to derive a secure key from the loaded Global Secret.
+ * Uses "decoder key" as the context info.
+ */
 #define PLAINTEXT_LEN 16
 #define CIPHERTEXT_LEN (PLAINTEXT_LEN + GCM_IV_SIZE + GCM_TAG_SIZE)
 #define HASH_OUT_SIZE  32
