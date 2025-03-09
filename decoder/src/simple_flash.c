@@ -8,6 +8,7 @@
 
 #include "simple_flash.h"
 #include <stdio.h>
+#include <stddef.h>
 #include "flc.h"
 #include "icc.h"
 #include "nvic_table.h"
