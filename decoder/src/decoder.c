@@ -126,6 +126,7 @@ void init_global_secret(void) {
 }
 #endif  // CRYPTO_EXAMPLE
 
+static timestamp_t last_timestamp = 0;
 
 /**********************************************************
  ******************* UTILITY FUNCTIONS ********************
