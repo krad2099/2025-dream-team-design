@@ -4,11 +4,6 @@
  * @brief Simplified Crypto API Header (Updated for AES-GCM & SHA-256)
  * @date 2025
  *
- * This source file is part of an example system for MITRE's 2025 Embedded System CTF (eCTF).
- * This header declares the simplified cryptographic functions now implemented using AES-GCM
- * for authenticated encryption and SHA-256 for hashing.
- *
- * @copyright Copyright (c) 2025 The MITRE Corporation
  */
 
 #if CRYPTO_EXAMPLE
