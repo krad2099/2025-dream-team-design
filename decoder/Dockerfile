@@ -1,4 +1,7 @@
 # syntax=docker/dockerfile:1.4
+
+ARG DOCKER_BUILDKIT=1
+
 # Dockerfile for the 2025 eCTF
 # Make any changes here to set up your build environment (e.g., installing crypto
 # libraries, dependencies, the compiler for a different language)
