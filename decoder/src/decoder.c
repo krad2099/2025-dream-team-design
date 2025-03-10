@@ -14,7 +14,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include <string.h>
-#include <stdlib.h>   // For snprintf
+#include <stdlib.h>
 #include "mxc_device.h"
 #include "status_led.h"
 #include "board.h"
