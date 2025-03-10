@@ -11,7 +11,7 @@ import hashlib
 from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 
 # Constants matching decoder definitions
-FRAME_SIZE = 64
+FRAME_SIZE = 92
 SYNC_FRAME_CHANNEL = 0xFFFFFFFF
 
 class Encoder:
