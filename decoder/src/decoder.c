@@ -4,6 +4,7 @@
  * @file    decoder.c
  * @author  Dream Team
  * @brief   eCTF Dream Team Decoder Design Implementation with Clock Synchronization
+ *          and simplified cryptography.
  * @date    2025
  *
  */
@@ -25,7 +26,8 @@
 
 #ifdef CRYPTO_EXAMPLE
 #include "simple_crypto.h"
-#include "wolfssl/wolfcrypt/hkdf.h"  // For key derivation
+// Use wolfSSL's SHA256 function for simple key derivation.
+#include "wolfssl/wolfcrypt/sha256.h"
 #endif  // CRYPTO_EXAMPLE
 
 /**********************************************************
@@ -237,16 +239,15 @@ int decode(pkt_len_t pkt_len, frame_packet_t *new_frame) {
 #ifdef CRYPTO_EXAMPLE
     {
         uint8_t key[KEY_SIZE];
-        const uint8_t info[] = "decoder key";
-        int ret = wc_HKDF(key, KEY_SIZE,
-                          NULL, 0,
-                          global_secret, sizeof(global_secret),
-                          (uint8_t*)info, sizeof(info) - 1,
-                          WC_HASH_TYPE_SHA256);
+        // Simplified key derivation: compute SHA-256 of the global secret and take first 16 bytes.
+        uint8_t hash_out[32];
+        int ret = wc_Sha256Hash(global_secret, sizeof(global_secret), hash_out);
         if (ret != 0) {
             print_error("Key derivation failed in decode\n");
             return -1;
         }
+        memcpy(key, hash_out, KEY_SIZE);
+        
         uint16_t plaintext_len = frame_size - (GCM_IV_SIZE + GCM_TAG_SIZE);
         uint8_t plaintext[plaintext_len];
         ret = decrypt_sym(new_frame->data, frame_size, key, plaintext);
@@ -302,17 +303,15 @@ void crypto_example(void) {
     uint8_t hash_out[HASH_OUT_SIZE];
     uint8_t decrypted[PLAINTEXT_LEN];
     char output_buf[128] = {0};
-    const uint8_t info[] = "decoder key";
-    int ret;
-    ret = wc_HKDF(key, KEY_SIZE,
-                  NULL, 0,
-                  global_secret, sizeof(global_secret),
-                  (uint8_t*)info, sizeof(info) - 1,
-                  WC_HASH_TYPE_SHA256);
+    // Simplified key derivation as above.
+    uint8_t info_hash[32];
+    int ret = wc_Sha256Hash(global_secret, sizeof(global_secret), info_hash);
     if (ret != 0) {
          print_error("Key derivation failed\n");
          return;
     }
+    memcpy(key, info_hash, KEY_SIZE);
+    
     ret = encrypt_sym((uint8_t*)plaintext, PLAINTEXT_LEN, key, ciphertext);
     if (ret != 0) {
          print_error("Encryption failed\n");
