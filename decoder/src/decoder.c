@@ -25,7 +25,7 @@
 
 #ifdef CRYPTO_EXAMPLE
 #include "simple_crypto.h"
-// Using wolfSSL's SHA256 for our simplified key derivation.
+// Using wolfSSL's SHA256 for simplified key derivation.
 #include "wolfssl/wolfcrypt/sha256.h"
 #endif  // CRYPTO_EXAMPLE
 
@@ -118,17 +118,12 @@ void process_sync_frame(frame_packet_t *sync_frame);
 /**********************************************************
  ******************** UTILITY FUNCTIONS *******************
  **********************************************************/
-
-/**
- * @brief Returns a monotonic timestamp.
- *
- * Since clock_gettime is not available on our platform, we use a simple
- * static counter that increments by 1 millisecond (1,000,000 ns) on each call.
- * (For a production system, replace this with a proper hardware timer.)
- */
 timestamp_t get_monotonic_timestamp(void) {
+    /* Since clock_gettime is not available on our platform,
+       use a simple static counter that increments by 1ms (1,000,000 ns)
+       per call. For production, replace this with a hardware timer. */
     static timestamp_t counter = 0;
-    counter += 1000000; // Increment by 1ms in nanoseconds.
+    counter += 1000000;
     return counter;
 }
 
@@ -332,4 +327,55 @@ void crypto_example(void) {
          return;
     }
     print_debug("SHA-256 hash of ciphertext:\n");
-    print_hex_debug(hash_out, H
+    print_hex_debug(hash_out, HASH_OUT_SIZE);
+    ret = decrypt_sym(ciphertext, CIPHERTEXT_LEN, key, decrypted);
+    if (ret != 0) {
+         print_error("Decryption failed\n");
+         return;
+    }
+    sprintf(output_buf, "Decrypted message: %s\n", decrypted);
+    print_debug(output_buf);
+}
+#endif  // CRYPTO_EXAMPLE
+
+int main(void) {
+    char output_buf[128] = {0};
+    uint8_t uart_buf[100];
+    msg_type_t cmd;
+    int result;
+    pkt_len_t pkt_len;
+    init();
+    print_debug("Decoder Booted!\n");
+    while (1) {
+        print_debug("Ready\n");
+        STATUS_LED_GREEN();
+        result = read_packet(&cmd, uart_buf, &pkt_len);
+        if (result < 0) {
+            STATUS_LED_ERROR();
+            print_error("Failed to receive cmd from host\n");
+            continue;
+        }
+        switch (cmd) {
+        case LIST_MSG:
+            STATUS_LED_CYAN();
+#ifdef CRYPTO_EXAMPLE
+            crypto_example();
+#endif
+            list_channels();
+            break;
+        case DECODE_MSG:
+            STATUS_LED_PURPLE();
+            decode(pkt_len, (frame_packet_t *)uart_buf);
+            break;
+        case SUBSCRIBE_MSG:
+            STATUS_LED_YELLOW();
+            update_subscription(pkt_len, (subscription_update_packet_t *)uart_buf);
+            break;
+        default:
+            STATUS_LED_ERROR();
+            sprintf(output_buf, "Invalid Command: %c\n", cmd);
+            print_error(output_buf);
+            break;
+        }
+    }
+}
