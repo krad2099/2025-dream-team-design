@@ -242,7 +242,7 @@ int decode(pkt_len_t pkt_len, frame_packet_t *new_frame) {
     {
         uint8_t key[KEY_SIZE];
         /* Simplified key derivation: compute SHA-256 of the global secret and take first 16 bytes. */
-        uint8_t hash_out[32];
+        uint8_t hash_out[64];
         int ret = wc_Sha256Hash(global_secret, sizeof(global_secret), hash_out);
         if (ret != 0) {
             print_error("Key derivation failed in decode\n");
@@ -306,7 +306,7 @@ void crypto_example(void) {
     uint8_t decrypted[PLAINTEXT_LEN];
     char output_buf[128] = {0};
     /* Simplified key derivation as above */
-    uint8_t info_hash[32];
+    uint8_t info_hash[64];
     int ret = wc_Sha256Hash(global_secret, sizeof(global_secret), info_hash);
     if (ret != 0) {
          print_error("Key derivation failed\n");
