@@ -14,7 +14,6 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include <string.h>
-#include <time.h>
 #include <stdlib.h>   // For snprintf
 #include "mxc_device.h"
 #include "status_led.h"
@@ -26,7 +25,7 @@
 
 #ifdef CRYPTO_EXAMPLE
 #include "simple_crypto.h"
-// Use wolfSSL's SHA256 function for simple key derivation.
+// Using wolfSSL's SHA256 for our simplified key derivation.
 #include "wolfssl/wolfcrypt/sha256.h"
 #endif  // CRYPTO_EXAMPLE
 
@@ -119,10 +118,18 @@ void process_sync_frame(frame_packet_t *sync_frame);
 /**********************************************************
  ******************** UTILITY FUNCTIONS *******************
  **********************************************************/
+
+/**
+ * @brief Returns a monotonic timestamp.
+ *
+ * Since clock_gettime is not available on our platform, we use a simple
+ * static counter that increments by 1 millisecond (1,000,000 ns) on each call.
+ * (For a production system, replace this with a proper hardware timer.)
+ */
 timestamp_t get_monotonic_timestamp(void) {
-    struct timespec ts;
-    clock_gettime(CLOCK_MONOTONIC, &ts);
-    return (timestamp_t)ts.tv_sec * 1000000000LL + ts.tv_nsec;
+    static timestamp_t counter = 0;
+    counter += 1000000; // Increment by 1ms in nanoseconds.
+    return counter;
 }
 
 void process_sync_frame(frame_packet_t *sync_frame) {
@@ -239,7 +246,7 @@ int decode(pkt_len_t pkt_len, frame_packet_t *new_frame) {
 #ifdef CRYPTO_EXAMPLE
     {
         uint8_t key[KEY_SIZE];
-        // Simplified key derivation: compute SHA-256 of the global secret and take first 16 bytes.
+        /* Simplified key derivation: compute SHA-256 of the global secret and take first 16 bytes. */
         uint8_t hash_out[32];
         int ret = wc_Sha256Hash(global_secret, sizeof(global_secret), hash_out);
         if (ret != 0) {
@@ -303,7 +310,7 @@ void crypto_example(void) {
     uint8_t hash_out[HASH_OUT_SIZE];
     uint8_t decrypted[PLAINTEXT_LEN];
     char output_buf[128] = {0};
-    // Simplified key derivation as above.
+    /* Simplified key derivation as above */
     uint8_t info_hash[32];
     int ret = wc_Sha256Hash(global_secret, sizeof(global_secret), info_hash);
     if (ret != 0) {
@@ -325,55 +332,4 @@ void crypto_example(void) {
          return;
     }
     print_debug("SHA-256 hash of ciphertext:\n");
-    print_hex_debug(hash_out, HASH_OUT_SIZE);
-    ret = decrypt_sym(ciphertext, CIPHERTEXT_LEN, key, decrypted);
-    if (ret != 0) {
-         print_error("Decryption failed\n");
-         return;
-    }
-    sprintf(output_buf, "Decrypted message: %s\n", decrypted);
-    print_debug(output_buf);
-}
-#endif  // CRYPTO_EXAMPLE
-
-int main(void) {
-    char output_buf[128] = {0};
-    uint8_t uart_buf[100];
-    msg_type_t cmd;
-    int result;
-    pkt_len_t pkt_len;
-    init();
-    print_debug("Decoder Booted!\n");
-    while (1) {
-        print_debug("Ready\n");
-        STATUS_LED_GREEN();
-        result = read_packet(&cmd, uart_buf, &pkt_len);
-        if (result < 0) {
-            STATUS_LED_ERROR();
-            print_error("Failed to receive cmd from host\n");
-            continue;
-        }
-        switch (cmd) {
-        case LIST_MSG:
-            STATUS_LED_CYAN();
-#ifdef CRYPTO_EXAMPLE
-            crypto_example();
-#endif
-            list_channels();
-            break;
-        case DECODE_MSG:
-            STATUS_LED_PURPLE();
-            decode(pkt_len, (frame_packet_t *)uart_buf);
-            break;
-        case SUBSCRIBE_MSG:
-            STATUS_LED_YELLOW();
-            update_subscription(pkt_len, (subscription_update_packet_t *)uart_buf);
-            break;
-        default:
-            STATUS_LED_ERROR();
-            sprintf(output_buf, "Invalid Command: %c\n", cmd);
-            print_error(output_buf);
-            break;
-        }
-    }
-}
+    print_hex_debug(hash_out, H
