@@ -14,7 +14,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include <string.h>
-#include <stdlib.h>
+#include <stdlib.h>   // For snprintf
 #include "mxc_device.h"
 #include "status_led.h"
 #include "board.h"
@@ -40,9 +40,12 @@
 /**********************************************************
  ************************ CONSTANTS ***********************
  **********************************************************/
+// For a 64-byte plaintext frame, AES-GCM encryption produces a 12-byte nonce, 
+// a 64-byte ciphertext, and a 16-byte authentication tag, for a total of 92 bytes.
+#define FRAME_SIZE 92
+
 #define MAX_CHANNEL_COUNT 8
 #define EMERGENCY_CHANNEL 0
-#define FRAME_SIZE 64
 #define DEFAULT_CHANNEL_TIMESTAMP 0xFFFFFFFFFFFFFFFFULL
 #define FLASH_FIRST_BOOT 0xDEADBEEF
 #define FLASH_STATUS_ADDR ((MXC_FLASH_MEM_BASE + MXC_FLASH_MEM_SIZE) - (2 * MXC_FLASH_PAGE_SIZE))
@@ -238,31 +241,30 @@ int decode(pkt_len_t pkt_len, frame_packet_t *new_frame) {
         print_debug("Warning: Sync frame not received yet.\n");
     }
     
-#ifdef CRYPTO_EXAMPLE
-    {
-        uint8_t key[KEY_SIZE];
-        /* Simplified key derivation: compute SHA-256 of the global secret and take first 16 bytes. */
-        uint8_t hash_out[32];
-        int ret = wc_Sha256Hash(global_secret, sizeof(global_secret), hash_out);
-        if (ret != 0) {
-            print_error("Key derivation failed in decode\n");
-            return -1;
-        }
-        memcpy(key, hash_out, KEY_SIZE);
-        
-        uint16_t plaintext_len = frame_size - (GCM_IV_SIZE + GCM_TAG_SIZE);
-        uint8_t plaintext[plaintext_len];
-        ret = decrypt_sym(new_frame->data, frame_size, key, plaintext);
-        if (ret != 0) {
-            print_error("Decryption failed\n");
-            return -1;
-        }
-        print_debug("Decoded frame successfully\n");
-        write_packet(DECODE_MSG, plaintext, plaintext_len);
+    // Always perform decryption (removing CRYPTO_EXAMPLE conditional)
+    uint8_t key[KEY_SIZE];
+    /* Simplified key derivation: compute SHA-256 of the global secret and take first 16 bytes. */
+    uint8_t hash_out[32];
+    int ret = wc_Sha256Hash(global_secret, sizeof(global_secret), hash_out);
+    if (ret != 0) {
+        print_error("Key derivation failed in decode\n");
+        return -1;
     }
-#else
-    write_packet(DECODE_MSG, new_frame->data, frame_size);
-#endif
+    memcpy(key, hash_out, KEY_SIZE);
+    
+    /* Calculate plaintext length:
+       plaintext_len = encoded frame data size - (IV size + tag size)
+       For FRAME_SIZE = 92, plaintext_len becomes 92 - (GCM_IV_SIZE + GCM_TAG_SIZE) = 64 bytes.
+    */
+    uint16_t plaintext_len = frame_size - (GCM_IV_SIZE + GCM_TAG_SIZE);
+    uint8_t plaintext[plaintext_len];
+    ret = decrypt_sym(new_frame->data, frame_size, key, plaintext);
+    if (ret != 0) {
+        print_error("Decryption failed\n");
+        return -1;
+    }
+    print_debug("Decoded frame successfully\n");
+    write_packet(DECODE_MSG, plaintext, plaintext_len);
     return 0;
 }
 
@@ -296,7 +298,7 @@ void init(void) {
 #ifdef CRYPTO_EXAMPLE
 #define PLAINTEXT_LEN 16
 #define CIPHERTEXT_LEN (PLAINTEXT_LEN + GCM_IV_SIZE + GCM_TAG_SIZE)
-#define HASH_OUT_SIZE  64
+#define HASH_OUT_SIZE  32
 
 void crypto_example(void) {
     uint8_t plaintext[PLAINTEXT_LEN] = "Crypto Example!";
