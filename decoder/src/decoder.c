@@ -22,12 +22,16 @@
 #include "simple_flash.h"
 #include "host_messaging.h"
 #include "simple_uart.h"
-
-#ifdef CRYPTO_EXAMPLE
-#include "simple_crypto.h"
-// Using wolfSSL's SHA256 for simplified key derivation.
+#include "simple_crypto.h"   // Always include crypto helper functions
 #include "wolfssl/wolfcrypt/sha256.h"
-#endif  // CRYPTO_EXAMPLE
+
+/* Define missing macros for cryptographic operations */
+#define KEY_SIZE 16
+#define GCM_IV_SIZE 12
+#define GCM_TAG_SIZE 16
+
+/* Forward declaration for decryption function */
+int decrypt_sym(const uint8_t *in, uint16_t in_len, const uint8_t *key, uint8_t *out);
 
 /**********************************************************
  ******************* PRIMITIVE TYPES **********************
@@ -40,8 +44,7 @@
 /**********************************************************
  ************************ CONSTANTS ***********************
  **********************************************************/
-// For a 64-byte plaintext frame, AES-GCM encryption produces a 12-byte nonce, 
-// a 64-byte ciphertext, and a 16-byte authentication tag, for a total of 92 bytes.
+// For a 64-byte plaintext, AES-GCM produces 12-byte nonce + 64-byte ciphertext + 16-byte tag = 92 bytes.
 #define FRAME_SIZE 92
 
 #define MAX_CHANNEL_COUNT 8
@@ -98,14 +101,10 @@ typedef struct {
 /**********************************************************
  ************************ GLOBALS *************************
  **********************************************************/
-flash_entry_t decoder_status;
+/* Global secret used for crypto operations */
+static uint8_t global_secret[KEY_SIZE];
 
-#ifdef CRYPTO_EXAMPLE
-static uint8_t global_secret[16];
-void init_global_secret(void) {
-    load_global_secret(global_secret, sizeof(global_secret));
-}
-#endif  // CRYPTO_EXAMPLE
+flash_entry_t decoder_status;
 
 /* Global variables for timestamp synchronization */
 static int64_t timestamp_offset = 0;
@@ -117,14 +116,13 @@ static uint64_t last_adjusted_timestamp = 0;
  **********************************************************/
 timestamp_t get_monotonic_timestamp(void);
 void process_sync_frame(frame_packet_t *sync_frame);
+void init_global_secret(void);
 
 /**********************************************************
  ******************** UTILITY FUNCTIONS *******************
  **********************************************************/
 timestamp_t get_monotonic_timestamp(void) {
-    /* Since clock_gettime is not available on our platform,
-       use a simple static counter that increments by 1ms (1,000,000 ns)
-       per call. For production, replace this with a hardware timer. */
+    /* For production, replace with a hardware timer. Here we use a simple counter that increments by 1ms per call. */
     static timestamp_t counter = 0;
     counter += 1000000;
     return counter;
@@ -140,6 +138,11 @@ void process_sync_frame(frame_packet_t *sync_frame) {
                  "Sync frame received. Offset set to %lld\n", timestamp_offset);
         print_debug(dbg_buf);
     }
+}
+
+void init_global_secret(void) {
+    /* Load the global secret from flash (or other persistent storage) */
+    load_global_secret(global_secret, sizeof(global_secret));
 }
 
 int is_subscribed(channel_id_t channel) {
@@ -241,7 +244,7 @@ int decode(pkt_len_t pkt_len, frame_packet_t *new_frame) {
         print_debug("Warning: Sync frame not received yet.\n");
     }
     
-    // Always perform decryption (removing CRYPTO_EXAMPLE conditional)
+    /* Always perform decryption */
     uint8_t key[KEY_SIZE];
     /* Simplified key derivation: compute SHA-256 of the global secret and take first 16 bytes. */
     uint8_t hash_out[32];
@@ -253,8 +256,8 @@ int decode(pkt_len_t pkt_len, frame_packet_t *new_frame) {
     memcpy(key, hash_out, KEY_SIZE);
     
     /* Calculate plaintext length:
-       plaintext_len = encoded frame data size - (IV size + tag size)
-       For FRAME_SIZE = 92, plaintext_len becomes 92 - (GCM_IV_SIZE + GCM_TAG_SIZE) = 64 bytes.
+       plaintext_len = FRAME_SIZE - (GCM_IV_SIZE + GCM_TAG_SIZE)
+       For FRAME_SIZE = 92, plaintext_len becomes 92 - (12 + 16) = 64 bytes.
     */
     uint16_t plaintext_len = frame_size - (GCM_IV_SIZE + GCM_TAG_SIZE);
     uint8_t plaintext[plaintext_len];
@@ -285,60 +288,13 @@ void init(void) {
         flash_simple_erase_page(FLASH_STATUS_ADDR);
         flash_simple_write(FLASH_STATUS_ADDR, &decoder_status, sizeof(flash_entry_t));
     }
-#ifdef CRYPTO_EXAMPLE
     init_global_secret();
-#endif
     ret = uart_init();
     if (ret < 0) {
         STATUS_LED_ERROR();
         while (1);
     }
 }
-
-#ifdef CRYPTO_EXAMPLE
-#define PLAINTEXT_LEN 16
-#define CIPHERTEXT_LEN (PLAINTEXT_LEN + GCM_IV_SIZE + GCM_TAG_SIZE)
-#define HASH_OUT_SIZE  32
-
-void crypto_example(void) {
-    uint8_t plaintext[PLAINTEXT_LEN] = "Crypto Example!";
-    uint8_t ciphertext[CIPHERTEXT_LEN];
-    uint8_t key[KEY_SIZE];
-    uint8_t hash_out[HASH_OUT_SIZE];
-    uint8_t decrypted[PLAINTEXT_LEN];
-    char output_buf[128] = {0};
-    /* Simplified key derivation as above */
-    uint8_t info_hash[32];
-    int ret = wc_Sha256Hash(global_secret, sizeof(global_secret), info_hash);
-    if (ret != 0) {
-         print_error("Key derivation failed\n");
-         return;
-    }
-    memcpy(key, info_hash, KEY_SIZE);
-    
-    ret = encrypt_sym((uint8_t*)plaintext, PLAINTEXT_LEN, key, ciphertext);
-    if (ret != 0) {
-         print_error("Encryption failed\n");
-         return;
-    }
-    print_debug("Encrypted data (IV || ciphertext || tag):\n");
-    print_hex_debug(ciphertext, CIPHERTEXT_LEN);
-    ret = hash(ciphertext, CIPHERTEXT_LEN, hash_out);
-    if (ret != 0) {
-         print_error("Hashing failed\n");
-         return;
-    }
-    print_debug("SHA-256 hash of ciphertext:\n");
-    print_hex_debug(hash_out, HASH_OUT_SIZE);
-    ret = decrypt_sym(ciphertext, CIPHERTEXT_LEN, key, decrypted);
-    if (ret != 0) {
-         print_error("Decryption failed\n");
-         return;
-    }
-    sprintf(output_buf, "Decrypted message: %s\n", decrypted);
-    print_debug(output_buf);
-}
-#endif  // CRYPTO_EXAMPLE
 
 int main(void) {
     char output_buf[128] = {0};
@@ -360,9 +316,6 @@ int main(void) {
         switch (cmd) {
         case LIST_MSG:
             STATUS_LED_CYAN();
-#ifdef CRYPTO_EXAMPLE
-            crypto_example();
-#endif
             list_channels();
             break;
         case DECODE_MSG:
