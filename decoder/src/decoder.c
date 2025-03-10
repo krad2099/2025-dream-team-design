@@ -42,7 +42,7 @@
  **********************************************************/
 #define MAX_CHANNEL_COUNT 8
 #define EMERGENCY_CHANNEL 0
-#define FRAME_SIZE 36
+#define FRAME_SIZE 64
 #define DEFAULT_CHANNEL_TIMESTAMP 0xFFFFFFFFFFFFFFFFULL
 #define FLASH_FIRST_BOOT 0xDEADBEEF
 #define FLASH_STATUS_ADDR ((MXC_FLASH_MEM_BASE + MXC_FLASH_MEM_SIZE) - (2 * MXC_FLASH_PAGE_SIZE))
@@ -296,7 +296,7 @@ void init(void) {
 #ifdef CRYPTO_EXAMPLE
 #define PLAINTEXT_LEN 16
 #define CIPHERTEXT_LEN (PLAINTEXT_LEN + GCM_IV_SIZE + GCM_TAG_SIZE)
-#define HASH_OUT_SIZE  32
+#define HASH_OUT_SIZE  64
 
 void crypto_example(void) {
     uint8_t plaintext[PLAINTEXT_LEN] = "Crypto Example!";
