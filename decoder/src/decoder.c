@@ -22,16 +22,14 @@
 #include "simple_flash.h"
 #include "host_messaging.h"
 #include "simple_uart.h"
-#include "simple_crypto.h"   // Always include crypto helper functions
-#include "wolfssl/wolfcrypt/sha256.h"
+#include "simple_crypto.h"   // Use our simple crypto implementation
 
-/* Define missing macros for cryptographic operations */
-#define KEY_SIZE 16
-#define GCM_IV_SIZE 12
-#define GCM_TAG_SIZE 16
-
-/* Forward declaration for decryption function */
-int decrypt_sym(const uint8_t *in, uint16_t in_len, const uint8_t *key, uint8_t *out);
+#ifdef CRYPTO_EXAMPLE
+/* If wolfSSL is not available, define wc_Sha256Hash in terms of our simple_sha256 */
+#ifndef wc_Sha256Hash
+#define wc_Sha256Hash(data, datalen, out) simple_sha256(data, datalen, out)
+#endif
+#endif  // CRYPTO_EXAMPLE
 
 /**********************************************************
  ******************* PRIMITIVE TYPES **********************
@@ -44,7 +42,8 @@ int decrypt_sym(const uint8_t *in, uint16_t in_len, const uint8_t *key, uint8_t 
 /**********************************************************
  ************************ CONSTANTS ***********************
  **********************************************************/
-// For a 64-byte plaintext, AES-GCM produces 12-byte nonce + 64-byte ciphertext + 16-byte tag = 92 bytes.
+// For a 64-byte plaintext, AES-GCM produces a 12-byte nonce, 64-byte ciphertext, and a 16-byte tag.
+// That gives a total encrypted data length of 12+16+64 = 92 bytes.
 #define FRAME_SIZE 92
 
 #define MAX_CHANNEL_COUNT 8
@@ -101,8 +100,7 @@ typedef struct {
 /**********************************************************
  ************************ GLOBALS *************************
  **********************************************************/
-/* Global secret used for crypto operations */
-static uint8_t global_secret[KEY_SIZE];
+static uint8_t global_secret[KEY_SIZE];  // Global secret for crypto
 
 flash_entry_t decoder_status;
 
@@ -122,7 +120,8 @@ void init_global_secret(void);
  ******************** UTILITY FUNCTIONS *******************
  **********************************************************/
 timestamp_t get_monotonic_timestamp(void) {
-    /* For production, replace with a hardware timer. Here we use a simple counter that increments by 1ms per call. */
+    /* For production, replace this with a hardware timer.
+       Here we use a simple counter that increments by 1ms (1,000,000 ns) per call. */
     static timestamp_t counter = 0;
     counter += 1000000;
     return counter;
@@ -141,7 +140,7 @@ void process_sync_frame(frame_packet_t *sync_frame) {
 }
 
 void init_global_secret(void) {
-    /* Load the global secret from flash (or other persistent storage) */
+    /* Load the global secret from persistent storage */
     load_global_secret(global_secret, sizeof(global_secret));
 }
 
@@ -244,9 +243,8 @@ int decode(pkt_len_t pkt_len, frame_packet_t *new_frame) {
         print_debug("Warning: Sync frame not received yet.\n");
     }
     
-    /* Always perform decryption */
+    /* Decrypt the frame data */
     uint8_t key[KEY_SIZE];
-    /* Simplified key derivation: compute SHA-256 of the global secret and take first 16 bytes. */
     uint8_t hash_out[32];
     int ret = wc_Sha256Hash(global_secret, sizeof(global_secret), hash_out);
     if (ret != 0) {
