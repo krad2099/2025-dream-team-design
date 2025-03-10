@@ -48,12 +48,6 @@
 #define SYNC_FRAME_CHANNEL 0xFFFFFFFF
 
 /**********************************************************
- ********* FORWARD FUNCTION PROTOTYPES ******************
- **********************************************************/
-timestamp_t get_monotonic_timestamp(void);
-void process_sync_frame(struct frame_packet_t *sync_frame);
-
-/**********************************************************
  ***** COMMUNICATION PACKET DEFINITIONS (packed) *******
  **********************************************************/
 #pragma pack(push, 1)
@@ -113,6 +107,12 @@ void init_global_secret(void) {
 static int64_t timestamp_offset = 0;
 static int sync_received = 0;
 static uint64_t last_adjusted_timestamp = 0;
+
+/**********************************************************
+ ********** FORWARD FUNCTION PROTOTYPES *******************
+ **********************************************************/
+timestamp_t get_monotonic_timestamp(void);
+void process_sync_frame(frame_packet_t *sync_frame);
 
 /**********************************************************
  ******************** UTILITY FUNCTIONS *******************
