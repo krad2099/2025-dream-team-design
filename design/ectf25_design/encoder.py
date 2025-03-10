@@ -7,11 +7,11 @@ Program: encoder.py
 import os
 import time
 import struct
-import hashlib  # Using hashlib for simplified key derivation
+import hashlib
 from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 
 # Constants matching decoder definitions
-FRAME_SIZE = 92
+FRAME_SIZE = 36
 SYNC_FRAME_CHANNEL = 0xFFFFFFFF
 
 class Encoder:
