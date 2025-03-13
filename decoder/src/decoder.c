@@ -19,9 +19,10 @@
 #include "status_led.h"
 #include "board.h"
 #include "mxc_delay.h"
-#include "simple_flash.h"
+#include "simple_flash.h"      // basic flash interface
 #include "host_messaging.h"
 #include "simple_uart.h"
+#include "secure_provision.h"  // new secure provisioning module
 
 #ifdef CRYPTO_EXAMPLE
 #include "simple_crypto.h"
@@ -41,12 +42,17 @@
  ************************ CONSTANTS ***********************
  **********************************************************/
 #define FRAME_SIZE 92
+
 #define MAX_CHANNEL_COUNT 8
 #define EMERGENCY_CHANNEL 0
 #define DEFAULT_CHANNEL_TIMESTAMP 0xFFFFFFFFFFFFFFFFULL
 #define FLASH_FIRST_BOOT 0xDEADBEEF
 #define FLASH_STATUS_ADDR ((MXC_FLASH_MEM_BASE + MXC_FLASH_MEM_SIZE) - (2 * MXC_FLASH_PAGE_SIZE))
 #define SYNC_FRAME_CHANNEL 0xFFFFFFFF
+
+// Define secure secret storage address in a protected flash region.
+// (Choose the proper address for your device’s OTP or locked flash region.)
+#define SECURE_SECRET_ADDR (MXC_FLASH_MEM_BASE + MXC_FLASH_MEM_SIZE - (4 * MXC_FLASH_PAGE_SIZE))
 
 /**********************************************************
  ***** COMMUNICATION PACKET DEFINITIONS (packed) *******
@@ -98,21 +104,15 @@ typedef struct {
 flash_entry_t decoder_status;
 
 #ifdef CRYPTO_EXAMPLE
+// Global secret is now provisioned securely rather than being a hardcoded value.
 static uint8_t global_secret[16];
-/*
- * Instead of storing the global secret in flash, we provision it securely.
- * In production, secure_provision_global_secret should load the secret from a
- * secure external source (e.g. a secure element, secure bootloader, or secure channel).
- * For demonstration purposes, we set it to a fixed demo value.
- */
-void secure_provision_global_secret(void) {
-    uint8_t sec.global_secret[16] = {
-        0x01, 0x02, 0x03, 0x04,
-        0x05, 0x06, 0x07, 0x08,
-        0x09, 0x0A, 0x0B, 0x0C,
-        0x0D, 0x0E, 0x0F, 0x10
-    };
-    memcpy(global_secret, sec.global_secret, sizeof(sec.global_secret));
+void init_global_secret(void) {
+    // Read the secret from a secure flash region using our secure provision interface.
+    if (secure_flash_read(SECURE_SECRET_ADDR, global_secret, sizeof(global_secret)) != 0) {
+        print_error("Failed to securely provision global secret\n");
+        // Halt execution if secret cannot be read.
+        while (1);
+    }
 }
 #endif  // CRYPTO_EXAMPLE
 
@@ -296,7 +296,7 @@ void init(void) {
         flash_simple_write(FLASH_STATUS_ADDR, &decoder_status, sizeof(flash_entry_t));
     }
 #ifdef CRYPTO_EXAMPLE
-    secure_provision_global_secret();
+    init_global_secret();
 #endif
     ret = uart_init();
     if (ret < 0) {
