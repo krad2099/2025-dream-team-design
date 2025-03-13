@@ -19,10 +19,10 @@
 #include "status_led.h"
 #include "board.h"
 #include "mxc_delay.h"
-#include "simple_flash.h"      // basic flash interface
+#include "simple_flash.h"
 #include "host_messaging.h"
 #include "simple_uart.h"
-#include "secure_provision.h"  // new secure provisioning module
+#include "secure_provision.h"  // New: use secure provisioning to read global secret
 
 #ifdef CRYPTO_EXAMPLE
 #include "simple_crypto.h"
@@ -49,10 +49,6 @@
 #define FLASH_FIRST_BOOT 0xDEADBEEF
 #define FLASH_STATUS_ADDR ((MXC_FLASH_MEM_BASE + MXC_FLASH_MEM_SIZE) - (2 * MXC_FLASH_PAGE_SIZE))
 #define SYNC_FRAME_CHANNEL 0xFFFFFFFF
-
-// Define secure secret storage address in a protected flash region.
-// (Choose the proper address for your device’s OTP or locked flash region.)
-#define SECURE_SECRET_ADDR (MXC_FLASH_MEM_BASE + MXC_FLASH_MEM_SIZE - (4 * MXC_FLASH_PAGE_SIZE))
 
 /**********************************************************
  ***** COMMUNICATION PACKET DEFINITIONS (packed) *******
@@ -104,16 +100,8 @@ typedef struct {
 flash_entry_t decoder_status;
 
 #ifdef CRYPTO_EXAMPLE
-// Global secret is now provisioned securely rather than being a hardcoded value.
+// Instead of storing a demo secret here (or in simple_flash.h), we now read it securely.
 static uint8_t global_secret[16];
-void init_global_secret(void) {
-    // Read the secret from a secure flash region using our secure provision interface.
-    if (secure_flash_read(SECURE_SECRET_ADDR, global_secret, sizeof(global_secret)) != 0) {
-        print_error("Failed to securely provision global secret\n");
-        // Halt execution if secret cannot be read.
-        while (1);
-    }
-}
 #endif  // CRYPTO_EXAMPLE
 
 /* Global variables for timestamp synchronization */
@@ -254,7 +242,7 @@ int decode(pkt_len_t pkt_len, frame_packet_t *new_frame) {
     {
         uint8_t key[KEY_SIZE];
         /* Simplified key derivation: compute SHA-256 of the global secret and take first 16 bytes. */
-        uint8_t hash_out[64];
+        uint8_t hash_out[32];
         int ret = wc_Sha256Hash(global_secret, sizeof(global_secret), hash_out);
         if (ret != 0) {
             print_error("Key derivation failed in decode\n");
@@ -296,7 +284,15 @@ void init(void) {
         flash_simple_write(FLASH_STATUS_ADDR, &decoder_status, sizeof(flash_entry_t));
     }
 #ifdef CRYPTO_EXAMPLE
-    init_global_secret();
+    {
+        /* Instead of using a demo secret stored via simple_flash.h,
+           securely read the global secret from a secure provisioning region.
+           (secure_flash_read is defined in secure_provision.c) */
+        if (secure_flash_read(SECRET_STORAGE_ADDR, global_secret, sizeof(global_secret)) != 0) {
+            print_error("Secure flash read failed\n");
+            while (1);
+        }
+    }
 #endif
     ret = uart_init();
     if (ret < 0) {
@@ -318,7 +314,7 @@ void crypto_example(void) {
     uint8_t decrypted[PLAINTEXT_LEN];
     char output_buf[128] = {0};
     /* Simplified key derivation as above */
-    uint8_t info_hash[64];
+    uint8_t info_hash[32];
     int ret = wc_Sha256Hash(global_secret, sizeof(global_secret), info_hash);
     if (ret != 0) {
          print_error("Key derivation failed\n");
