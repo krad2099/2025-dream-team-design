@@ -24,11 +24,13 @@
 #include <stddef.h>
 #include <wolfssl/options.h>
 #include <wolfssl/wolfcrypt/aes.h>
+#include "wolfssl/wolfcrypt/gcm.h"
 #include <wolfssl/wolfcrypt/random.h>
 #include <wolfssl/wolfcrypt/sha256.h>
 
 #define GCM_IV_SIZE    12
 #define GCM_TAG_SIZE   16
+#define KEY_SIZE 16
 
 /**
  * @brief Encrypts plaintext using AES-GCM authenticated encryption.
@@ -104,35 +106,29 @@ int encrypt_sym(uint8_t *plaintext, size_t len, uint8_t *key, uint8_t *out) {
  *
  * @return 0 on success, non-zero error code on failure.
  */
-int decrypt_sym(uint8_t *in, size_t inLen, uint8_t *key, uint8_t *plaintext) {
-    int ret;
-    Aes aes;
-    if (inLen < (GCM_IV_SIZE + GCM_TAG_SIZE))
-        return -1;  /* Not enough data */
+int decrypt_sym(const uint8_t *ciphertext, uint16_t cipher_len, const uint8_t *key, uint8_t *plaintext) {
+    if (cipher_len < (GCM_IV_SIZE + GCM_TAG_SIZE)) {
+        return -1;  // Not enough data
+    }
+    const uint8_t *nonce = ciphertext;
+    const uint8_t *encData = ciphertext + GCM_IV_SIZE;
+    uint16_t encDataLen = cipher_len - GCM_IV_SIZE;
+    uint8_t tag[GCM_TAG_SIZE];
 
-    size_t cipherLen = inLen - GCM_IV_SIZE - GCM_TAG_SIZE;
-    byte iv[GCM_IV_SIZE];
-    byte authTag[GCM_TAG_SIZE];
+    // The tag is assumed to be the last GCM_TAG_SIZE bytes of encData.
+    if (encDataLen < GCM_TAG_SIZE) {
+        return -1;
+    }
+    uint16_t cipherTextLen = encDataLen - GCM_TAG_SIZE;
+    memcpy(tag, encData + cipherTextLen, GCM_TAG_SIZE);
 
-    /* Extract the IV and authentication tag from the input */
-    memcpy(iv, in, GCM_IV_SIZE);
-    memcpy(authTag, in + GCM_IV_SIZE + cipherLen, GCM_TAG_SIZE);
-
-    /* Set AES key for GCM mode */
-    ret = wc_AesGcmSetKey(&aes, key, 16);
-    if (ret != 0)
+    AesGcm aesGcm;
+    int ret = wc_AesGcmSetKey(&aesGcm, key, KEY_SIZE);
+    if (ret != 0) {
         return ret;
-
-    /* Perform AES-GCM decryption.
-       No additional authenticated data (AAD) is used (NULL, 0). */
-    ret = wc_AesGcmDecrypt(&aes, 
-                           plaintext,         /* plaintext output */
-                           in + GCM_IV_SIZE,  /* ciphertext input */
-                           (word32)cipherLen, /* ciphertext length */
-                           iv, GCM_IV_SIZE,   /* IV and its size */
-                           authTag, GCM_TAG_SIZE, /* authentication tag */
-                           NULL, 0);          /* no AAD */
-
+    }
+    ret = wc_AesGcmDecrypt(&aesGcm, plaintext, encData, cipherTextLen,
+                           nonce, GCM_IV_SIZE, tag, GCM_TAG_SIZE, NULL, 0);
     return ret;
 }
 
