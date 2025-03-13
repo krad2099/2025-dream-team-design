@@ -41,7 +41,6 @@
  ************************ CONSTANTS ***********************
  **********************************************************/
 #define FRAME_SIZE 92
-
 #define MAX_CHANNEL_COUNT 8
 #define EMERGENCY_CHANNEL 0
 #define DEFAULT_CHANNEL_TIMESTAMP 0xFFFFFFFFFFFFFFFFULL
@@ -100,8 +99,20 @@ flash_entry_t decoder_status;
 
 #ifdef CRYPTO_EXAMPLE
 static uint8_t global_secret[16];
-void init_global_secret(void) {
-    load_global_secret(global_secret, sizeof(global_secret));
+/*
+ * Instead of storing the global secret in flash, we provision it securely.
+ * In production, secure_provision_global_secret should load the secret from a
+ * secure external source (e.g. a secure element, secure bootloader, or secure channel).
+ * For demonstration purposes, we set it to a fixed demo value.
+ */
+void secure_provision_global_secret(void) {
+    uint8_t sec.global_secret[16] = {
+        0x01, 0x02, 0x03, 0x04,
+        0x05, 0x06, 0x07, 0x08,
+        0x09, 0x0A, 0x0B, 0x0C,
+        0x0D, 0x0E, 0x0F, 0x10
+    };
+    memcpy(global_secret, sec.global_secret, sizeof(sec.global_secret));
 }
 #endif  // CRYPTO_EXAMPLE
 
@@ -285,7 +296,7 @@ void init(void) {
         flash_simple_write(FLASH_STATUS_ADDR, &decoder_status, sizeof(flash_entry_t));
     }
 #ifdef CRYPTO_EXAMPLE
-    init_global_secret();
+    secure_provision_global_secret();
 #endif
     ret = uart_init();
     if (ret < 0) {
