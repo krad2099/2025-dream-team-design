@@ -1,5 +1,5 @@
 #include "secure_provision.h"
-#include "simple_flash.h"  // Using our basic flash interface as a placeholder
+#include "simple_flash.h"  // We use the simple flash interface to read from our secure region
 
 /**
  * @brief Securely read from flash.
