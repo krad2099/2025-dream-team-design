@@ -22,7 +22,7 @@
 #include "simple_flash.h"
 #include "host_messaging.h"
 #include "simple_uart.h"
-#include "secure_provision.h"  // New: use secure provisioning to read global secret
+#include "secure_provision.h"  // New include for secure provisioning
 
 #ifdef CRYPTO_EXAMPLE
 #include "simple_crypto.h"
@@ -100,8 +100,11 @@ typedef struct {
 flash_entry_t decoder_status;
 
 #ifdef CRYPTO_EXAMPLE
-// Instead of storing a demo secret here (or in simple_flash.h), we now read it securely.
-static uint8_t global_secret[16];
+static uint8_t global_secret[KEY_SIZE];  // KEY_SIZE defined in simple_crypto.c (16 bytes)
+void init_global_secret(void) {
+    // Instead of loading from simple_flash.h, securely provision from secure flash.
+    secure_flash_read(SECRET_STORAGE_ADDR, global_secret, sizeof(global_secret));
+}
 #endif  // CRYPTO_EXAMPLE
 
 /* Global variables for timestamp synchronization */
@@ -119,11 +122,8 @@ void process_sync_frame(frame_packet_t *sync_frame);
  ******************** UTILITY FUNCTIONS *******************
  **********************************************************/
 timestamp_t get_monotonic_timestamp(void) {
-    /* Since clock_gettime is not available on our platform,
-       use a simple static counter that increments by 1ms (1,000,000 ns)
-       per call. For production, replace this with a hardware timer. */
     static timestamp_t counter = 0;
-    counter += 1000000;
+    counter += 1000000;  // Increment by 1ms per call
     return counter;
 }
 
@@ -131,12 +131,10 @@ void process_sync_frame(frame_packet_t *sync_frame) {
     uint64_t local_time = get_monotonic_timestamp();
     timestamp_offset = (int64_t)sync_frame->timestamp - (int64_t)local_time;
     sync_received = 1;
-    {
-        char dbg_buf[128];
-        snprintf(dbg_buf, sizeof(dbg_buf),
-                 "Sync frame received. Offset set to %lld\n", timestamp_offset);
-        print_debug(dbg_buf);
-    }
+    char dbg_buf[128];
+    snprintf(dbg_buf, sizeof(dbg_buf),
+             "Sync frame received. Offset set to %lld\n", timestamp_offset);
+    print_debug(dbg_buf);
 }
 
 int is_subscribed(channel_id_t channel) {
@@ -228,11 +226,9 @@ int decode(pkt_len_t pkt_len, frame_packet_t *new_frame) {
             adjusted_timestamp = last_adjusted_timestamp + 1;
         }
         last_adjusted_timestamp = adjusted_timestamp;
-        {
-            char dbg_buf[128];
-            snprintf(dbg_buf, sizeof(dbg_buf), "Adjusted timestamp: %llu\n", adjusted_timestamp);
-            print_debug(dbg_buf);
-        }
+        char dbg_buf[128];
+        snprintf(dbg_buf, sizeof(dbg_buf), "Adjusted timestamp: %llu\n", adjusted_timestamp);
+        print_debug(dbg_buf);
         new_frame->timestamp = adjusted_timestamp;
     } else {
         print_debug("Warning: Sync frame not received yet.\n");
@@ -241,7 +237,6 @@ int decode(pkt_len_t pkt_len, frame_packet_t *new_frame) {
 #ifdef CRYPTO_EXAMPLE
     {
         uint8_t key[KEY_SIZE];
-        /* Simplified key derivation: compute SHA-256 of the global secret and take first 16 bytes. */
         uint8_t hash_out[32];
         int ret = wc_Sha256Hash(global_secret, sizeof(global_secret), hash_out);
         if (ret != 0) {
@@ -284,15 +279,7 @@ void init(void) {
         flash_simple_write(FLASH_STATUS_ADDR, &decoder_status, sizeof(flash_entry_t));
     }
 #ifdef CRYPTO_EXAMPLE
-    {
-        /* Instead of using a demo secret stored via simple_flash.h,
-           securely read the global secret from a secure provisioning region.
-           (secure_flash_read is defined in secure_provision.c) */
-        if (secure_flash_read(SECRET_STORAGE_ADDR, global_secret, sizeof(global_secret)) != 0) {
-            print_error("Secure flash read failed\n");
-            while (1);
-        }
-    }
+    init_global_secret();
 #endif
     ret = uart_init();
     if (ret < 0) {
@@ -313,7 +300,6 @@ void crypto_example(void) {
     uint8_t hash_out[HASH_OUT_SIZE];
     uint8_t decrypted[PLAINTEXT_LEN];
     char output_buf[128] = {0};
-    /* Simplified key derivation as above */
     uint8_t info_hash[32];
     int ret = wc_Sha256Hash(global_secret, sizeof(global_secret), info_hash);
     if (ret != 0) {
