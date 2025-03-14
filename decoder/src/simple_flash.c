@@ -6,6 +6,7 @@
  *
  */
 
+#include "config.h"
 #include "simple_flash.h"
 #include <stdio.h>
 #include <stddef.h>
