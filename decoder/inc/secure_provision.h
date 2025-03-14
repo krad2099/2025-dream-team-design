@@ -7,7 +7,9 @@
 // Define the secure flash address for storing the global secret.
 // For example, if FLASH_STATUS_ADDR is two pages from the end,
 // you may reserve an earlier flash page for secrets. Adjust as needed.
+#ifndef SECRET_STORAGE_ADDR
 #define SECRET_STORAGE_ADDR ((MXC_FLASH_MEM_BASE + MXC_FLASH_MEM_SIZE) - (4 * MXC_FLASH_PAGE_SIZE))
+#endif
 
 // Initialize the secure flash provisioning system.
 int secure_flash_init(void);
