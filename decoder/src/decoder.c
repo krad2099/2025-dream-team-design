@@ -269,7 +269,7 @@ int decode(pkt_len_t pkt_len, frame_packet_t *new_frame) {
 void init(void) {
     int ret;
     secure_flash_init();
-    secure_flash_read(FLASH_STATUS_ADDR, &decoder_status, sizeof(flash_entry_t));
+    secure_flash_read(FLASH_STATUS_ADDR, (uint8_t *)&decoder_status, sizeof(flash_entry_t));
     if (decoder_status.first_boot != FLASH_FIRST_BOOT) {
         print_debug("First boot.  Setting flash...\n");
         decoder_status.first_boot = FLASH_FIRST_BOOT;
