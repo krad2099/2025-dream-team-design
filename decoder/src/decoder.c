@@ -19,7 +19,6 @@
 #include "status_led.h"
 #include "board.h"
 #include "mxc_delay.h"
-#include "simple_flash.h"
 #include "host_messaging.h"
 #include "simple_uart.h"
 #include "secure_provision.h"  // New include for secure provisioning
