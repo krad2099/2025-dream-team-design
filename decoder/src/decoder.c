@@ -19,9 +19,10 @@
 #include "status_led.h"
 #include "board.h"
 #include "mxc_delay.h"
-#include "secure_provision.h"  // Use our secure flash interface instead of simple_flash.h
+#include "simple_flash.h"
 #include "host_messaging.h"
 #include "simple_uart.h"
+#include "secure_provision.h"  // Use secure provision routines
 
 #ifdef CRYPTO_EXAMPLE
 #include "simple_crypto.h"
@@ -41,11 +42,12 @@
  ************************ CONSTANTS ***********************
  **********************************************************/
 #define FRAME_SIZE 92
+
 #define MAX_CHANNEL_COUNT 8
 #define EMERGENCY_CHANNEL 0
 #define DEFAULT_CHANNEL_TIMESTAMP 0xFFFFFFFFFFFFFFFFULL
 #define FLASH_FIRST_BOOT 0xDEADBEEF
-#define FLASH_STATUS_ADDR ((MXC_FLASH_MEM_BASE + MXC_FLASH_MEM_SIZE) - (2 * MXC_FLASH_PAGE_SIZE))
+// FLASH_STATUS_ADDR is defined in simple_flash.h or board-specific header.
 #define SYNC_FRAME_CHANNEL 0xFFFFFFFF
 
 /**********************************************************
@@ -192,7 +194,7 @@ int update_subscription(pkt_len_t pkt_len, subscription_update_packet_t *update)
         return -1;
     }
     secure_flash_erase_page(FLASH_STATUS_ADDR);
-    secure_flash_write(FLASH_STATUS_ADDR, &decoder_status, sizeof(flash_entry_t));
+    secure_flash_write(FLASH_STATUS_ADDR, (uint8_t *)&decoder_status, sizeof(flash_entry_t));
     write_packet(SUBSCRIBE_MSG, NULL, 0);
     return 0;
 }
@@ -268,7 +270,8 @@ int decode(pkt_len_t pkt_len, frame_packet_t *new_frame) {
 
 void init(void) {
     int ret;
-    secure_flash_init();
+    flash_simple_init();  // Use simple flash init if not using secure provisioning for flash init
+    /* Read using secure flash read and cast the pointer appropriately */
     secure_flash_read(FLASH_STATUS_ADDR, (uint8_t *)&decoder_status, sizeof(flash_entry_t));
     if (decoder_status.first_boot != FLASH_FIRST_BOOT) {
         print_debug("First boot.  Setting flash...\n");
@@ -280,8 +283,8 @@ void init(void) {
             subscription[i].active = false;
         }
         memcpy(decoder_status.subscribed_channels, subscription, MAX_CHANNEL_COUNT * sizeof(channel_status_t));
-        secure_flash_erase_page(FLASH_STATUS_ADDR);
-        secure_flash_write(FLASH_STATUS_ADDR, &decoder_status, sizeof(flash_entry_t));
+        flash_simple_erase_page(FLASH_STATUS_ADDR);
+        flash_simple_write(FLASH_STATUS_ADDR, (uint8_t *)&decoder_status, sizeof(flash_entry_t));
     }
 #ifdef CRYPTO_EXAMPLE
     init_global_secret();
