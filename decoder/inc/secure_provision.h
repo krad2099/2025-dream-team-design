@@ -4,19 +4,15 @@
 #include <stdint.h>
 #include <stddef.h>
 
-/* Define the secure secret storage address.
-   In a production system, this should point to a secure/OTP flash region.
-   For this demo, we assume the same flash region as before. */
-#define SECRET_STORAGE_ADDR ((MXC_FLASH_MEM_BASE + MXC_FLASH_MEM_SIZE) - (3 * MXC_FLASH_PAGE_SIZE))
-
 /**
- * @brief Securely read secret data from flash.
+ * @brief Securely reads from the flash area where the global secret is stored.
  *
- * @param address Flash address to read from.
- * @param buffer Buffer to store the secret.
- * @param len Number of bytes to read.
- * @return int 0 on success, negative on error.
+ * @param address The flash address where the secret is stored.
+ * @param buffer Pointer to a buffer where the secret will be stored.
+ * @param len Length (in bytes) of the secret.
+ *
+ * @return 0 on success; non-zero on failure.
  */
-int secure_flash_read(uint32_t address, uint8_t *buffer, size_t len);
+int secure_flash_read(uint32_t address, void *buffer, uint32_t len);
 
 #endif // SECURE_PROVISION_H
