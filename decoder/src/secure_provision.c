@@ -1,18 +1,18 @@
-#include "secure_provision.h"
-#include "simple_flash.h"  // We use the simple flash interface to read from our secure region
-
 /**
- * @brief Securely read from flash.
+ * @file secure_provision.c
+ * @author Dream Team
+ * @brief Secure Provisioning Implementation
+ * @date 2025
  *
- * For demonstration purposes, this function calls flash_simple_read.
- * In production, replace this with access to a secure/OTP flash region.
- *
- * @param address The address of the secure secret.
- * @param buffer Pointer to the buffer where the secret will be stored.
- * @param len Number of bytes to read.
- * @return int 0 on success, negative on error.
+ * This module implements secure flash read routines for the global secret.
  */
-int secure_flash_read(uint32_t address, uint8_t *buffer, size_t len) {
+
+#include "secure_provision.h"
+#include "simple_flash.h"  // Note: simple_flash.c provides flash_simple_read
+
+int secure_flash_read(uint32_t address, void *buffer, uint32_t len) {
+    /* Call the underlying flash_simple_read (which returns void)
+       then return 0 to indicate success. */
     flash_simple_read(address, buffer, len);
     return 0;
 }
