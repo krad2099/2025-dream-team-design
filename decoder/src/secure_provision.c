@@ -20,7 +20,8 @@
 #define SECRET_STORAGE_ADDR ((MXC_FLASH_MEM_BASE + MXC_FLASH_MEM_SIZE) - (3 * MXC_FLASH_PAGE_SIZE))
 
 int secure_flash_init(void) {
-    return flash_simple_init();
+    flash_simple_init();
+    return 0;
 }
 
 int secure_flash_erase_page(uint32_t address) {
