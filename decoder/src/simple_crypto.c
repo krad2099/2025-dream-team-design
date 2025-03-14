@@ -122,12 +122,12 @@ int decrypt_sym(const uint8_t *ciphertext, uint16_t cipher_len, const uint8_t *k
     uint16_t cipherTextLen = encDataLen - GCM_TAG_SIZE;
     memcpy(tag, encData + cipherTextLen, GCM_TAG_SIZE);
 
-    AesGcm aesGcm;
-    int ret = wc_AesGcmSetKey(&aesGcm, key, KEY_SIZE);
+    Aes aes;
+    int ret = wc_AesGcmSetKey(&aes, key, KEY_SIZE);
     if (ret != 0) {
         return ret;
     }
-    ret = wc_AesGcmDecrypt(&aesGcm, plaintext, encData, cipherTextLen,
+    ret = wc_AesGcmDecrypt(&aes, plaintext, encData, cipherTextLen,
                            nonce, GCM_IV_SIZE, tag, GCM_TAG_SIZE, NULL, 0);
     return ret;
 }
