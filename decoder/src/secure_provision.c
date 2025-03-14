@@ -42,6 +42,6 @@ void load_global_secret(uint8_t *secret_buffer, size_t len) {
     if (ret != 0) {
         // Handle error appropriately (e.g., log an error message and halt)
         printf("Error: Failed to load global secret from secure flash\n");
-        // For a production system, you might want to retry or halt the system.
+        // For production, you might want to retry or halt the system.
     }
 }
