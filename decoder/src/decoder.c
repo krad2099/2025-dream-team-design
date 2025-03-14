@@ -20,9 +20,9 @@
 #include "board.h"
 #include "mxc_delay.h"
 #include "simple_flash.h"
+#include "secure_provision.h"   // Use our secure provisioning API
 #include "host_messaging.h"
 #include "simple_uart.h"
-#include "secure_provision.h"  // Use secure provision routines
 
 #ifdef CRYPTO_EXAMPLE
 #include "simple_crypto.h"
@@ -47,7 +47,7 @@
 #define EMERGENCY_CHANNEL 0
 #define DEFAULT_CHANNEL_TIMESTAMP 0xFFFFFFFFFFFFFFFFULL
 #define FLASH_FIRST_BOOT 0xDEADBEEF
-// FLASH_STATUS_ADDR is defined in simple_flash.h or board-specific header.
+#define FLASH_STATUS_ADDR ((MXC_FLASH_MEM_BASE + MXC_FLASH_MEM_SIZE) - (2 * MXC_FLASH_PAGE_SIZE))
 #define SYNC_FRAME_CHANNEL 0xFFFFFFFF
 
 /**********************************************************
@@ -100,9 +100,11 @@ typedef struct {
 flash_entry_t decoder_status;
 
 #ifdef CRYPTO_EXAMPLE
+// Instead of using load_global_secret from simple_flash,
+// we now use our secure provisioning interface.
 static uint8_t global_secret[16];
 void init_global_secret(void) {
-    load_global_secret(global_secret, sizeof(global_secret));
+    secure_flash_read(SECRET_STORAGE_ADDR, global_secret, sizeof(global_secret));
 }
 #endif  // CRYPTO_EXAMPLE
 
@@ -193,8 +195,8 @@ int update_subscription(pkt_len_t pkt_len, subscription_update_packet_t *update)
         print_error("Failed to update subscription - max subscriptions installed\n");
         return -1;
     }
-    secure_flash_erase_page(FLASH_STATUS_ADDR);
-    secure_flash_write(FLASH_STATUS_ADDR, (uint8_t *)&decoder_status, sizeof(flash_entry_t));
+    flash_simple_erase_page(FLASH_STATUS_ADDR);
+    flash_simple_write(FLASH_STATUS_ADDR, &decoder_status, sizeof(flash_entry_t));
     write_packet(SUBSCRIBE_MSG, NULL, 0);
     return 0;
 }
@@ -243,7 +245,6 @@ int decode(pkt_len_t pkt_len, frame_packet_t *new_frame) {
 #ifdef CRYPTO_EXAMPLE
     {
         uint8_t key[KEY_SIZE];
-        /* Simplified key derivation: compute SHA-256 of the global secret and take first 16 bytes. */
         uint8_t hash_out[32];
         int ret = wc_Sha256Hash(global_secret, sizeof(global_secret), hash_out);
         if (ret != 0) {
@@ -270,9 +271,8 @@ int decode(pkt_len_t pkt_len, frame_packet_t *new_frame) {
 
 void init(void) {
     int ret;
-    flash_simple_init();  // Use simple flash init if not using secure provisioning for flash init
-    /* Read using secure flash read and cast the pointer appropriately */
-    secure_flash_read(FLASH_STATUS_ADDR, (uint8_t *)&decoder_status, sizeof(flash_entry_t));
+    flash_simple_init();
+    flash_simple_read(FLASH_STATUS_ADDR, &decoder_status, sizeof(flash_entry_t));
     if (decoder_status.first_boot != FLASH_FIRST_BOOT) {
         print_debug("First boot.  Setting flash...\n");
         decoder_status.first_boot = FLASH_FIRST_BOOT;
@@ -284,7 +284,7 @@ void init(void) {
         }
         memcpy(decoder_status.subscribed_channels, subscription, MAX_CHANNEL_COUNT * sizeof(channel_status_t));
         flash_simple_erase_page(FLASH_STATUS_ADDR);
-        flash_simple_write(FLASH_STATUS_ADDR, (uint8_t *)&decoder_status, sizeof(flash_entry_t));
+        flash_simple_write(FLASH_STATUS_ADDR, &decoder_status, sizeof(flash_entry_t));
     }
 #ifdef CRYPTO_EXAMPLE
     init_global_secret();
@@ -308,7 +308,6 @@ void crypto_example(void) {
     uint8_t hash_out[HASH_OUT_SIZE];
     uint8_t decrypted[PLAINTEXT_LEN];
     char output_buf[128] = {0};
-    /* Simplified key derivation as above */
     uint8_t info_hash[32];
     int ret = wc_Sha256Hash(global_secret, sizeof(global_secret), info_hash);
     if (ret != 0) {
