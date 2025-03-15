@@ -1,11 +1,11 @@
 #ifndef SIMPLE_FLASH_H
 #define SIMPLE_FLASH_H
 
+#include "config.h"
 #include <stdint.h>
 #include <stddef.h>
 
 #define FLASH_STATUS_ADDR ((MXC_FLASH_MEM_BASE + MXC_FLASH_MEM_SIZE) - (2 * MXC_FLASH_PAGE_SIZE))
-/*#define SECRET_STORAGE_ADDR 0x0001F000 */
 
 void flash_simple_init(void);
 int flash_simple_erase_page(uint32_t address);
