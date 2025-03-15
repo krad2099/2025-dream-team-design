@@ -5,6 +5,7 @@
 #include <stdint.h>
 #include <stddef.h>
 
+#define FLASH_STATUS_ADDR ((MXC_FLASH_MEM_BASE + MXC_FLASH_MEM_SIZE) - (2 * MXC_FLASH_PAGE_SIZE))
 
 void flash_simple_init(void);
 int flash_simple_erase_page(uint32_t address);
