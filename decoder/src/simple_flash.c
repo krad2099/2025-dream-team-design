@@ -61,10 +61,3 @@ void flash_simple_read(uint32_t address, void* buffer, uint32_t size) {
 int flash_simple_write(uint32_t address, void* buffer, uint32_t size) {
     return MXC_FLC_Write(address, size, (uint32_t *)buffer);
 }
-
-/**
- * @brief Load Global Secrets from a designated secure flash region.
- */
-void load_global_secret(uint8_t *secret_buffer, size_t len) {
-    flash_simple_read(SECRET_STORAGE_ADDR, secret_buffer, len);
-}
