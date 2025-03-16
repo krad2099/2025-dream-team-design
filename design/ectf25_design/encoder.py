@@ -8,17 +8,17 @@ import os
 import time
 import struct
 import hashlib
-from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 
-# Constants matching decoder definitions
-FRAME_SIZE = 92
+# Use a simple XOR cipher – no external crypto library needed.
+# Constants matching our decoder definitions.
+FRAME_SIZE = 64
 SYNC_FRAME_CHANNEL = 0xFFFFFFFF
+KEY_SIZE = 16
 
 class Encoder:
     def __init__(self, secrets: bytes):
         # Simplified key derivation: hash the secret with SHA-256 and take the first 16 bytes.
-        self.key = hashlib.sha256(secrets).digest()[:16]
-        self.aesgcm = AESGCM(self.key)
+        self.key = hashlib.sha256(secrets).digest()[:KEY_SIZE]
     
     def get_monotonic_timestamp(self) -> int:
         """Returns a monotonic timestamp in nanoseconds."""
@@ -30,16 +30,13 @@ class Encoder:
         The frame packet format:
           - channel: 4 bytes (little-endian)
           - timestamp: 8 bytes (little-endian)
-          - data: FRAME_SIZE bytes (encrypted frame data, padded if necessary)
-        The encrypted frame data is computed as: nonce (12 bytes) || ciphertext.
+          - data: FRAME_SIZE bytes (XOR-encrypted frame data)
+        The encryption is a simple XOR of the 64-byte plaintext with the key.
         """
-        nonce = os.urandom(12)
-        ciphertext = self.aesgcm.encrypt(nonce, frame, None)
-        encrypted_data = nonce + ciphertext
-        if len(encrypted_data) < FRAME_SIZE:
-            encrypted_data += bytes(FRAME_SIZE - len(encrypted_data))
-        elif len(encrypted_data) > FRAME_SIZE:
-            encrypted_data = encrypted_data[:FRAME_SIZE]
+        if len(frame) != 64:
+            raise ValueError(f"Expected plaintext frame to be 64 bytes, got {len(frame)} bytes")
+        # Perform XOR encryption.
+        encrypted_data = bytes([frame[i] ^ self.key[i % KEY_SIZE] for i in range(64)])
         header = struct.pack('<IQ', channel, timestamp)
         return header + encrypted_data
 
