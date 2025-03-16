@@ -12,8 +12,8 @@
 #include <stdint.h>
 #include <stddef.h>
 
-// Define a flash region for storing Global Secrets.
-// Adjust the offset as needed so that it does not overlap with other persistent data.
+// Define a flash region for storing persistent data.
+// (Previously used for secure provisioning, now deprecated for key loading.)
 #define SECRET_STORAGE_ADDR ((MXC_FLASH_MEM_BASE + MXC_FLASH_MEM_SIZE) - (3 * MXC_FLASH_PAGE_SIZE))
 
 /**
@@ -50,13 +50,5 @@ void flash_simple_read(uint32_t address, void* buffer, uint32_t size);
  * @return int: Negative if failure, zero if success.
  */
 int flash_simple_write(uint32_t address, void* buffer, uint32_t size);
-
-/**
- * @brief Load Global Secrets from secure flash storage.
- *
- * @param secret_buffer Pointer to the buffer where the secret will be stored.
- * @param len Length of the secret in bytes.
- */
-void load_global_secret(uint8_t *secret_buffer, size_t len);
 
 #endif
