@@ -4,7 +4,7 @@
  * @file    decoder.c
  * @author  Dream Team
  * @brief   eCTF Dream Team Decoder Design Implementation with Clock Synchronization
- *          and simplified XOR-based encryption.
+ *          and simplified (XOR) encryption.
  * @date    2025
  *
  */
@@ -26,7 +26,7 @@
 
 #ifdef CRYPTO_EXAMPLE
 #include "simple_crypto.h"
-// Using wolfSSL's SHA256 for simplified key derivation.
+// Using wolfSSL's SHA256 for simplified key derivation (only used during key derivation).
 #include "wolfssl/wolfcrypt/sha256.h"
 #endif  // CRYPTO_EXAMPLE
 
@@ -39,7 +39,7 @@
 
 /**********************************************************
  ************************ CONSTANTS ***********************/
-#define FRAME_SIZE 64
+#define FRAME_SIZE 92
 
 #define MAX_CHANNEL_COUNT 8
 #define EMERGENCY_CHANNEL 0
@@ -98,17 +98,9 @@ flash_entry_t decoder_status;
 #ifdef CRYPTO_EXAMPLE
 // Instead of using load_global_secret from simple_flash,
 // we now use our secure provisioning interface.
-static uint8_t global_secret[16];
+static uint8_t global_secret[KEY_SIZE];
 void init_global_secret(void) {
     secure_flash_read(SECRET_STORAGE_ADDR, global_secret, sizeof(global_secret));
-    {
-        char dbg_buf[64];
-        for (int i = 0; i < 16; i++) {
-            sprintf(dbg_buf + i*2, "%02x", global_secret[i]);
-        }
-        print_debug("Global secret loaded: ");
-        print_debug(dbg_buf);
-    }
 }
 #endif  // CRYPTO_EXAMPLE
 
@@ -125,7 +117,8 @@ void process_sync_frame(frame_packet_t *sync_frame);
 /**********************************************************
  ******************** UTILITY FUNCTIONS *******************/
 timestamp_t get_monotonic_timestamp(void) {
-    /* Simple static counter increasing by 1ms (1,000,000 ns) per call. */
+    /* For demonstration purposes, use a static counter that increments by 1ms (1,000,000 ns)
+       per call. In production, replace with an appropriate hardware timer. */
     static timestamp_t counter = 0;
     counter += 1000000;
     return counter;
@@ -253,7 +246,7 @@ int decode(pkt_len_t pkt_len, frame_packet_t *new_frame) {
         }
         memcpy(key, hash_out, KEY_SIZE);
         
-        uint16_t plaintext_len = frame_size;  // For XOR, ciphertext length equals plaintext length.
+        uint16_t plaintext_len = frame_size - (GCM_IV_SIZE + GCM_TAG_SIZE);
         uint8_t plaintext[plaintext_len];
         ret = decrypt_sym(new_frame->data, frame_size, key, plaintext);
         if (ret != 0) {
@@ -298,7 +291,7 @@ void init(void) {
 
 #ifdef CRYPTO_EXAMPLE
 #define PLAINTEXT_LEN 16
-#define CIPHERTEXT_LEN (PLAINTEXT_LEN)  // For XOR, output equals plaintext length.
+#define CIPHERTEXT_LEN (PLAINTEXT_LEN + GCM_IV_SIZE + GCM_TAG_SIZE)
 #define HASH_OUT_SIZE  64
 
 void crypto_example(void) {
@@ -321,8 +314,15 @@ void crypto_example(void) {
          print_error("Encryption failed\n");
          return;
     }
-    print_debug("Encrypted data (XOR result):\n");
+    print_debug("Encrypted data (IV || ciphertext || tag):\n");
     print_hex_debug(ciphertext, CIPHERTEXT_LEN);
+    ret = hash(ciphertext, CIPHERTEXT_LEN, hash_out);
+    if (ret != 0) {
+         print_error("Hashing failed\n");
+         return;
+    }
+    print_debug("SHA-256 hash of ciphertext:\n");
+    print_hex_debug(hash_out, HASH_OUT_SIZE);
     ret = decrypt_sym(ciphertext, CIPHERTEXT_LEN, key, decrypted);
     if (ret != 0) {
          print_error("Decryption failed\n");
