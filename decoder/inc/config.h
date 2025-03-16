@@ -3,9 +3,9 @@
 #define CONFIG_H
 
 // Define flash parameters
-#define MXC_FLASH_MEM_BASE 0x00000000
+/* #define MXC_FLASH_MEM_BASE 0x00000000
 #define MXC_FLASH_MEM_SIZE 0x00080000
-#define MXC_FLASH_PAGE_SIZE  0x1000
+#define MXC_FLASH_PAGE_SIZE  0x1000 */
 
 // Use a single definition for SECRET_STORAGE_ADDR
 #ifndef SECRET_STORAGE_ADDR
