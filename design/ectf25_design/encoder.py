@@ -15,7 +15,16 @@ FRAME_SIZE = 92
 SYNC_FRAME_CHANNEL = 0xFFFFFFFF
 
 class Encoder:
-    def __init__(self, secrets: bytes):
+    def __init__(self):
+        # Load the secret directly from the global.secrets file.
+        try:
+            with open("global.secrets", "rb") as f:
+                secrets = f.read(16)
+                if len(secrets) != 16:
+                    raise ValueError("global.secrets file must be exactly 16 bytes.")
+        except Exception as e:
+            raise RuntimeError("Failed to load global.secrets: " + str(e))
+        
         # Simplified key derivation: hash the secret with SHA-256 and take the first 16 bytes.
         self.key = hashlib.sha256(secrets).digest()[:16]
         self.aesgcm = AESGCM(self.key)
