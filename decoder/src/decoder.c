@@ -4,7 +4,7 @@
  * @file    decoder.c
  * @author  Dream Team
  * @brief   eCTF Dream Team Decoder Design Implementation with Clock Synchronization
- *          and simplified cryptography.
+ *          and simplified XOR-based encryption.
  * @date    2025
  *
  */
@@ -31,17 +31,15 @@
 #endif  // CRYPTO_EXAMPLE
 
 /**********************************************************
- ******************* PRIMITIVE TYPES **********************
- **********************************************************/
+ ******************* PRIMITIVE TYPES **********************/
 #define timestamp_t uint64_t
 #define channel_id_t uint32_t
 #define decoder_id_t uint32_t
 #define pkt_len_t uint16_t
 
 /**********************************************************
- ************************ CONSTANTS ***********************
- **********************************************************/
-#define FRAME_SIZE 92
+ ************************ CONSTANTS ***********************/
+#define FRAME_SIZE 64
 
 #define MAX_CHANNEL_COUNT 8
 #define EMERGENCY_CHANNEL 0
@@ -80,8 +78,7 @@ typedef struct {
 #pragma pack(pop)
 
 /**********************************************************
- ********************* TYPE DEFINITIONS *******************
- **********************************************************/
+ ********************* TYPE DEFINITIONS *******************/
 typedef struct {
     bool active;
     channel_id_t id;
@@ -95,8 +92,7 @@ typedef struct {
 } flash_entry_t;
 
 /**********************************************************
- ************************ GLOBALS *************************
- **********************************************************/
+ ************************ GLOBALS *************************/
 flash_entry_t decoder_status;
 
 #ifdef CRYPTO_EXAMPLE
@@ -105,6 +101,14 @@ flash_entry_t decoder_status;
 static uint8_t global_secret[16];
 void init_global_secret(void) {
     secure_flash_read(SECRET_STORAGE_ADDR, global_secret, sizeof(global_secret));
+    {
+        char dbg_buf[64];
+        for (int i = 0; i < 16; i++) {
+            sprintf(dbg_buf + i*2, "%02x", global_secret[i]);
+        }
+        print_debug("Global secret loaded: ");
+        print_debug(dbg_buf);
+    }
 }
 #endif  // CRYPTO_EXAMPLE
 
@@ -114,18 +118,14 @@ static int sync_received = 0;
 static uint64_t last_adjusted_timestamp = 0;
 
 /**********************************************************
- ********** FORWARD FUNCTION PROTOTYPES *******************
- **********************************************************/
+ ********** FORWARD FUNCTION PROTOTYPES *******************/
 timestamp_t get_monotonic_timestamp(void);
 void process_sync_frame(frame_packet_t *sync_frame);
 
 /**********************************************************
- ******************** UTILITY FUNCTIONS *******************
- **********************************************************/
+ ******************** UTILITY FUNCTIONS *******************/
 timestamp_t get_monotonic_timestamp(void) {
-    /* Since clock_gettime is not available on our platform,
-       use a simple static counter that increments by 1ms (1,000,000 ns)
-       per call. For production, replace this with a hardware timer. */
+    /* Simple static counter increasing by 1ms (1,000,000 ns) per call. */
     static timestamp_t counter = 0;
     counter += 1000000;
     return counter;
@@ -253,7 +253,7 @@ int decode(pkt_len_t pkt_len, frame_packet_t *new_frame) {
         }
         memcpy(key, hash_out, KEY_SIZE);
         
-        uint16_t plaintext_len = frame_size - (GCM_IV_SIZE + GCM_TAG_SIZE);
+        uint16_t plaintext_len = frame_size;  // For XOR, ciphertext length equals plaintext length.
         uint8_t plaintext[plaintext_len];
         ret = decrypt_sym(new_frame->data, frame_size, key, plaintext);
         if (ret != 0) {
@@ -298,7 +298,7 @@ void init(void) {
 
 #ifdef CRYPTO_EXAMPLE
 #define PLAINTEXT_LEN 16
-#define CIPHERTEXT_LEN (PLAINTEXT_LEN + GCM_IV_SIZE + GCM_TAG_SIZE)
+#define CIPHERTEXT_LEN (PLAINTEXT_LEN)  // For XOR, output equals plaintext length.
 #define HASH_OUT_SIZE  64
 
 void crypto_example(void) {
@@ -321,15 +321,8 @@ void crypto_example(void) {
          print_error("Encryption failed\n");
          return;
     }
-    print_debug("Encrypted data (IV || ciphertext || tag):\n");
+    print_debug("Encrypted data (XOR result):\n");
     print_hex_debug(ciphertext, CIPHERTEXT_LEN);
-    ret = hash(ciphertext, CIPHERTEXT_LEN, hash_out);
-    if (ret != 0) {
-         print_error("Hashing failed\n");
-         return;
-    }
-    print_debug("SHA-256 hash of ciphertext:\n");
-    print_hex_debug(hash_out, HASH_OUT_SIZE);
     ret = decrypt_sym(ciphertext, CIPHERTEXT_LEN, key, decrypted);
     if (ret != 0) {
          print_error("Decryption failed\n");
