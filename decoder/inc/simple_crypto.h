@@ -6,67 +6,72 @@
  *
  */
 
+#ifndef SIMPLE_CRYPTO_H
+#define SIMPLE_CRYPTO_H
+
+#include <stddef.h>
+#include <stdint.h>
+
 #if CRYPTO_EXAMPLE
-#ifndef ECTF_CRYPTO_H
-#define ECTF_CRYPTO_H
 
-#include "wolfssl/wolfcrypt/aes.h"
-#include "wolfssl/wolfcrypt/hash.h"
-
-/******************************** MACRO DEFINITIONS ********************************/
-// For AES-GCM, plaintext can be any length.
-// The output format for encryption is:
-//   [IV (12 bytes)] || [ciphertext (plaintext length bytes)] || [auth tag (16 bytes)]
 #define GCM_IV_SIZE    12
 #define GCM_TAG_SIZE   16
+#define KEY_SIZE       16
+#define HASH_SIZE      32
 
-#define KEY_SIZE 16
-// Use 32 bytes for SHA-256 digest output.
-#define HASH_SIZE 32
+#ifdef __cplusplus
+extern "C" {
+#endif
 
-/******************************** FUNCTION PROTOTYPES ********************************/
 /**
- * @brief Encrypts plaintext using AES-GCM authenticated encryption.
+ * @brief Encrypts plaintext using a simple XOR-based cipher.
  *
- * The output is formatted as:
- *   [IV (12 bytes)] || [ciphertext (plaintext length bytes)] || [auth tag (16 bytes)]
- * The caller must allocate a ciphertext buffer of size (plaintext length + 12 + 16) bytes.
+ * The output format is: [IV (12 bytes)] || [ciphertext (plaintext length bytes)] || [tag (16 bytes)]
  *
- * @param plaintext  Pointer to the plaintext to encrypt.
- * @param len        Length of the plaintext (in bytes).
- * @param key        Pointer to a 16-byte key.
- * @param ciphertext Pointer to the output buffer where the resulting ciphertext is written.
+ * The caller must provide an output buffer that is at least:
+ *         plaintext length + 12 (IV) + 16 (tag) bytes.
  *
- * @return 0 on success, or a non-zero error code on failure.
+ * @param plaintext Pointer to the plaintext to encrypt.
+ * @param len Length of the plaintext.
+ * @param key Pointer to the 16-byte key.
+ * @param out Pointer to the output buffer.
+ *
+ * @return 0 on success, non-zero error code on failure.
  */
-int encrypt_sym(uint8_t *plaintext, size_t len, uint8_t *key, uint8_t *ciphertext);
+int encrypt_sym(uint8_t *plaintext, size_t len, uint8_t *key, uint8_t *out);
 
 /**
- * @brief Decrypts ciphertext that was produced by encrypt_sym.
+ * @brief Decrypts ciphertext that was encrypted with encrypt_sym.
  *
- * Expects input format:
- *   [IV (12 bytes)] || [ciphertext (plaintext length bytes)] || [auth tag (16 bytes)]
+ * Expects input format: [IV (12 bytes)] || [ciphertext (plaintext length bytes)] || [tag (16 bytes)]
  *
- * @param ciphertext Pointer to the input ciphertext buffer.
- * @param inLen      Total length of the input buffer (must be at least 12+16 bytes).
- * @param key        Pointer to a 16-byte key.
- * @param plaintext  Pointer to the output buffer for the decrypted plaintext.
- *                   This buffer must be at least (inLen - 12 - 16) bytes in size.
+ * @param ciphertext Pointer to the input data.
+ * @param cipher_len Total length of the input data.
+ * @param key Pointer to the 16-byte key.
+ * @param plaintext Pointer to the output buffer for decrypted plaintext.
  *
- * @return 0 on success, or a non-zero error code on failure.
+ * @return 0 on success, non-zero error code on failure.
  */
-int decrypt_sym(uint8_t *ciphertext, size_t inLen, uint8_t *key, uint8_t *plaintext);
+int decrypt_sym(const uint8_t *ciphertext, uint16_t cipher_len, const uint8_t *key, uint8_t *plaintext);
 
 /**
- * @brief Hashes arbitrary-length data using SHA-256.
+ * @brief Hashes arbitrary-length data using a simple hash.
  *
- * @param data     Pointer to the data to hash.
- * @param len      Length of the data (in bytes).
- * @param hash_out Pointer to a buffer (32 bytes) where the resulting hash will be written.
+ * Produces a 32-byte hash.
  *
- * @return 0 on success, or a non-zero error code on failure.
+ * @param data Pointer to the data to hash.
+ * @param len Length of the data.
+ * @param hash_out Pointer to the output buffer (at least 32 bytes).
+ *
+ * @return 0 on success, non-zero error code on failure.
  */
 int hash(void *data, size_t len, uint8_t *hash_out);
 
-#endif // ECTF_CRYPTO_H
-#endif // CRYPTO_EXAMPLE
+#ifdef __cplusplus
+}
+#endif
+
+#endif  // CRYPTO_EXAMPLE
+
+#endif  // SIMPLE_CRYPTO_H
+
