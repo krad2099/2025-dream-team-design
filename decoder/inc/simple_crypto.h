@@ -4,6 +4,8 @@
  * @brief Simplified Crypto API Header (Updated for AES-GCM & SHA-256)
  * @date 2025
  *
+ * Note: The key must be provided externally (e.g. loaded from the global.secrets file)
+ * rather than being loaded via secure provisioning.
  */
 
 #if CRYPTO_EXAMPLE
