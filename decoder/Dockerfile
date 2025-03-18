@@ -1,44 +1,35 @@
-# Dockerfile for the 2025 eCTF Secure Decoder
+# Dockerfile for the 2025 eCTF
+# Make any changes here to set up your build environment (e.g., installing crypto
+# libraries, dependencies, the compiler for a different language)
+
 FROM ubuntu:24.04
 
-LABEL version="0.3"
-LABEL description="Secure Decoder Docker Container for the 2025 eCTF"
+LABEL version="0.2"
+LABEL description="Example Decoder Docker Container for the 2025 eCTF"
 
 ARG DEBIAN_FRONTEND=noninteractive
 WORKDIR /root
 
-# Install system dependencies FIRST
+# Install Requisite Packages
 RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     gdb \
     gdb-multiarch \
     gcc-arm-none-eabi \
     binutils-arm-none-eabi \
     make \
-    python3.10 \
+    python3 \
     python3-pip \
-    python3-venv \
-    python3-dev \
     git \
     wget \
-    cmake \
-    clang \
-    ninja-build \
     libtool \
     texinfo \
     unzip \
-    pkg-config \
     libssl-dev \
-    && rm -rf /var/lib/apt/lists/*
+    openssl && \
+    rm -rf /var/lib/apt/lists/*
 
-# 🔹 Install `cryptography` BEFORE running `gen_secrets.py`
-RUN pip3 install --upgrade pip && \
-    pip3 install cryptography loguru
-
-# Ensure necessary system libraries for `cryptography` are installed
-RUN apt-get update && apt-get install -y \
-    libffi-dev \
-    python3-cffi \
-    && rm -rf /var/lib/apt/lists/*
+# Install Python Cryptography Library
+RUN pip3 install --no-cache-dir cryptography
 
 # Install MSDK
 RUN wget https://github.com/analogdevicesinc/msdk/archive/refs/tags/v2024_02.zip && \
@@ -47,35 +38,13 @@ RUN wget https://github.com/analogdevicesinc/msdk/archive/refs/tags/v2024_02.zip
 
 ENV MAXIM_PATH=/root/msdk-2024_02
 
-# Install Python Virtual Environment
 WORKDIR /decoder
-RUN python3 -m venv venv && \
-    . venv/bin/activate && \
-    pip install --upgrade pip && \
-    pip install cryptography loguru
 
-# Ensure the virtual environment is activated inside the container
-ENV VIRTUAL_ENV=/decoder/venv
-ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+# Set entrypoint to allow flexible commands during container execution
+ENTRYPOINT ["bash", "-c"]
 
-# Install wolfSSL for C-based AES-GCM and HMAC
-RUN git clone --depth 1 --branch v5.6.0-stable https://github.com/wolfSSL/wolfssl.git && \
-    cd wolfssl && \
-    ./autogen.sh && \
-    ./configure --enable-aesgcm --enable-hmac && \
-    make -j$(nproc) && \
-    make install && \
-    cd .. && rm -rf wolfssl
-
-# Set environment variables for wolfSSL
-ENV PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
-ENV LD_LIBRARY_PATH=/usr/local/lib
-
-# ✅ Ensure cryptography is installed BEFORE submission
-RUN python3 -c "import cryptography; print('Cryptography is installed correctly')"
-
-# Ensure the decoder builds successfully
-ENTRYPOINT ["bash", "-c", "source /decoder/venv/bin/activate && make release DECODER_ID=${DECODER_ID} && cp build/max78000.elf build/max78000.bin /out"]
+# Default command for building the decoder
+CMD ["make release DECODER_ID=${DECODER_ID} && cp build/max78000.elf build/max78000.bin /out"]
 
 # Sample run command:
 # docker run -v ./decoder/:/decoder -v ./global.secrets:/global.secrets:ro -v ./deadbeef_build:/out -e DECODER_ID=0xdeadbeef build-decoder
