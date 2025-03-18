@@ -1,39 +1,84 @@
 import argparse
 import json
 import os
-import base64
-from cryptography.hazmat.primitives import hashes
-from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
+from pathlib import Path
+
+from loguru import logger
 
 
-def generate_secrets(num_channels: int, output_file: str):
-    """Generates a secure secrets file with a master key and per-channel keys"""
+def gen_secrets(channels: list[int]) -> bytes:
+    """Generate the contents secrets file
 
-    # Generate a random master key
-    master_key = base64.b64encode(os.urandom(32)).decode()  # Store in Base64
+    This will be passed to the Encoder, ectf25_design.gen_subscription, and the build
+    process of the decoder
 
-    # Generate channel identifiers (e.g., 0 to num_channels-1)
-    channels = list(range(num_channels))
+    :param channels: List of channel numbers that will be valid in this deployment.
+        Channel 0 is the emergency broadcast, which will always be valid and will
+        NOT be included in this list
 
-    # Create and save the secrets JSON
+    :returns: Contents of the secrets file
+    """
+    # Generate a random encryption key (256-bit AES key)
+    encryption_key = os.urandom(32).hex()
+
+    # Create the secrets object
     secrets = {
-        "master_key": master_key,
-        "channels": channels  # The actual keys will be derived later
+        "channels": channels,
+        "some_secrets": "EXAMPLE",
+        "encryption_key": encryption_key,  # Store encryption key as hex
     }
 
-    with open(output_file, "w") as f:
-        json.dump(secrets, f, indent=4)
+    # Return the JSON encoded secrets
+    return json.dumps(secrets).encode()
 
-    print(f"Secrets file generated: {output_file}")
+
+def parse_args():
+    """Define and parse the command line arguments
+
+    NOTE: Your design must not change this function
+    """
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--force",
+        "-f",
+        action="store_true",
+        help="Force creation of secrets file, overwriting existing file",
+    )
+    parser.add_argument(
+        "secrets_file",
+        type=Path,
+        help="Path to the secrets file to be created",
+    )
+    parser.add_argument(
+        "channels",
+        nargs="+",
+        type=int,
+        help="Supported channels. Channel 0 (broadcast) is always valid and will not"
+        " be provided in this list",
+    )
+    return parser.parse_args()
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Generate a secrets JSON file.")
-    parser.add_argument("num_channels", type=int, help="Number of channels to generate keys for")
-    parser.add_argument("output_file", type=str, help="Path to save the secrets file")
-    args = parser.parse_args()
+    """Main function of gen_secrets
 
-    generate_secrets(args.num_channels, args.output_file)
+    You will likely not have to change this function
+    """
+    # Parse the command line arguments
+    args = parse_args()
+
+    secrets = gen_secrets(args.channels)
+
+    # Print the generated secrets for debugging (remove in production)
+    logger.debug(f"Generated secrets: {secrets}")
+
+    # Open the file, erroring if the file exists unless the --force arg is provided
+    with open(args.secrets_file, "wb" if args.force else "xb") as f:
+        # Dump the secrets to the file
+        f.write(secrets)
+
+    # Debugging log
+    logger.success(f"Wrote secrets to {str(args.secrets_file.absolute())}")
 
 
 if __name__ == "__main__":
