@@ -1,13 +1,14 @@
 #ifndef ECTF_CRYPTO_H
 #define ECTF_CRYPTO_H
 
-#include "wolfssl/wolfcrypt/aes.h"
-#include "wolfssl/wolfcrypt/hash.h"
+#include <wolfssl/options.h>
+#include <wolfssl/wolfcrypt/aes.h>
+#include <wolfssl/wolfcrypt/hash.h>
 
 /******************************** MACRO DEFINITIONS ********************************/
 #define BLOCK_SIZE AES_BLOCK_SIZE
-#define KEY_SIZE 32            // Updated to AES-256 key size
-#define IV_SIZE AES_BLOCK_SIZE  // Added for CBC mode
+#define KEY_SIZE 32
+#define IV_SIZE AES_BLOCK_SIZE
 #define HASH_SIZE MD5_DIGEST_SIZE
 
 /******************************** FUNCTION PROTOTYPES ********************************/
