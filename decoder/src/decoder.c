@@ -8,8 +8,7 @@
 #include "simple_flash.h"
 #include "host_messaging.h"
 #include "simple_uart.h"
-#include "simple_crypto.h"  // Added for AES decryption
-#include "subscription.h"   // Ensure is_subscribed() is declared
+#include "simple_crypto.h"
 
 /**********************************************************
  ******************* PRIMITIVE TYPES **********************
@@ -27,7 +26,7 @@
 #define FRAME_SIZE 64
 #define DEFAULT_CHANNEL_TIMESTAMP 0xFFFFFFFFFFFFFFFF
 #define FLASH_FIRST_BOOT 0xDEADBEEF
-#define FLASH_STATUS_ADDR 0x100000  // Define address properly
+#define FLASH_STATUS_ADDR 0x100000
 
 #define AES_KEY_SIZE 32
 #define AES_BLOCK_SIZE 16
@@ -45,7 +44,12 @@ typedef struct {
 
 typedef struct {
     uint32_t first_boot;
-    channel_status_t subscribed_channels[MAX_CHANNEL_COUNT];
+    struct {
+        bool active;
+        channel_id_t id;
+        timestamp_t start_timestamp;
+        timestamp_t end_timestamp;
+    } subscribed_channels[MAX_CHANNEL_COUNT];
 } flash_entry_t;
 
 #pragma pack(pop)
@@ -61,6 +65,23 @@ flash_entry_t decoder_status;
  **********************************************************/
 void decrypt_frame(uint8_t *ciphertext, uint8_t *plaintext, uint8_t *iv) {
     decrypt_sym(ciphertext, FRAME_SIZE, encryption_key, iv, plaintext);
+}
+
+/** @brief Checks if the decoder is subscribed to a given channel.
+ * 
+ *  @param channel The channel number to check.
+ *  @return 1 if subscribed, 0 if not.
+ */
+int is_subscribed(channel_id_t channel) {
+    if (channel == EMERGENCY_CHANNEL) {
+        return 1;  // Emergency broadcasts are always allowed
+    }
+    for (int i = 0; i < MAX_CHANNEL_COUNT; i++) {
+        if (decoder_status.subscribed_channels[i].id == channel && decoder_status.subscribed_channels[i].active) {
+            return 1;  // Subscribed to this channel
+        }
+    }
+    return 0;  // Not subscribed
 }
 
 /**********************************************************
