@@ -19,6 +19,7 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     make \
     python3 \
     python3-pip \
+    python3-cryptography \
     git \
     wget \
     libtool \
@@ -27,9 +28,6 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     libssl-dev \
     openssl && \
     rm -rf /var/lib/apt/lists/*
-
-# Install Python Cryptography Library
-RUN pip3 install --no-cache-dir cryptography
 
 # Install MSDK
 RUN wget https://github.com/analogdevicesinc/msdk/archive/refs/tags/v2024_02.zip && \
