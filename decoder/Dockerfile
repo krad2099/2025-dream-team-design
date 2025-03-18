@@ -1,7 +1,3 @@
-# Dockerfile for the 2025 eCTF
-# Make any changes here to set up your build environment (e.g., installing crypto
-# libraries, dependencies, the compiler for a different language)
-
 FROM ubuntu:24.04
 
 LABEL version="0.2"
@@ -26,8 +22,10 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     texinfo \
     unzip \
     libssl-dev \
-    openssl && \
-    rm -rf /var/lib/apt/lists/*
+    openssl \
+    build-essential \
+    cmake \
+    && rm -rf /var/lib/apt/lists/*
 
 # Install MSDK
 RUN wget https://github.com/analogdevicesinc/msdk/archive/refs/tags/v2024_02.zip && \
@@ -36,6 +34,15 @@ RUN wget https://github.com/analogdevicesinc/msdk/archive/refs/tags/v2024_02.zip
 
 ENV MAXIM_PATH=/root/msdk-2024_02
 
+# Install WolfSSL (with cryptography support)
+RUN git clone --depth=1 https://github.com/wolfSSL/wolfssl.git && \
+    cd wolfssl && \
+    ./autogen.sh && \
+    ./configure --enable-cryptonly && \
+    make -j$(nproc) && \
+    make install && \
+    ldconfig
+
 WORKDIR /decoder
 
 # Set entrypoint to allow flexible commands during container execution
@@ -43,6 +50,3 @@ ENTRYPOINT ["bash", "-c"]
 
 # Default command for building the decoder
 CMD ["make release DECODER_ID=${DECODER_ID} && cp build/max78000.elf build/max78000.bin /out"]
-
-# Sample run command:
-# docker run -v ./decoder/:/decoder -v ./global.secrets:/global.secrets:ro -v ./deadbeef_build:/out -e DECODER_ID=0xdeadbeef build-decoder
