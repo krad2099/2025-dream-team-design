@@ -24,6 +24,7 @@
 #include <stddef.h>
 #include <wolfssl/options.h>
 #include <wolfssl/wolfcrypt/aes.h>
+#include <wolfssl/wolfcrypt/gcm.h>
 #include <wolfssl/wolfcrypt/random.h>
 #include <wolfssl/wolfcrypt/sha256.h>
 
@@ -71,12 +72,12 @@ int encrypt_sym(uint8_t *plaintext, size_t len, uint8_t *key, uint8_t *out) {
     /* Perform AES-GCM encryption.
        No additional authenticated data (AAD) is used here (NULL, 0). */
     ret = wc_AesGcmEncrypt(&aes, 
-                           out + GCM_IV_SIZE,    /* ciphertext output location */
-                           plaintext,            /* plaintext input */
-                           (word32)len,          /* plaintext length */
-                           iv, GCM_IV_SIZE,      /* IV and its size */
-                           authTag, GCM_TAG_SIZE,/* authentication tag output */
-                           NULL, 0);             /* no AAD */
+                           out + GCM_IV_SIZE,
+                           plaintext,
+                           (word32)len,
+                           iv, GCM_IV_SIZE,
+                           authTag, GCM_TAG_SIZE,
+                           NULL, 0);
     if (ret != 0) {
         wc_FreeRng(&rng);
         return ret;
@@ -104,37 +105,7 @@ int encrypt_sym(uint8_t *plaintext, size_t len, uint8_t *key, uint8_t *out) {
  *
  * @return 0 on success, non-zero error code on failure.
  */
-int decrypt_sym(uint8_t *in, size_t inLen, uint8_t *key, uint8_t *plaintext) {
-    int ret;
-    Aes aes;
-    if (inLen < (GCM_IV_SIZE + GCM_TAG_SIZE))
-        return -1;  /* Not enough data */
-
-    size_t cipherLen = inLen - GCM_IV_SIZE - GCM_TAG_SIZE;
-    byte iv[GCM_IV_SIZE];
-    byte authTag[GCM_TAG_SIZE];
-
-    /* Extract the IV and authentication tag from the input */
-    memcpy(iv, in, GCM_IV_SIZE);
-    memcpy(authTag, in + GCM_IV_SIZE + cipherLen, GCM_TAG_SIZE);
-
-    /* Set AES key for GCM mode */
-    ret = wc_AesGcmSetKey(&aes, key, 16);
-    if (ret != 0)
-        return ret;
-
-    /* Perform AES-GCM decryption.
-       No additional authenticated data (AAD) is used (NULL, 0). */
-    ret = wc_AesGcmDecrypt(&aes, 
-                           plaintext,         /* plaintext output */
-                           in + GCM_IV_SIZE,  /* ciphertext input */
-                           (word32)cipherLen, /* ciphertext length */
-                           iv, GCM_IV_SIZE,   /* IV and its size */
-                           authTag, GCM_TAG_SIZE, /* authentication tag */
-                           NULL, 0);          /* no AAD */
-
-    return ret;
-}
+v
 
 /**
  * @brief Hashes arbitrary-length data using SHA-256.
