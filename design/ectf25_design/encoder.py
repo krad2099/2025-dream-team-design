@@ -10,8 +10,11 @@ import struct
 import hashlib
 from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 
-# Constants matching decoder definitions
-FRAME_SIZE = 92
+# Constants matching decoder definitions.
+# Note: The plaintext frame size is up to 64 bytes.
+# For a 64-byte plaintext, the encrypted data will be:
+#   12 (nonce) + 64 (plaintext) + 16 (tag) = 92 bytes.
+DEFAULT_PLAINTEXT_SIZE = 64
 SYNC_FRAME_CHANNEL = 0xFFFFFFFF
 
 class Encoder:
@@ -27,29 +30,41 @@ class Encoder:
     def encode(self, channel: int, frame: bytes, timestamp: int) -> bytes:
         """
         Encodes a normal frame packet.
-        The frame packet format:
+        
+        The frame packet format is:
           - channel: 4 bytes (little-endian)
           - timestamp: 8 bytes (little-endian)
-          - data: FRAME_SIZE bytes (encrypted frame data, padded if necessary)
-        The encrypted frame data is computed as: nonce (12 bytes) || ciphertext.
+          - data: encrypted frame data
+        
+        The encrypted frame data is computed as:
+          [nonce (12 bytes)] || [ciphertext (plaintext + auth tag (16 bytes))]
+        
+        The caller should provide a frame of up to 64 bytes. For example, if the frame is
+        exactly 64 bytes, the encrypted data will be 12 + 64 + 16 = 92 bytes. The header is
+        then prepended to form the final packet.
         """
+        # Generate a random 12-byte nonce.
         nonce = os.urandom(12)
+        # Encrypt the frame; AESGCM.encrypt returns ciphertext with auth tag appended.
         ciphertext = self.aesgcm.encrypt(nonce, frame, None)
+        # Concatenate nonce and ciphertext to form the encrypted data.
         encrypted_data = nonce + ciphertext
-        if len(encrypted_data) < FRAME_SIZE:
-            encrypted_data += bytes(FRAME_SIZE - len(encrypted_data))
-        elif len(encrypted_data) > FRAME_SIZE:
-            encrypted_data = encrypted_data[:FRAME_SIZE]
+        # Pack header: channel (4 bytes) and timestamp (8 bytes) in little-endian.
         header = struct.pack('<IQ', channel, timestamp)
         return header + encrypted_data
 
     def create_sync_frame(self) -> bytes:
         """
         Creates a sync frame packet used to synchronize clocks.
+        
         The sync frame uses the SYNC_FRAME_CHANNEL and a monotonic timestamp.
-        The data field is filled with zeros.
+        The data field is filled with zeros. Its length is set to match the length of a
+        normal encrypted frame generated for a DEFAULT_PLAINTEXT_SIZE frame.
         """
         timestamp = self.get_monotonic_timestamp()
-        data = bytes(FRAME_SIZE)
+        # Calculate the expected encrypted data length:
+        # nonce (12) + DEFAULT_PLAINTEXT_SIZE + tag (16)
+        encrypted_data_length = 12 + DEFAULT_PLAINTEXT_SIZE + 16
+        data = bytes(encrypted_data_length)
         header = struct.pack('<IQ', SYNC_FRAME_CHANNEL, timestamp)
         return header + data
