@@ -72,12 +72,12 @@ int encrypt_sym(uint8_t *plaintext, size_t len, uint8_t *key, uint8_t *out) {
     /* Perform AES-GCM encryption.
        No additional authenticated data (AAD) is used here (NULL, 0). */
     ret = wc_AesGcmEncrypt(&aes, 
-                           out + GCM_IV_SIZE,
-                           plaintext,
-                           (word32)len,
-                           iv, GCM_IV_SIZE,
-                           authTag, GCM_TAG_SIZE,
-                           NULL, 0);
+                           out + GCM_IV_SIZE,    /* Ciphertext output offset by IV */
+                           plaintext,            /* Plaintext input */
+                           (word32)len,          /* Length of plaintext */
+                           iv, GCM_IV_SIZE,      /* IV and IV length */
+                           authTag, GCM_TAG_SIZE,/* Authentication tag and tag length */
+                           NULL, 0);             /* No AAD */
     if (ret != 0) {
         wc_FreeRng(&rng);
         return ret;
@@ -97,7 +97,7 @@ int encrypt_sym(uint8_t *plaintext, size_t len, uint8_t *key, uint8_t *out) {
  *
  * Expects input format: [IV (12 bytes)] || [ciphertext (N bytes)] || [auth tag (16 bytes)]
  *
- * @param in Pointer to the input data.
+ * @param ciphertext Pointer to the input data.
  * @param inLen Total length of the input data. Must be at least (12 + 16) bytes.
  * @param key Pointer to the 16-byte key.
  * @param plaintext Pointer to the output buffer for the decrypted plaintext.
@@ -105,7 +105,44 @@ int encrypt_sym(uint8_t *plaintext, size_t len, uint8_t *key, uint8_t *out) {
  *
  * @return 0 on success, non-zero error code on failure.
  */
-v
+int decrypt_sym(uint8_t *ciphertext, size_t inLen, uint8_t *key, uint8_t *plaintext) {
+    /* Ensure the input is long enough to contain IV and tag */
+    if (inLen < (GCM_IV_SIZE + GCM_TAG_SIZE)) {
+        return -1;  // Input too short.
+    }
+
+    /* Calculate the length of the ciphertext (which is also the plaintext length) */
+    size_t cipher_text_len = inLen - (GCM_IV_SIZE + GCM_TAG_SIZE);
+
+    /* Extract the IV (nonce), ciphertext, and tag */
+    uint8_t *iv = ciphertext;  // First 12 bytes.
+    uint8_t *enc_data = ciphertext + GCM_IV_SIZE;  // Next cipher_text_len bytes.
+    uint8_t *tag = ciphertext + GCM_IV_SIZE + cipher_text_len;  // Final 16 bytes.
+
+    Aes aes;
+    int ret = wc_AesGcmSetKey(&aes, key, 16);
+    if (ret != 0) {
+        return ret;
+    }
+
+    /* Decrypt the ciphertext.
+       - plaintext: Output buffer for decrypted data.
+       - enc_data: The ciphertext to decrypt.
+       - cipher_text_len: Length of the ciphertext (should equal the original plaintext length).
+       - iv: The 12-byte nonce.
+       - tag: The 16-byte authentication tag.
+       - No additional authenticated data (AAD) is used.
+    */
+    ret = wc_AesGcmDecrypt(&aes,
+                           plaintext,             /* Output buffer */
+                           enc_data,              /* Ciphertext */
+                           (word32)cipher_text_len, /* Ciphertext length */
+                           iv, GCM_IV_SIZE,       /* IV and IV length */
+                           tag, GCM_TAG_SIZE,     /* Tag and tag length */
+                           NULL, 0);              /* No AAD */
+
+    return ret;  // Return 0 on success, non-zero on error.
+}
 
 /**
  * @brief Hashes arbitrary-length data using SHA-256.
@@ -117,9 +154,7 @@ v
  * @return 0 on success, non-zero error code on failure.
  */
 int hash(void *data, size_t len, uint8_t *hash_out) {
-    /* Use SHA-256 instead of MD5 for better security.
-       SHA-256 produces a 32-byte hash output. */
     return wc_Sha256Hash((uint8_t *)data, (word32)len, hash_out);
 }
 
-#endif
+#endif // CRYPTO_EXAMPLE
