@@ -53,6 +53,8 @@
 // (Choose the proper address for your device’s OTP or locked flash region.)
 #define SECURE_SECRET_ADDR (MXC_FLASH_MEM_BASE + MXC_FLASH_MEM_SIZE - (4 * MXC_FLASH_PAGE_SIZE))
 
+#define KEY_SIZE 16
+
 /**********************************************************
  ***** COMMUNICATION PACKET DEFINITIONS (packed) *******
  **********************************************************/
@@ -107,7 +109,7 @@ static uint8_t global_secret[16];
 #ifdef CRYPTO_EXAMPLE
 // Global secret is now provisioned securely rather than being a hardcoded value.
 void init_global_secret(void) {
-    FILE *f = fopen("global.secrets", "rb");
+    FILE *f = fopen("/tmp/global.secrets", "rb");
     if (!f) {
         print_error("Failed to open global.secrets\n");
         while (1);
