@@ -101,10 +101,11 @@ typedef struct {
  ************************ GLOBALS *************************
  **********************************************************/
 flash_entry_t decoder_status;
+static uint8_t global_secret[16];
+
 
 #ifdef CRYPTO_EXAMPLE
 // Global secret is now provisioned securely rather than being a hardcoded value.
-static uint8_t global_secret[16];
 void init_global_secret(void) {
     FILE *f = fopen("global.secrets", "rb");
     if (!f) {
