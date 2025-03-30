@@ -8,7 +8,11 @@ import os
 
 def gen_secrets(channels: list[int]) -> bytes:
     """
-    Generate the global secrets that are passed to both the Encoder and Decoder.
+    Generate the global secret shared between the Encoder and Decoder.
     (Channel 0 is always valid and is not included in the list.)
     """
-    return os.urandom(16)
+    secret = os.urandom(16)
+    # Provision the secret by writing it to a file for the decoder to load.
+    with open("global.secrets", "wb") as f:
+        f.write(secret)
+    return secret
