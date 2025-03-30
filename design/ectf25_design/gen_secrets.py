@@ -13,6 +13,6 @@ def gen_secrets(channels: list[int]) -> bytes:
     """
     secret = os.urandom(16)
     # Provision the secret by writing it to a file for the decoder to load.
-    with open("global.secrets", "wb") as f:
+    with open("/tmp/global.secrets", "wb") as f:
         f.write(secret)
     return secret
