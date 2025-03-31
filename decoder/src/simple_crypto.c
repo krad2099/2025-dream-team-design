@@ -22,10 +22,10 @@
 #include <string.h>
 #include <stddef.h>
 #include <wolfssl/options.h>
-#include <wolfssl/wolfcrypt/aes.h>
-#include <wolfssl/wolfcrypt/gcm.h>
-#include <wolfssl/wolfcrypt/random.h>
-#include <wolfssl/wolfcrypt/sha256.h>
+#include <wolfssl/wolfssl/wolfcrypt/aes.h>
+#include <wolfssl/wolfssl/wolfcrypt/gcm.h>
+#include <wolfssl/wolfssl/wolfcrypt/random.h>
+#include <wolfssl/wolfssl/wolfcrypt/sha256.h>
 
 #define GCM_IV_SIZE    12
 #define GCM_TAG_SIZE   16
