@@ -10,8 +10,8 @@
 #ifndef ECTF_CRYPTO_H
 #define ECTF_CRYPTO_H
 
-#include "wolfssl/wolfcrypt/aes.h"
-#include "wolfssl/wolfcrypt/hash.h"
+#include "wolfssl/wolfssl/wolfcrypt/aes.h"
+#include "wolfssl/wolfssl/wolfcrypt/hash.h"
 
 /******************************** MACRO DEFINITIONS ********************************/
 // For AES-GCM, plaintext can be any length.
