@@ -23,8 +23,6 @@
 #include <stddef.h>
 #include <wolfssl/options.h>
 #include <wolfssl/wolfcrypt/aes.h>
-#include <wolfssl/wolfcrypt/gcm.h>
-#include <wolfssl/wolfcrypt/random.h>
 #include <wolfssl/wolfcrypt/sha256.h>
 
 #define GCM_IV_SIZE    12
