@@ -18,6 +18,9 @@
 override BOARD=FTHR_RevA
 MFLOAT_ABI=soft
 
+LIBPATH += inc/wolfssl/lib
+LIBS += -lwolfssl
+
 IPATH+=../deployment
 IPATH+=inc/
 VPATH+=src/
