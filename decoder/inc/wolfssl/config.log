@@ -30,8 +30,8 @@ Kernel configured for up to 10 processors.
 Processor type: arm64e (ARM64E)
 Processors active: 0 1 2 3 4 5 6 7 8 9
 Primary memory available: 16.00 gigabytes
-Default processor set: 390 tasks, 3542 threads, 10 processors
-Load average: 1.57, Mach factor: 8.42
+Default processor set: 432 tasks, 3475 threads, 10 processors
+Load average: 1.02, Mach factor: 8.96
 /bin/machine           = unknown
 /usr/bin/oslevel       = unknown
 /bin/universe          = unknown
@@ -706,7 +706,7 @@ configure:14730: checking for gmtime_s
 configure:14730: gcc -o conftest      conftest.c -lnetwork  >&5
 Undefined symbols for architecture arm64:
   "_gmtime_s", referenced from:
-      _main in conftest-1c64bd.o
+      _main in conftest-ae98cf.o
 ld: symbol(s) not found for architecture arm64
 clang: error: linker command failed with exit code 1 (use -v to see invocation)
 configure:14730: $? = 1
@@ -2006,7 +2006,28 @@ on Konrads-MacBook-Pro.local
 
 config.status:1557: creating stamp-h
 config.status:1557: creating Makefile
-config.status:1543: error: cannot find input file: `wolfssl/version.h.in'
+config.status:1557: creating wolfssl/version.h
+config.status:1557: creating wolfssl/options.h
+config.status:1557: creating support/wolfssl.pc
+config.status:1557: creating debian/control
+config.status:1557: creating debian/changelog
+config.status:1557: creating rpm/spec
+config.status:1557: creating wolfcrypt/test/test_paths.h
+config.status:1557: creating scripts/unit.test
+config.status:1557: creating config.h
+config.status:1786: executing depfiles commands
+config.status:1863: cd .       && sed -e '/# am--include-marker/d' Makefile         | make -f - am--depfiles
+config.status:1868: $? = 0
+config.status:1786: executing libtool commands
+config.status:1786: executing wolfssl/wolfcrypt/async.h commands
+config.status:1786: executing wolfssl/wolfcrypt/fips.h commands
+config.status:1786: executing wolfssl/wolfcrypt/port/cavium/cavium_nitrox.h commands
+config.status:1786: executing wolfssl/wolfcrypt/port/intel/quickassist.h commands
+config.status:1786: executing wolfssl/wolfcrypt/port/intel/quickassist_mem.h commands
+configure:39504: ---
+configure:39506: Running make clean...
+configure:39531: ---
+configure:39533: Generating user options header...
 
 ## ---------------- ##
 ## Cache variables. ##
@@ -2669,7 +2690,7 @@ USE_VALGRIND_TRUE='#'
 VERSION='5.7.6'
 WOLFSENTRY_INCLUDE=''
 WOLFSENTRY_LIB=''
-WOLFSSL_BUILD_DATE='Tue, 01 Apr 2025 13:50:49 -0500'
+WOLFSSL_BUILD_DATE='Tue, 01 Apr 2025 18:36:24 -0500'
 WOLFSSL_CONFIG_ARGS=' '\''--host=arm-none-eabi'\'' '\''--enable-fips'\'' '\''host_alias=arm-none-eabi'\'''
 WOLFSSL_LIBRARY_VERSION='43:0:0'
 WOLFSSL_LIBRARY_VERSION_FIRST='43'
@@ -2803,4 +2824,4 @@ target_vendor='none'
 #define VCS_SYSTEM "none"
 #define VCS_CHECKOUT 0
 
-configure: exit 1
+configure: exit 0
