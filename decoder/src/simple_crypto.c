@@ -17,6 +17,9 @@
 
 #if CRYPTO_EXAMPLE
 
+/* Define WOLFSSL_AES_GCM to enable AES-GCM functions in the headers. */
+#define WOLFSSL_AES_GCM
+
 #include "simple_crypto.h"
 #include <stdint.h>
 #include <string.h>
@@ -25,6 +28,7 @@
 #include <wolfssl/wolfcrypt/aes.h>
 #include <wolfssl/wolfcrypt/sha256.h>
 
+/* Define sizes for IV and Tag */
 #define GCM_IV_SIZE    12
 #define GCM_TAG_SIZE   16
 
@@ -45,7 +49,7 @@ int encrypt_sym(uint8_t *plaintext, size_t len, uint8_t *key, uint8_t *out) {
     Aes aes;
     byte iv[GCM_IV_SIZE];
     byte authTag[GCM_TAG_SIZE];
-    wc_RNG rng;
+    WC_RNG rng;
 
     /* Initialize RNG */
     ret = wc_InitRng(&rng);
