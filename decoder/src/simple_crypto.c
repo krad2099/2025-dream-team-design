@@ -1,3 +1,11 @@
+
+/* Force WolfSSL to enable AES-GCM support without a configuration */
+#define NO_WOLFSSL_CONFIG
+#define HAVE_AESGCM
+/* Define WOLFSSL_AES_GCM to enable AES-GCM functions in the headers. */
+#define WOLFSSL_AES_GCM
+
+
 /**
  * @file "simple_crypto.c"
  * @author Dream Team
@@ -16,9 +24,6 @@
  */
 
 #if CRYPTO_EXAMPLE
-
-/* Define WOLFSSL_AES_GCM to enable AES-GCM functions in the headers. */
-#define WOLFSSL_AES_GCM
 
 #include "simple_crypto.h"
 #include <stdint.h>
