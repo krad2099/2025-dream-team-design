@@ -18,9 +18,6 @@
 override BOARD=FTHR_RevA
 MFLOAT_ABI=soft
 
-LIBPATH += inc/wolfssl/lib
-LIBS += -lwolfssl
-
 IPATH+=../deployment
 IPATH+=inc/
 VPATH+=src/
@@ -43,3 +40,7 @@ ENTRY=firmware_startup
 
 # Enable Crypto Example
 CRYPTO_EXAMPLE=1
+
+# WolfSSL Library Linking
+LIBPATH += inc/wolfssl/lib
+LIBS += -lwolfssl
