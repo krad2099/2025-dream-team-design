@@ -36,22 +36,6 @@ RUN apt-get install -y unzip && \
     unzip v2024_02.zip && \
     rm -f v2024_02.zip
 
-# Build and configure WolfSSL
-WORKDIR /root
-RUN wget https://www.wolfssl.com/download/wolfssl-5.7.6.tar.gz && \
-    tar -xzf wolfssl-5.7.6.tar.gz && \
-    cd wolfssl-5.7.6 && \
-    # WolfSSL expects version.h.in to be in wolfssl/; create that directory and copy it if needed
-    mkdir -p wolfssl && cp version.h.in wolfssl/version.h.in && \
-    ./configure --enable-harden && \
-    make && \
-    # Create a lib directory in your MSDK inc folder (adjust path as needed)
-    mkdir -p /root/msdk-2024_02/inc/wolfssl/lib && \
-    # Copy the entire configured wolfssl directory into your project's include folder
-    cp -R wolfssl /root/msdk-2024_02/inc/ && \
-    # Copy the built static library so that your linker can find it
-    cp libwolfssl.a /root/msdk-2024_02/inc/wolfssl/lib/
-
 ENV MAXIM_PATH=/root/msdk-2024_02
 # Add the real-time library linker option
 ENV LDFLAGS=-lrt
