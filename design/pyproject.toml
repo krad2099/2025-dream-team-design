@@ -11,6 +11,7 @@ requires-python = ">=3.11"
 dependencies = [
     "loguru",
     "cryptography",
+    "wolfssl",
 ]
 
 [tool.black]
