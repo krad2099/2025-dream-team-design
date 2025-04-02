@@ -21,7 +21,7 @@ MFLOAT_ABI=soft
 IPATH+=../deployment
 IPATH+=inc/
 VPATH+=src/
-IPATH+=./wolfssl
+IPATH+=./inc/wolfssl
 
 # ****************** eCTF Bootloader *******************
 # DO NOT REMOVE
