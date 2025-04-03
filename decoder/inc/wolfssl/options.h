@@ -37,5 +37,24 @@ extern "C" {
 }
 #endif
 
+/* options.h - Custom Configuration for wolfSSL */
+
+/* Enable SHA256 functionality */
+#define WOLFSSL_SHA256
+
+/* Enable AES functionality */
+#define WOLFSSL_AES
+
+/* Enable AES GCM for authenticated encryption */
+#define WOLFSSL_AES_256_GCM
+
+/* Other configurations can be enabled as needed */
+
+/* Include additional options for platform-specific optimizations */
+#define WOLFSSL_USE_INTEL
+
+/* Disable other functionality as needed (for example, disable RSA) */
+#define WOLFSSL_NO_RSA
+
 
 #endif /* WOLFSSL_OPTIONS_H */
