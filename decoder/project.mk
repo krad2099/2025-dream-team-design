@@ -43,4 +43,4 @@ CRYPTO_EXAMPLE=1
 
 # WolfSSL Library Linking
 LIBPATH += inc/wolfssl/lib
-LIBS += -lwolfssl
+LIBS += wolfssl
