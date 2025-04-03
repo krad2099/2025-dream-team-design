@@ -21,6 +21,7 @@
 
 
 /* default blank options for autoconf */
+#define WOLFSSL_NO_HARDENING
 
 #ifdef WOLFSSL_NO_OPTIONS_H
 /* options.h inhibited by configuration */
