@@ -41,6 +41,7 @@ ENTRY=firmware_startup
 # Enable Crypto Example
 CRYPTO_EXAMPLE=1
 
-# WolfSSL Library Linking
+# WolfSSL Library Linking & configuration
+CFLAGS += -I/inc/wolfssl/options.h
 LIBPATH += inc/wolfssl/lib
 LIBS += wolfssl
