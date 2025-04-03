@@ -43,4 +43,4 @@ CRYPTO_EXAMPLE=1
 
 # WolfSSL Library Linking & configuration
 CFLAGS += -I/inc/wolfssl/options.h
-LIBS += -L/inc/wolfssl -lwolfssl
+LIBS += -L/inc/wolfssl/lib -lwolfssl
