@@ -38,6 +38,16 @@ extern "C" {
 #endif
 
 /* options.h - Custom Configuration for wolfSSL */
+/* Enable constant-time cryptographic operations */
+#define WOLFSSL_CONSTANT_TIME
+
+/* Enable additional hardening options for cryptographic operations */
+#define WOLFSSL_SHA256_CONSTANT_TIME  // For SHA256 constant-time operations
+#define WOLFSSL_AES_CONSTANT_TIME     // For AES constant-time operations
+#define WOLFSSL_RSA_CONSTANT_TIME     // For RSA constant-time operations
+
+/* Enable the use of additional hardening options for side-channel resistance */
+#define WOLFSSL_USE_EXTERNAL_RNG
 
 /* Enable SHA256 functionality */
 #define WOLFSSL_SHA256
