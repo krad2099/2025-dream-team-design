@@ -21,7 +21,7 @@
 
 
 /* default blank options for autoconf */
-#define WOLFSSL_NO_HARDENING
+
 
 #ifdef WOLFSSL_NO_OPTIONS_H
 /* options.h inhibited by configuration */
@@ -40,6 +40,7 @@ extern "C" {
 
 /* options.h - Custom Configuration for wolfSSL */
 /* Enable constant-time cryptographic operations */
+#define WOLFSSL_NO_HARDENING
 #define WOLFSSL_CONSTANT_TIME
 
 /* Enable additional hardening options for cryptographic operations */
@@ -47,8 +48,6 @@ extern "C" {
 #define WOLFSSL_AES_CONSTANT_TIME     // For AES constant-time operations
 #define WOLFSSL_RSA_CONSTANT_TIME     // For RSA constant-time operations
 
-/* Enable the use of additional hardening options for side-channel resistance */
-#define WOLFSSL_USE_EXTERNAL_RNG
 
 /* Enable SHA256 functionality */
 #define WOLFSSL_SHA256
@@ -62,7 +61,7 @@ extern "C" {
 /* Other configurations can be enabled as needed */
 
 /* Include additional options for platform-specific optimizations */
-#define WOLFSSL_USE_INTEL
+#define WOLFSSL_USE_ARM
 
 /* Disable other functionality as needed (for example, disable RSA) */
 #define WOLFSSL_NO_RSA
