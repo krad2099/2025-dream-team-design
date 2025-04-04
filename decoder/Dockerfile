@@ -30,15 +30,15 @@ ENV LDFLAGS=-lrt
 
 # Copy decoder source and the custom headers
 COPY ./decoder /decoder
-COPY ./inc /usr/local/include
+COPY ./inc
 
 WORKDIR /decoder
 
 # Point to where wolfssl/options.h now lives
-ENV CFLAGS="-I/usr/local/include"
+ENV CFLAGS="-I/inc/wolfssl"
 
 # Optional: linker path for libs if needed
-ENV LIBRARY_PATH="/usr/local/lib:$LIBRARY_PATH"
+#ENV LIBRARY_PATH="/usr/local/lib:$LIBRARY_PATH"
 
 # Default build command
 CMD ["make"]
