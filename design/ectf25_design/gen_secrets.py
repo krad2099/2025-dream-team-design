@@ -13,6 +13,6 @@ def gen_secrets(channels: list[int]) -> bytes:
           for provisioning. (Channel 0 is always valid and is not included in the list.)
     """
     secret = os.urandom(16)
-    with open("global.secrets", "wb") as f:
+    with open("/tmp/global.secrets", "wb") as f:
         f.write(secret)
     return secret
