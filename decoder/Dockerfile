@@ -30,6 +30,14 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     texinfo \
     unzip    
 
+    RUN apt-get update && apt-get install -y \
+    build-essential \
+    libwolfssl-dev \
+    && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    libwolfssl-dev \
+    && rm -rf /var/lib/apt/lists/*
 # Install MSDK
 RUN apt-get install -y unzip && \
     wget https://github.com/analogdevicesinc/msdk/archive/refs/tags/v2024_02.zip && \
