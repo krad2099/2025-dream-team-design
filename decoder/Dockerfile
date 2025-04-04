@@ -30,11 +30,6 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     texinfo \
     unzip    
 
-  RUN apt-get update && apt-get install -y \
-    build-essential \
-    libwolfssl-dev \
-    && rm -rf /var/lib/apt/lists/*
-
 
 # Install MSDK
 RUN apt-get install -y unzip && \
@@ -48,10 +43,10 @@ ENV LDFLAGS=-lrt
 
 # Add your application source code
 WORKDIR /decoder
-COPY . /decoder
+
 
 # Run the build process
-CMD ["make"]
+CMD ["make -I ./inc/wolfssl"]
 
 ENTRYPOINT ["bash", "-c", "make release DECODER_ID=${DECODER_ID} && cp build/max78000.elf build/max78000.bin /out"]
 
