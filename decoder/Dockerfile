@@ -30,14 +30,12 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     texinfo \
     unzip    
 
-    RUN apt-get update && apt-get install -y \
+  RUN apt-get update && apt-get install -y \
     build-essential \
     libwolfssl-dev \
     && rm -rf /var/lib/apt/lists/*
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    libwolfssl-dev \
-    && rm -rf /var/lib/apt/lists/*
+
+
 # Install MSDK
 RUN apt-get install -y unzip && \
     wget https://github.com/analogdevicesinc/msdk/archive/refs/tags/v2024_02.zip && \
@@ -48,7 +46,12 @@ ENV MAXIM_PATH=/root/msdk-2024_02
 # Add the real-time library linker option
 ENV LDFLAGS=-lrt
 
+# Add your application source code
 WORKDIR /decoder
+COPY . /decoder
+
+# Run the build process
+CMD ["make"]
 
 ENTRYPOINT ["bash", "-c", "make release DECODER_ID=${DECODER_ID} && cp build/max78000.elf build/max78000.bin /out"]
 
