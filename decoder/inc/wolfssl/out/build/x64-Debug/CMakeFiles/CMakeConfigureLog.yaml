@@ -1,0 +1,1643 @@
+
+---
+events:
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CMakeDetermineSystem.cmake:205 (message)"
+      - "CMakeLists.txt:37 (project)"
+    message: |
+      The system is: Windows - 10.0.19045 - AMD64
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CMakeDetermineCCompiler.cmake:123 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:37 (project)"
+    message: |
+      Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+      Compiler: C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.43.34808/bin/Hostx64/x64/cl.exe 
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      0
+      Microsoft (R) C/C++ Optimizing Compiler Version 19.43.34809 for x64
+      Copyright (C) Microsoft Corporation.  All rights reserved.
+      
+      CMakeCCompilerId.c
+      Microsoft (R) Incremental Linker Version 14.43.34809.0
+      Copyright (C) Microsoft Corporation.  All rights reserved.
+      
+      /out:CMakeCCompilerId.exe 
+      CMakeCCompilerId.obj 
+      
+      
+      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CMakeCCompilerId.exe"
+      
+      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CMakeCCompilerId.obj"
+      
+      The C compiler identification is MSVC, found in:
+        H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/3.30.5-msvc23/CompilerIdC/CMakeCCompilerId.exe
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CMakeDetermineCompilerId.cmake:1243 (message)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CMakeDetermineCompilerId.cmake:250 (CMAKE_DETERMINE_MSVC_SHOWINCLUDES_PREFIX)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CMakeDetermineCCompiler.cmake:123 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:37 (project)"
+    message: |
+      Detecting C compiler /showIncludes prefix:
+        main.c
+        Note: including file: H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\ShowIncludes\\foo.h
+        
+      Found prefix "Note: including file: "
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CMakeDetermineCompilerId.cmake:1205 (message)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CMakeDetermineASMCompiler.cmake:135 (CMAKE_DETERMINE_COMPILER_ID_VENDOR)"
+      - "CMakeLists.txt:37 (project)"
+    message: |
+      Checking whether the ASM compiler is GNU using "--version" did not match "(GNU assembler)|(GCC)|(Free Software Foundation)":
+      Microsoft (R) C/C++ Optimizing Compiler Version 19.43.34809 for x64
+      Copyright (C) Microsoft Corporation.  All rights reserved.
+      
+      cl : Command line warning D9002 : ignoring unknown option '--version'
+      cl : Command line error D8003 : missing source filename
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CMakeDetermineCompilerId.cmake:1205 (message)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CMakeDetermineASMCompiler.cmake:135 (CMAKE_DETERMINE_COMPILER_ID_VENDOR)"
+      - "CMakeLists.txt:37 (project)"
+    message: |
+      Checking whether the ASM compiler is AppleClang using "--version" did not match "(Apple (clang|LLVM) version)":
+      Microsoft (R) C/C++ Optimizing Compiler Version 19.43.34809 for x64
+      Copyright (C) Microsoft Corporation.  All rights reserved.
+      
+      cl : Command line warning D9002 : ignoring unknown option '--version'
+      cl : Command line error D8003 : missing source filename
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CMakeDetermineCompilerId.cmake:1205 (message)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CMakeDetermineASMCompiler.cmake:135 (CMAKE_DETERMINE_COMPILER_ID_VENDOR)"
+      - "CMakeLists.txt:37 (project)"
+    message: |
+      Checking whether the ASM compiler is Clang using "--version" did not match "(clang version)":
+      Microsoft (R) C/C++ Optimizing Compiler Version 19.43.34809 for x64
+      Copyright (C) Microsoft Corporation.  All rights reserved.
+      
+      cl : Command line warning D9002 : ignoring unknown option '--version'
+      cl : Command line error D8003 : missing source filename
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CMakeDetermineCompilerId.cmake:1205 (message)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CMakeDetermineASMCompiler.cmake:135 (CMAKE_DETERMINE_COMPILER_ID_VENDOR)"
+      - "CMakeLists.txt:37 (project)"
+    message: |
+      Checking whether the ASM compiler is ARMClang using "--version" did not match "armclang":
+      Microsoft (R) C/C++ Optimizing Compiler Version 19.43.34809 for x64
+      Copyright (C) Microsoft Corporation.  All rights reserved.
+      
+      cl : Command line warning D9002 : ignoring unknown option '--version'
+      cl : Command line error D8003 : missing source filename
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CMakeDetermineCompilerId.cmake:1205 (message)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CMakeDetermineASMCompiler.cmake:135 (CMAKE_DETERMINE_COMPILER_ID_VENDOR)"
+      - "CMakeLists.txt:37 (project)"
+    message: |
+      Checking whether the ASM compiler is OrangeC using "--version" did not match "occ \\(OrangeC\\) Version":
+      Microsoft (R) C/C++ Optimizing Compiler Version 19.43.34809 for x64
+      Copyright (C) Microsoft Corporation.  All rights reserved.
+      
+      cl : Command line warning D9002 : ignoring unknown option '--version'
+      cl : Command line error D8003 : missing source filename
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CMakeDetermineCompilerId.cmake:1205 (message)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CMakeDetermineASMCompiler.cmake:135 (CMAKE_DETERMINE_COMPILER_ID_VENDOR)"
+      - "CMakeLists.txt:37 (project)"
+    message: |
+      Checking whether the ASM compiler is HP using "-V" did not match "HP C":
+      Microsoft (R) C/C++ Optimizing Compiler Version 19.43.34809 for x64
+      Copyright (C) Microsoft Corporation.  All rights reserved.
+      
+      cl : Command line error D8004 : '/V' requires an argument
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CMakeDetermineCompilerId.cmake:1205 (message)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CMakeDetermineASMCompiler.cmake:135 (CMAKE_DETERMINE_COMPILER_ID_VENDOR)"
+      - "CMakeLists.txt:37 (project)"
+    message: |
+      Checking whether the ASM compiler is Intel using "--version" did not match "(ICC)":
+      Microsoft (R) C/C++ Optimizing Compiler Version 19.43.34809 for x64
+      Copyright (C) Microsoft Corporation.  All rights reserved.
+      
+      cl : Command line warning D9002 : ignoring unknown option '--version'
+      cl : Command line error D8003 : missing source filename
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CMakeDetermineCompilerId.cmake:1205 (message)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CMakeDetermineASMCompiler.cmake:135 (CMAKE_DETERMINE_COMPILER_ID_VENDOR)"
+      - "CMakeLists.txt:37 (project)"
+    message: |
+      Checking whether the ASM compiler is IntelLLVM using "--version" did not match "(Intel[^
+      ]+oneAPI)":
+      Microsoft (R) C/C++ Optimizing Compiler Version 19.43.34809 for x64
+      Copyright (C) Microsoft Corporation.  All rights reserved.
+      
+      cl : Command line warning D9002 : ignoring unknown option '--version'
+      cl : Command line error D8003 : missing source filename
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CMakeDetermineCompilerId.cmake:1205 (message)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CMakeDetermineASMCompiler.cmake:135 (CMAKE_DETERMINE_COMPILER_ID_VENDOR)"
+      - "CMakeLists.txt:37 (project)"
+    message: |
+      Checking whether the ASM compiler is SunPro using "-V" did not match "Sun C":
+      Microsoft (R) C/C++ Optimizing Compiler Version 19.43.34809 for x64
+      Copyright (C) Microsoft Corporation.  All rights reserved.
+      
+      cl : Command line error D8004 : '/V' requires an argument
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CMakeDetermineCompilerId.cmake:1205 (message)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CMakeDetermineASMCompiler.cmake:135 (CMAKE_DETERMINE_COMPILER_ID_VENDOR)"
+      - "CMakeLists.txt:37 (project)"
+    message: |
+      Checking whether the ASM compiler is XL using "-qversion" did not match "XL C":
+      Microsoft (R) C/C++ Optimizing Compiler Version 19.43.34809 for x64
+      Copyright (C) Microsoft Corporation.  All rights reserved.
+      
+      cl : Command line warning D9002 : ignoring unknown option '-qversion'
+      cl : Command line error D8003 : missing source filename
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CMakeDetermineCompilerId.cmake:1192 (message)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CMakeDetermineASMCompiler.cmake:135 (CMAKE_DETERMINE_COMPILER_ID_VENDOR)"
+      - "CMakeLists.txt:37 (project)"
+    message: |
+      Checking whether the ASM compiler is MSVC using "-?" matched "Microsoft":
+      Microsoft (R) C/C++ Optimizing Compiler Version 19.43.34809 for x64
+      Copyright (C) Microsoft Corporation.  All rights reserved.
+      
+                               C/C++ COMPILER OPTIONS
+      
+      
+                                    -OPTIMIZATION-
+      
+      /O1 maximum optimizations (favor space) /O2 maximum optimizations (favor speed)
+      /Ob<n> inline expansion (default n=0)   /Od disable optimizations (default)
+      /Og enable global optimization          /Oi[-] enable intrinsic functions
+      /Os favor code space                    /Ot favor code speed
+      /Ox optimizations (favor speed)         
+      /favor:<blend|AMD64|INTEL64|ATOM> select processor to optimize for, one of:
+          blend - a combination of optimizations for several different x64 processors
+          AMD64 - 64-bit AMD processors
+          INTEL64 - Intel(R)64 architecture processors
+          ATOM - Intel(R) Atom(TM) processors
+      
+                                   -CODE GENERATION-
+      
+      /Gu[-] ensure distinct functions have distinct addresses
+      /Gw[-] separate global variables for linker
+      /GF enable read-only string pooling     /Gy[-] separate functions for linker
+      /GS[-] enable security checks           /GR[-] enable C++ RTTI
+      /guard:cf[-] enable CFG (control flow guard)
+      /guard:ehcont[-] enable EH continuation metadata (CET)
+      /EHs enable C++ EH (no SEH exceptions)  /EHa enable C++ EH (w/ SEH exceptions)
+      /EHc extern "C" defaults to nothrow     
+      /EHr always generate noexcept runtime termination checks
+      /fp:<contract|except[-]|fast|precise|strict> choose floating-point model:
+          contract - consider floating-point contractions when generating code
+          except[-] - consider floating-point exceptions when generating code
+          fast - "fast" floating-point model; results are less predictable
+          precise - "precise" floating-point model; results are predictable
+          strict - "strict" floating-point model (implies /fp:except)
+      /Qfast_transcendentals generate inline FP intrinsics even with /fp:except
+      /Qspectre[-] enable mitigations for CVE 2017-5753
+      /Qpar[-] enable parallel code generation
+      /Qpar-report:1 auto-parallelizer diagnostic; indicate parallelized loops
+      /Qpar-report:2 auto-parallelizer diagnostic; indicate loops not parallelized
+      /Qvec-report:1 auto-vectorizer diagnostic; indicate vectorized loops
+      /Qvec-report:2 auto-vectorizer diagnostic; indicate loops not vectorized
+      /GL[-] enable link-time code generation 
+      /volatile:<iso|ms> choose volatile model:
+          iso - Acquire/release semantics not guaranteed on volatile accesses
+          ms  - Acquire/release semantics guaranteed on volatile accesses
+      /GA optimize for Windows Application    /Ge force stack checking for all funcs
+      /Gs[num] control stack checking calls   /Gh enable _penter function call
+      /GH enable _pexit function call         /GT generate fiber-safe TLS accesses
+      /RTC1 Enable fast checks (/RTCsu)       /RTCc Convert to smaller type checks
+      /RTCs Stack Frame runtime checking      /RTCu Uninitialized local usage checks
+      /clr[:option] compile for common language runtime, where option is:
+          pure : produce IL-only output file (no native executable code)
+          safe : produce IL-only verifiable output file
+          netcore : produce assemblies targeting .NET Core runtime
+          noAssembly : do not produce an assembly
+          nostdlib : ignore the system .NET framework directory when searching for assemblies
+          nostdimport : do not import any required assemblies implicitly
+          initialAppDomain : enable initial AppDomain behavior of Visual C++ 2002
+          implicitKeepAlive- : turn off implicit emission of System::GC::KeepAlive(this)
+          char_t- : turn off metadata support for char8_t, char16_t and char32_t
+          ECMAParamArray : use rules specified in ECMA-372/14.6 for overloads with parameter arrays (implied by /clr)
+          ECMAParamArray- : use new rules for overloads with parameter arrays (implied by /clr:netcore)
+      /fsanitize=address Enable address sanitizer codegen
+      /homeparams Force parameters passed in registers to be written to the stack
+      /GZ Enable stack checks (/RTCs)         /Gv __vectorcall calling convention
+      /arch:<SSE2|SSE4.2|AVX|AVX2|AVX512|AVX10.x> minimum CPU architecture requirements, one of:
+         SSE2 - (default) enable use of instructions available with SSE2-enabled CPUs
+         SSE4.2 - enable use of instructions available with SSE 4.2-enabled CPUs
+         AVX - enable use of instructions available with AVX-enabled CPUs
+         AVX2 - enable use of instructions available with AVX2-enabled CPUs
+         AVX512 - enable use of instructions available with AVX-512-enabled CPUs
+         AVX10.x - enable use of instructions available with AVX10.x-enabled CPUs. Valid values of x are 1
+      /QIntel-jcc-erratum enable mitigations for Intel JCC erratum
+      /Qspectre-load Enable spectre mitigations for all instructions which load memory
+      /Qspectre-load-cf Enable spectre mitigations for all control-flow instructions which load memory
+      /Qspectre-jmp[-] Enable spectre mitigations for unconditional jump instructions
+      /fpcvt:<IA|BC> FP to unsigned integer conversion compatibility
+         IA - results compatible with VCVTTSD2USI instruction
+         BC - results compatible with VS2017 and earlier compiler
+      /jumptablerdata Place jump tables for switch case statements in .rdata section
+      /vlen=<256|512> Choose vector length of either 256 or 512 for automatic code-generation
+      /vlen Choose default vector length based on /arch setting
+      
+                                    -OUTPUT FILES-
+      
+      /Fa[file] name assembly listing file    /FA[scu] configure assembly listing
+      /Fd[file] name .PDB file                /Fe<file> name executable file
+      /Fm[file] name map file                 /Fo<file> name object file
+      /Fp<file> name precompiled header file  /Fr[file] name source browser file
+      /FR[file] name extended .SBR file       /Fi[file] name preprocessed file
+      /Fd: <file> name .PDB file              /Fe: <file> name executable file
+      /Fm: <file> name map file               /Fo: <file> name object file
+      /Fp: <file> name .PCH file              /FR: <file> name extended .SBR file
+      /Fi: <file> name preprocessed file      
+      /Ft<dir> location of the header files generated for #import
+      /doc[file] process XML documentation comments and optionally name the .xdc file
+      
+                                    -PREPROCESSOR-
+      
+      /AI<dir> add to assembly search path    /FU<file> import .NET assembly/module
+      /FU:asFriend<file> import .NET assembly/module as friend
+      /C don't strip comments                 /D<name>{=|#}<text> define macro
+      /E preprocess to stdout                 /EP preprocess to stdout, no #line
+      /P preprocess to file                   /Fx merge injected code to file
+      /FI<file> name forced include file      /U<name> remove predefined macro
+      /u remove all predefined macros         /I<dir> add to include search path
+      /X ignore "standard places"             
+      /PH generate #pragma file_hash when preprocessing
+      /PD print all macro definitions         
+      
+                                      -LANGUAGE-
+      
+      /std:<c++14|c++17|c++20|c++latest> C++ standard version
+          c++14 - ISO/IEC 14882:2014 (default)
+          c++17 - ISO/IEC 14882:2017
+          c++20 - ISO/IEC 14882:2020
+          c++latest - latest draft standard (feature set subject to change)
+      /std:<c11|c17|clatest> C standard version
+          c11 - ISO/IEC 9899:2011
+          c17 - ISO/IEC 9899:2018
+          clatest - latest draft standard (feature set subject to change)
+      /permissive[-] enable some nonconforming code to compile
+                     (feature set subject to change) (off by default in C++20 and later)
+      /Za disable extensions (not recommended for C++)
+      /ZW enable WinRT language extensions    /Zs syntax check only
+      /await enable resumable functions extension
+      /await:strict enable standard C++20 coroutine support with earlier language versions
+      /constexpr:depth<N>     recursion depth limit for constexpr evaluation (default: 512)
+      /constexpr:backtrace<N> show N constexpr evaluations in diagnostics (default: 10)
+      /constexpr:steps<N>     terminate constexpr evaluation after N steps (default: 1048576)
+      /Zi enable debugging information        /Z7 enable old-style debug info
+      /Zo[-] generate richer debugging information for optimized code (on by default)
+      /ZH:[MD5|SHA1|SHA_256] hash algorithm for calculation of file checksum in debug info (default: SHA_256)
+      /Zp[n] pack structs on n-byte boundary  /Zl omit default library name in .OBJ
+      /vd{0|1|2} disable/enable vtordisp      /vm<x> type of pointers to members
+      /Zc:arg1[,arg2] language conformance, where arguments can be:
+        forScope[-]           enforce Standard C++ for scoping rules
+        wchar_t[-]            wchar_t is the native type, not a typedef
+        auto[-]               enforce the new Standard C++ meaning for auto
+        trigraphs[-]          enable trigraphs (off by default)
+        rvalueCast[-]         enforce Standard C++ explicit type conversion rules
+                              (on by default in C++20 or later, implied by /permissive-)
+        strictStrings[-]      disable string-literal to [char|wchar_t]*
+                              conversion (on by default in C++20 or later, implied by /permissive-)
+        implicitNoexcept[-]   enable implicit noexcept on required functions
+        threadSafeInit[-]     enable thread-safe local static initialization
+        inline[-]             remove unreferenced function or data if it is
+                              COMDAT or has internal linkage only (off by default)
+        sizedDealloc[-]       enable C++14 global sized deallocation
+                              functions (on by default)
+        throwingNew[-]        assume operator new throws on failure (off by default)
+        referenceBinding[-]   a temporary will not bind to a non-const
+                              lvalue reference (on by default in C++20 or later, implied by /permissive-)
+        twoPhase-             disable two-phase name lookup
+        ternary[-]            enforce C++11 rules for conditional operator
+                              (on by default in C++20 or later, implied by /permissive-)
+        noexceptTypes[-]      enforce C++17 noexcept rules (on by default in C++17 or later)
+        alignedNew[-]         enable C++17 alignment of dynamically allocated objects (on by default)
+        hiddenFriend[-]       enforce Standard C++ hidden friend rules
+                              (on by default in C++20 or later, implied by /permissive-)
+        externC[-]            enforce Standard C++ rules for 'extern "C"' functions
+                              (on by default in C++20 or later, implied by /permissive-)
+        lambda[-]             better lambda support by using the newer lambda processor
+                              (on by default in C++20 or later, implied by /permissive-)
+        tlsGuards[-]          generate runtime checks for TLS variable initialization (on by default)
+        zeroSizeArrayNew[-]   call member new/delete for 0-size arrays of objects (on by default)
+        static_assert[-]      strict handling of 'static_assert' (on by default in C++20 or later,
+                              implied by /permissive-)
+        gotoScope[-]          cannot jump past the initialization of a variable (implied by /permissive-)
+        templateScope[-]      enforce Standard C++ template parameter shadowing rules
+        enumTypes[-]          enable Standard C++ underlying enum types (off by default)
+        checkGwOdr[-]         enforce Standard C++ one definition rule violations
+                              when /Gw has been enabled (off by default)
+        nrvo[-]               enable optional copy and move elision (on by default in C++20 or later,
+                              implied by /permissive- or /O2)
+        __STDC__              define __STDC__ to 1 in C
+        __cplusplus[-]        __cplusplus macro reports the supported C++ standard (off by default)
+        char8_t[-]            enable C++20 native `u8` literal support as `const char8_t`
+                              (on by default in C++20 or later)
+        externConstexpr[-]    enable external linkage for constexpr variables in C++
+                              (on by default in C++20 or later, implied by /permissive-)
+        preprocessor[-]       enable standard conforming preprocessor in C/C++
+                              (on by default in C11 or later)
+      /ZI enable Edit and Continue debug info 
+      /openmp enable OpenMP 2.0 language extensions
+      /openmp:experimental enable OpenMP 2.0 language extensions plus select OpenMP 3.0+ language extensions
+      /openmp:llvm OpenMP language extensions using LLVM runtime
+      
+                                    -MISCELLANEOUS-
+      
+      @<file> options response file           /?, /help print this help message
+      /bigobj generate extended object format /c compile only, no link
+      /FC use full pathnames in diagnostics   /H<num> max external name length
+      /J default char type is unsigned        
+      /MP[n] use up to 'n' processes for compilation
+      /nologo suppress copyright message      /showIncludes show include file names
+      /Tc<source file> compile file as .c     /Tp<source file> compile file as .cpp
+      /TC compile all files as .c             /TP compile all files as .cpp
+      /V<string> set version string           /Yc[file] create .PCH file
+      /Yd put debug info in every .OBJ        /Yl[sym] inject .PCH ref for debug lib
+      /Yu[file] use .PCH file                 /Y- disable all PCH options
+      /Zm<n> max memory alloc (% of default)  /FS force to use MSPDBSRV.EXE
+      /source-charset:<iana-name>|.nnnn set source character set
+      /execution-charset:<iana-name>|.nnnn set execution character set
+      /utf-8 set source and execution character set to UTF-8
+      /validate-charset[-] validate UTF-8 files for only legal characters
+      /fastfail[-] enable fast-fail mode      /JMC[-] enable native just my code
+      /presetPadding[-] zero initialize padding for stack based class types
+      /volatileMetadata[-] generate metadata on volatile memory accesses
+      /sourcelink [file] file containing source link information
+      
+                                      -LINKING-
+      
+      /LD Create .DLL                         /LDd Create .DLL debug library
+      /LN Create a .netmodule                 /F<num> set stack size
+      /link [linker options and libraries]    /MD link with MSVCRT.LIB
+      /MT link with LIBCMT.LIB                /MDd link with MSVCRTD.LIB debug lib
+      /MTd link with LIBCMTD.LIB debug lib    
+      
+                                    -CODE ANALYSIS-
+      
+      /analyze[-] Enable native analysis      /analyze:quiet[-] No warning to console
+      /analyze:log<name> Warnings to file     /analyze:autolog Log to *.pftlog
+      /analyze:autolog:ext<ext> Log to *.<ext>/analyze:autolog- No log file
+      /analyze:WX- Warnings not fatal         /analyze:stacksize<num> Max stack frame
+      /analyze:max_paths<num> Max paths       /analyze:only Analyze, no code gen
+      
+                                    -DIAGNOSTICS-
+      
+      /diagnostics:<args,...> controls the format of diagnostic messages:
+                   classic   - retains prior format
+                   column[-] - prints column information
+                   caret[-]  - prints column and the indicated line of source
+      /Wall enable all warnings               /w   disable all warnings
+      /W<n> set warning level (default n=1)   
+      /Wv:xx[.yy[.zzzzz]] disable warnings introduced after version xx.yy.zzzzz
+      /WX treat warnings as errors            /WL enable one line diagnostics
+      /wd<n> disable warning n                /we<n> treat warning n as an error
+      /wo<n> issue warning n once             /w<l><n> set warning level 1-4 for n
+      /external:I <path>      - location of external headers
+      /external:env:<var>     - environment variable with locations of external headers
+      /external:anglebrackets - treat all headers included via <> as external
+      /external:W<n>          - warning level for external headers
+      /external:templates[-]  - evaluate warning level across template instantiation chain
+      /sdl enable additional security features and warnings
+      /options:strict unrecognized compiler options are an error
+      
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CMakeDetermineCompilerABI.cmake:74 (try_compile)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:37 (project)"
+    checks:
+      - "Detecting C compiler ABI info"
+    directories:
+      source: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-3k0mwj"
+      binary: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-3k0mwj"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+    buildResult:
+      variable: "CMAKE_C_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: 'H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-3k0mwj'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_50412
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_50412.dir\\CMakeCCompilerABI.c.obj /FdCMakeFiles\\cmTC_50412.dir\\ /FS -c "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-3.30\\Modules\\CMakeCCompilerABI.c"
+        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_50412.dir --rc=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_50412.dir\\CMakeCCompilerABI.c.obj  /out:cmTC_50412.exe /implib:cmTC_50412.lib /pdb:cmTC_50412.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CMakeDetermineCompilerABI.cmake:218 (message)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:37 (project)"
+    message: |
+      Parsed C implicit link information:
+        link line regex: [^( *|.*[/\\])(ld[0-9]*(\\.[a-z]+)?|link\\.exe|lld-link(\\.exe)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(\\.[a-z]+)?|link\\.exe|lld-link(\\.exe)?))("|,| |$)]
+        linker tool for 'C': C:/PROGRA~1/MIB055~1/2022/COMMUN~1/VC/Tools/MSVC/1443~1.348/bin/Hostx64/x64/link.exe
+        implicit libs: []
+        implicit objs: []
+        implicit dirs: []
+        implicit fwks: []
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/Internal/CMakeDetermineLinkerId.cmake:40 (message)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CMakeDetermineCompilerABI.cmake:255 (cmake_determine_linker_id)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:37 (project)"
+    message: |
+      Running the C compiler's linker: "C:/PROGRA~1/MIB055~1/2022/COMMUN~1/VC/Tools/MSVC/1443~1.348/bin/Hostx64/x64/link.exe" "-v"
+      Microsoft (R) Incremental Linker Version 14.43.34809.0
+      Copyright (C) Microsoft Corporation.  All rights reserved.
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CheckIncludeFile.cmake:90 (try_compile)"
+      - "CMakeLists.txt:91 (check_include_file)"
+    checks:
+      - "Looking for arpa/inet.h"
+    directories:
+      source: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-bo6no1"
+      binary: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-bo6no1"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/cmake/modules/"
+    buildResult:
+      variable: "HAVE_ARPA_INET_H"
+      cached: true
+      stdout: |
+        Change Dir: 'H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-bo6no1'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_220af
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_220af.dir\\CheckIncludeFile.c.obj /FdCMakeFiles\\cmTC_220af.dir\\ /FS -c H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-bo6no1\\CheckIncludeFile.c
+        FAILED: CMakeFiles/cmTC_220af.dir/CheckIncludeFile.c.obj 
+        C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_220af.dir\\CheckIncludeFile.c.obj /FdCMakeFiles\\cmTC_220af.dir\\ /FS -c H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-bo6no1\\CheckIncludeFile.c
+        H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-bo6no1\\CheckIncludeFile.c(1): fatal error C1083: Cannot open include file: 'arpa/inet.h': No such file or directory
+        ninja: build stopped: subcommand failed.
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CheckIncludeFile.cmake:90 (try_compile)"
+      - "CMakeLists.txt:92 (check_include_file)"
+    checks:
+      - "Looking for fcntl.h"
+    directories:
+      source: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-24es8q"
+      binary: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-24es8q"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/cmake/modules/"
+    buildResult:
+      variable: "HAVE_FCNTL_H"
+      cached: true
+      stdout: |
+        Change Dir: 'H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-24es8q'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_2b58a
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_2b58a.dir\\CheckIncludeFile.c.obj /FdCMakeFiles\\cmTC_2b58a.dir\\ /FS -c H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-24es8q\\CheckIncludeFile.c
+        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_2b58a.dir --rc=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_2b58a.dir\\CheckIncludeFile.c.obj  /out:cmTC_2b58a.exe /implib:cmTC_2b58a.lib /pdb:cmTC_2b58a.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CheckIncludeFile.cmake:90 (try_compile)"
+      - "CMakeLists.txt:93 (check_include_file)"
+    checks:
+      - "Looking for limits.h"
+    directories:
+      source: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-bamfty"
+      binary: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-bamfty"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/cmake/modules/"
+    buildResult:
+      variable: "HAVE_LIMITS_H"
+      cached: true
+      stdout: |
+        Change Dir: 'H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-bamfty'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_48ee8
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_48ee8.dir\\CheckIncludeFile.c.obj /FdCMakeFiles\\cmTC_48ee8.dir\\ /FS -c H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-bamfty\\CheckIncludeFile.c
+        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_48ee8.dir --rc=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_48ee8.dir\\CheckIncludeFile.c.obj  /out:cmTC_48ee8.exe /implib:cmTC_48ee8.lib /pdb:cmTC_48ee8.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CheckIncludeFile.cmake:90 (try_compile)"
+      - "CMakeLists.txt:94 (check_include_file)"
+    checks:
+      - "Looking for netdb.h"
+    directories:
+      source: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-x43zm6"
+      binary: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-x43zm6"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/cmake/modules/"
+    buildResult:
+      variable: "HAVE_NETDB_H"
+      cached: true
+      stdout: |
+        Change Dir: 'H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-x43zm6'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_61d0e
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_61d0e.dir\\CheckIncludeFile.c.obj /FdCMakeFiles\\cmTC_61d0e.dir\\ /FS -c H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-x43zm6\\CheckIncludeFile.c
+        FAILED: CMakeFiles/cmTC_61d0e.dir/CheckIncludeFile.c.obj 
+        C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_61d0e.dir\\CheckIncludeFile.c.obj /FdCMakeFiles\\cmTC_61d0e.dir\\ /FS -c H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-x43zm6\\CheckIncludeFile.c
+        H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-x43zm6\\CheckIncludeFile.c(1): fatal error C1083: Cannot open include file: 'netdb.h': No such file or directory
+        ninja: build stopped: subcommand failed.
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CheckIncludeFile.cmake:90 (try_compile)"
+      - "CMakeLists.txt:95 (check_include_file)"
+    checks:
+      - "Looking for netinet/in.h"
+    directories:
+      source: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-j3nvdg"
+      binary: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-j3nvdg"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/cmake/modules/"
+    buildResult:
+      variable: "HAVE_NETINET_IN_H"
+      cached: true
+      stdout: |
+        Change Dir: 'H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-j3nvdg'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_e64fa
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_e64fa.dir\\CheckIncludeFile.c.obj /FdCMakeFiles\\cmTC_e64fa.dir\\ /FS -c H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-j3nvdg\\CheckIncludeFile.c
+        FAILED: CMakeFiles/cmTC_e64fa.dir/CheckIncludeFile.c.obj 
+        C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_e64fa.dir\\CheckIncludeFile.c.obj /FdCMakeFiles\\cmTC_e64fa.dir\\ /FS -c H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-j3nvdg\\CheckIncludeFile.c
+        H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-j3nvdg\\CheckIncludeFile.c(1): fatal error C1083: Cannot open include file: 'netinet/in.h': No such file or directory
+        ninja: build stopped: subcommand failed.
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CheckIncludeFile.cmake:90 (try_compile)"
+      - "CMakeLists.txt:96 (check_include_file)"
+    checks:
+      - "Looking for stddef.h"
+    directories:
+      source: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-5k0cpj"
+      binary: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-5k0cpj"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/cmake/modules/"
+    buildResult:
+      variable: "HAVE_STDDEF_H"
+      cached: true
+      stdout: |
+        Change Dir: 'H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-5k0cpj'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_29ca4
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_29ca4.dir\\CheckIncludeFile.c.obj /FdCMakeFiles\\cmTC_29ca4.dir\\ /FS -c H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-5k0cpj\\CheckIncludeFile.c
+        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_29ca4.dir --rc=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_29ca4.dir\\CheckIncludeFile.c.obj  /out:cmTC_29ca4.exe /implib:cmTC_29ca4.lib /pdb:cmTC_29ca4.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CheckIncludeFile.cmake:90 (try_compile)"
+      - "CMakeLists.txt:97 (check_include_file)"
+    checks:
+      - "Looking for time.h"
+    directories:
+      source: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-sgg6g4"
+      binary: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-sgg6g4"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/cmake/modules/"
+    buildResult:
+      variable: "HAVE_TIME_H"
+      cached: true
+      stdout: |
+        Change Dir: 'H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-sgg6g4'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_14ff9
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_14ff9.dir\\CheckIncludeFile.c.obj /FdCMakeFiles\\cmTC_14ff9.dir\\ /FS -c H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-sgg6g4\\CheckIncludeFile.c
+        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_14ff9.dir --rc=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_14ff9.dir\\CheckIncludeFile.c.obj  /out:cmTC_14ff9.exe /implib:cmTC_14ff9.lib /pdb:cmTC_14ff9.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CheckIncludeFile.cmake:90 (try_compile)"
+      - "CMakeLists.txt:98 (check_include_file)"
+    checks:
+      - "Looking for sys/ioctl.h"
+    directories:
+      source: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-zqf1dm"
+      binary: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-zqf1dm"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/cmake/modules/"
+    buildResult:
+      variable: "HAVE_SYS_IOCTL_H"
+      cached: true
+      stdout: |
+        Change Dir: 'H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-zqf1dm'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_42c86
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_42c86.dir\\CheckIncludeFile.c.obj /FdCMakeFiles\\cmTC_42c86.dir\\ /FS -c H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-zqf1dm\\CheckIncludeFile.c
+        FAILED: CMakeFiles/cmTC_42c86.dir/CheckIncludeFile.c.obj 
+        C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_42c86.dir\\CheckIncludeFile.c.obj /FdCMakeFiles\\cmTC_42c86.dir\\ /FS -c H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-zqf1dm\\CheckIncludeFile.c
+        H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-zqf1dm\\CheckIncludeFile.c(1): fatal error C1083: Cannot open include file: 'sys/ioctl.h': No such file or directory
+        ninja: build stopped: subcommand failed.
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CheckIncludeFile.cmake:90 (try_compile)"
+      - "CMakeLists.txt:99 (check_include_file)"
+    checks:
+      - "Looking for sys/socket.h"
+    directories:
+      source: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-a2c6dt"
+      binary: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-a2c6dt"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/cmake/modules/"
+    buildResult:
+      variable: "HAVE_SYS_SOCKET_H"
+      cached: true
+      stdout: |
+        Change Dir: 'H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-a2c6dt'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_c243e
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_c243e.dir\\CheckIncludeFile.c.obj /FdCMakeFiles\\cmTC_c243e.dir\\ /FS -c H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-a2c6dt\\CheckIncludeFile.c
+        FAILED: CMakeFiles/cmTC_c243e.dir/CheckIncludeFile.c.obj 
+        C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_c243e.dir\\CheckIncludeFile.c.obj /FdCMakeFiles\\cmTC_c243e.dir\\ /FS -c H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-a2c6dt\\CheckIncludeFile.c
+        H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-a2c6dt\\CheckIncludeFile.c(1): fatal error C1083: Cannot open include file: 'sys/socket.h': No such file or directory
+        ninja: build stopped: subcommand failed.
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CheckIncludeFile.cmake:90 (try_compile)"
+      - "CMakeLists.txt:100 (check_include_file)"
+    checks:
+      - "Looking for sys/time.h"
+    directories:
+      source: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-rzpd6h"
+      binary: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-rzpd6h"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/cmake/modules/"
+    buildResult:
+      variable: "HAVE_SYS_TIME_H"
+      cached: true
+      stdout: |
+        Change Dir: 'H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-rzpd6h'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_87d29
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_87d29.dir\\CheckIncludeFile.c.obj /FdCMakeFiles\\cmTC_87d29.dir\\ /FS -c H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-rzpd6h\\CheckIncludeFile.c
+        FAILED: CMakeFiles/cmTC_87d29.dir/CheckIncludeFile.c.obj 
+        C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_87d29.dir\\CheckIncludeFile.c.obj /FdCMakeFiles\\cmTC_87d29.dir\\ /FS -c H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-rzpd6h\\CheckIncludeFile.c
+        H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-rzpd6h\\CheckIncludeFile.c(1): fatal error C1083: Cannot open include file: 'sys/time.h': No such file or directory
+        ninja: build stopped: subcommand failed.
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CheckIncludeFile.cmake:90 (try_compile)"
+      - "CMakeLists.txt:101 (check_include_file)"
+    checks:
+      - "Looking for errno.h"
+    directories:
+      source: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-du9c90"
+      binary: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-du9c90"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/cmake/modules/"
+    buildResult:
+      variable: "HAVE_ERRNO_H"
+      cached: true
+      stdout: |
+        Change Dir: 'H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-du9c90'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_43f3c
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_43f3c.dir\\CheckIncludeFile.c.obj /FdCMakeFiles\\cmTC_43f3c.dir\\ /FS -c H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-du9c90\\CheckIncludeFile.c
+        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_43f3c.dir --rc=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_43f3c.dir\\CheckIncludeFile.c.obj  /out:cmTC_43f3c.exe /implib:cmTC_43f3c.lib /pdb:cmTC_43f3c.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CheckIncludeFile.cmake:90 (try_compile)"
+      - "CMakeLists.txt:102 (check_include_file)"
+    checks:
+      - "Looking for dlfcn.h"
+    directories:
+      source: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-zself0"
+      binary: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-zself0"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/cmake/modules/"
+    buildResult:
+      variable: "HAVE_DLFCN_H"
+      cached: true
+      stdout: |
+        Change Dir: 'H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-zself0'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_0a7ee
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_0a7ee.dir\\CheckIncludeFile.c.obj /FdCMakeFiles\\cmTC_0a7ee.dir\\ /FS -c H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-zself0\\CheckIncludeFile.c
+        FAILED: CMakeFiles/cmTC_0a7ee.dir/CheckIncludeFile.c.obj 
+        C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_0a7ee.dir\\CheckIncludeFile.c.obj /FdCMakeFiles\\cmTC_0a7ee.dir\\ /FS -c H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-zself0\\CheckIncludeFile.c
+        H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-zself0\\CheckIncludeFile.c(1): fatal error C1083: Cannot open include file: 'dlfcn.h': No such file or directory
+        ninja: build stopped: subcommand failed.
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CheckIncludeFile.cmake:90 (try_compile)"
+      - "CMakeLists.txt:103 (check_include_file)"
+    checks:
+      - "Looking for inttypes.h"
+    directories:
+      source: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-p6pqfo"
+      binary: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-p6pqfo"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/cmake/modules/"
+    buildResult:
+      variable: "HAVE_INTTYPES_H"
+      cached: true
+      stdout: |
+        Change Dir: 'H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-p6pqfo'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_35c59
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_35c59.dir\\CheckIncludeFile.c.obj /FdCMakeFiles\\cmTC_35c59.dir\\ /FS -c H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-p6pqfo\\CheckIncludeFile.c
+        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_35c59.dir --rc=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_35c59.dir\\CheckIncludeFile.c.obj  /out:cmTC_35c59.exe /implib:cmTC_35c59.lib /pdb:cmTC_35c59.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CheckIncludeFile.cmake:90 (try_compile)"
+      - "CMakeLists.txt:104 (check_include_file)"
+    checks:
+      - "Looking for memory.h"
+    directories:
+      source: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-lypyd4"
+      binary: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-lypyd4"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/cmake/modules/"
+    buildResult:
+      variable: "HAVE_MEMORY_H"
+      cached: true
+      stdout: |
+        Change Dir: 'H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-lypyd4'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_daa99
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_daa99.dir\\CheckIncludeFile.c.obj /FdCMakeFiles\\cmTC_daa99.dir\\ /FS -c H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-lypyd4\\CheckIncludeFile.c
+        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_daa99.dir --rc=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_daa99.dir\\CheckIncludeFile.c.obj  /out:cmTC_daa99.exe /implib:cmTC_daa99.lib /pdb:cmTC_daa99.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CheckIncludeFile.cmake:90 (try_compile)"
+      - "CMakeLists.txt:105 (check_include_file)"
+    checks:
+      - "Looking for stdint.h"
+    directories:
+      source: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-cuv7n2"
+      binary: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-cuv7n2"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/cmake/modules/"
+    buildResult:
+      variable: "HAVE_STDINT_H"
+      cached: true
+      stdout: |
+        Change Dir: 'H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-cuv7n2'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_b5883
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_b5883.dir\\CheckIncludeFile.c.obj /FdCMakeFiles\\cmTC_b5883.dir\\ /FS -c H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-cuv7n2\\CheckIncludeFile.c
+        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_b5883.dir --rc=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_b5883.dir\\CheckIncludeFile.c.obj  /out:cmTC_b5883.exe /implib:cmTC_b5883.lib /pdb:cmTC_b5883.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CheckIncludeFile.cmake:90 (try_compile)"
+      - "CMakeLists.txt:106 (check_include_file)"
+    checks:
+      - "Looking for stdlib.h"
+    directories:
+      source: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-fiatew"
+      binary: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-fiatew"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/cmake/modules/"
+    buildResult:
+      variable: "HAVE_STDLIB_H"
+      cached: true
+      stdout: |
+        Change Dir: 'H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-fiatew'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_c640c
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_c640c.dir\\CheckIncludeFile.c.obj /FdCMakeFiles\\cmTC_c640c.dir\\ /FS -c H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-fiatew\\CheckIncludeFile.c
+        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_c640c.dir --rc=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_c640c.dir\\CheckIncludeFile.c.obj  /out:cmTC_c640c.exe /implib:cmTC_c640c.lib /pdb:cmTC_c640c.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CheckIncludeFile.cmake:90 (try_compile)"
+      - "CMakeLists.txt:107 (check_include_file)"
+    checks:
+      - "Looking for string.h"
+    directories:
+      source: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-bvmr8c"
+      binary: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-bvmr8c"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/cmake/modules/"
+    buildResult:
+      variable: "HAVE_STRING_H"
+      cached: true
+      stdout: |
+        Change Dir: 'H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-bvmr8c'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_d0fa5
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_d0fa5.dir\\CheckIncludeFile.c.obj /FdCMakeFiles\\cmTC_d0fa5.dir\\ /FS -c H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-bvmr8c\\CheckIncludeFile.c
+        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_d0fa5.dir --rc=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_d0fa5.dir\\CheckIncludeFile.c.obj  /out:cmTC_d0fa5.exe /implib:cmTC_d0fa5.lib /pdb:cmTC_d0fa5.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CheckIncludeFile.cmake:90 (try_compile)"
+      - "CMakeLists.txt:108 (check_include_file)"
+    checks:
+      - "Looking for strings.h"
+    directories:
+      source: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-dw9zgu"
+      binary: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-dw9zgu"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/cmake/modules/"
+    buildResult:
+      variable: "HAVE_STRINGS_H"
+      cached: true
+      stdout: |
+        Change Dir: 'H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-dw9zgu'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_4bfcc
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_4bfcc.dir\\CheckIncludeFile.c.obj /FdCMakeFiles\\cmTC_4bfcc.dir\\ /FS -c H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-dw9zgu\\CheckIncludeFile.c
+        FAILED: CMakeFiles/cmTC_4bfcc.dir/CheckIncludeFile.c.obj 
+        C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_4bfcc.dir\\CheckIncludeFile.c.obj /FdCMakeFiles\\cmTC_4bfcc.dir\\ /FS -c H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-dw9zgu\\CheckIncludeFile.c
+        H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-dw9zgu\\CheckIncludeFile.c(1): fatal error C1083: Cannot open include file: 'strings.h': No such file or directory
+        ninja: build stopped: subcommand failed.
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CheckIncludeFile.cmake:90 (try_compile)"
+      - "CMakeLists.txt:109 (check_include_file)"
+    checks:
+      - "Looking for sys/stat.h"
+    directories:
+      source: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-dgyui2"
+      binary: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-dgyui2"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/cmake/modules/"
+    buildResult:
+      variable: "HAVE_SYS_STAT_H"
+      cached: true
+      stdout: |
+        Change Dir: 'H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-dgyui2'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_f24d5
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_f24d5.dir\\CheckIncludeFile.c.obj /FdCMakeFiles\\cmTC_f24d5.dir\\ /FS -c H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-dgyui2\\CheckIncludeFile.c
+        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_f24d5.dir --rc=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_f24d5.dir\\CheckIncludeFile.c.obj  /out:cmTC_f24d5.exe /implib:cmTC_f24d5.lib /pdb:cmTC_f24d5.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CheckIncludeFile.cmake:90 (try_compile)"
+      - "CMakeLists.txt:110 (check_include_file)"
+    checks:
+      - "Looking for sys/types.h"
+    directories:
+      source: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-bbxjfj"
+      binary: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-bbxjfj"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/cmake/modules/"
+    buildResult:
+      variable: "HAVE_SYS_TYPES_H"
+      cached: true
+      stdout: |
+        Change Dir: 'H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-bbxjfj'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_0832e
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_0832e.dir\\CheckIncludeFile.c.obj /FdCMakeFiles\\cmTC_0832e.dir\\ /FS -c H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-bbxjfj\\CheckIncludeFile.c
+        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_0832e.dir --rc=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_0832e.dir\\CheckIncludeFile.c.obj  /out:cmTC_0832e.exe /implib:cmTC_0832e.lib /pdb:cmTC_0832e.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CheckIncludeFile.cmake:90 (try_compile)"
+      - "CMakeLists.txt:111 (check_include_file)"
+    checks:
+      - "Looking for unistd.h"
+    directories:
+      source: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-fvlhxv"
+      binary: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-fvlhxv"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/cmake/modules/"
+    buildResult:
+      variable: "HAVE_UNISTD_H"
+      cached: true
+      stdout: |
+        Change Dir: 'H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-fvlhxv'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_10cbb
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_10cbb.dir\\CheckIncludeFile.c.obj /FdCMakeFiles\\cmTC_10cbb.dir\\ /FS -c H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-fvlhxv\\CheckIncludeFile.c
+        FAILED: CMakeFiles/cmTC_10cbb.dir/CheckIncludeFile.c.obj 
+        C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_10cbb.dir\\CheckIncludeFile.c.obj /FdCMakeFiles\\cmTC_10cbb.dir\\ /FS -c H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-fvlhxv\\CheckIncludeFile.c
+        H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-fvlhxv\\CheckIncludeFile.c(1): fatal error C1083: Cannot open include file: 'unistd.h': No such file or directory
+        ninja: build stopped: subcommand failed.
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CheckFunctionExists.cmake:86 (try_compile)"
+      - "CMakeLists.txt:118 (check_function_exists)"
+    checks:
+      - "Looking for gethostbyname"
+    directories:
+      source: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-14edsf"
+      binary: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-14edsf"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/cmake/modules/"
+    buildResult:
+      variable: "HAVE_GETHOSTBYNAME"
+      cached: true
+      stdout: |
+        Change Dir: 'H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-14edsf'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_ee1f2
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS -DCHECK_FUNCTION_EXISTS=gethostbyname /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_ee1f2.dir\\CheckFunctionExists.c.obj /FdCMakeFiles\\cmTC_ee1f2.dir\\ /FS -c H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-14edsf\\CheckFunctionExists.c
+        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_ee1f2.dir --rc=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_ee1f2.dir\\CheckFunctionExists.c.obj  /out:cmTC_ee1f2.exe /implib:cmTC_ee1f2.lib /pdb:cmTC_ee1f2.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        FAILED: cmTC_ee1f2.exe 
+        C:\\Windows\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_ee1f2.dir --rc=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_ee1f2.dir\\CheckFunctionExists.c.obj  /out:cmTC_ee1f2.exe /implib:cmTC_ee1f2.lib /pdb:cmTC_ee1f2.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        LINK Pass 1: command "C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_ee1f2.dir\\CheckFunctionExists.c.obj /out:cmTC_ee1f2.exe /implib:cmTC_ee1f2.lib /pdb:cmTC_ee1f2.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTFILE:CMakeFiles\\cmTC_ee1f2.dir/intermediate.manifest CMakeFiles\\cmTC_ee1f2.dir/manifest.res" failed (exit code 1120) with the following output:
+        CheckFunctionExists.c.obj : error LNK2019: unresolved external symbol gethostbyname referenced in function main\x0d
+        cmTC_ee1f2.exe : fatal error LNK1120: 1 unresolved externals\x0d
+        ninja: build stopped: subcommand failed.
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CheckFunctionExists.cmake:86 (try_compile)"
+      - "CMakeLists.txt:119 (check_function_exists)"
+    checks:
+      - "Looking for getaddrinfo"
+    directories:
+      source: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-e7a3q3"
+      binary: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-e7a3q3"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/cmake/modules/"
+    buildResult:
+      variable: "HAVE_GETADDRINFO"
+      cached: true
+      stdout: |
+        Change Dir: 'H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-e7a3q3'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_e23af
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS -DCHECK_FUNCTION_EXISTS=getaddrinfo /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_e23af.dir\\CheckFunctionExists.c.obj /FdCMakeFiles\\cmTC_e23af.dir\\ /FS -c H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-e7a3q3\\CheckFunctionExists.c
+        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_e23af.dir --rc=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_e23af.dir\\CheckFunctionExists.c.obj  /out:cmTC_e23af.exe /implib:cmTC_e23af.lib /pdb:cmTC_e23af.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        FAILED: cmTC_e23af.exe 
+        C:\\Windows\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_e23af.dir --rc=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_e23af.dir\\CheckFunctionExists.c.obj  /out:cmTC_e23af.exe /implib:cmTC_e23af.lib /pdb:cmTC_e23af.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        LINK Pass 1: command "C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_e23af.dir\\CheckFunctionExists.c.obj /out:cmTC_e23af.exe /implib:cmTC_e23af.lib /pdb:cmTC_e23af.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTFILE:CMakeFiles\\cmTC_e23af.dir/intermediate.manifest CMakeFiles\\cmTC_e23af.dir/manifest.res" failed (exit code 1120) with the following output:
+        CheckFunctionExists.c.obj : error LNK2019: unresolved external symbol getaddrinfo referenced in function main\x0d
+        cmTC_e23af.exe : fatal error LNK1120: 1 unresolved externals\x0d
+        ninja: build stopped: subcommand failed.
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CheckFunctionExists.cmake:86 (try_compile)"
+      - "CMakeLists.txt:120 (check_function_exists)"
+    checks:
+      - "Looking for gettimeofday"
+    directories:
+      source: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-knxqa8"
+      binary: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-knxqa8"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/cmake/modules/"
+    buildResult:
+      variable: "HAVE_GETTIMEOFDAY"
+      cached: true
+      stdout: |
+        Change Dir: 'H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-knxqa8'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_f8461
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS -DCHECK_FUNCTION_EXISTS=gettimeofday /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_f8461.dir\\CheckFunctionExists.c.obj /FdCMakeFiles\\cmTC_f8461.dir\\ /FS -c H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-knxqa8\\CheckFunctionExists.c
+        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_f8461.dir --rc=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_f8461.dir\\CheckFunctionExists.c.obj  /out:cmTC_f8461.exe /implib:cmTC_f8461.lib /pdb:cmTC_f8461.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        FAILED: cmTC_f8461.exe 
+        C:\\Windows\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_f8461.dir --rc=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_f8461.dir\\CheckFunctionExists.c.obj  /out:cmTC_f8461.exe /implib:cmTC_f8461.lib /pdb:cmTC_f8461.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        LINK Pass 1: command "C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_f8461.dir\\CheckFunctionExists.c.obj /out:cmTC_f8461.exe /implib:cmTC_f8461.lib /pdb:cmTC_f8461.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTFILE:CMakeFiles\\cmTC_f8461.dir/intermediate.manifest CMakeFiles\\cmTC_f8461.dir/manifest.res" failed (exit code 1120) with the following output:
+        CheckFunctionExists.c.obj : error LNK2019: unresolved external symbol gettimeofday referenced in function main\x0d
+        cmTC_f8461.exe : fatal error LNK1120: 1 unresolved externals\x0d
+        ninja: build stopped: subcommand failed.
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CheckFunctionExists.cmake:86 (try_compile)"
+      - "CMakeLists.txt:121 (check_function_exists)"
+    checks:
+      - "Looking for gmtime_r"
+    directories:
+      source: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-b0wxma"
+      binary: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-b0wxma"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/cmake/modules/"
+    buildResult:
+      variable: "HAVE_GMTIME_R"
+      cached: true
+      stdout: |
+        Change Dir: 'H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-b0wxma'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_2b3bb
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS -DCHECK_FUNCTION_EXISTS=gmtime_r /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_2b3bb.dir\\CheckFunctionExists.c.obj /FdCMakeFiles\\cmTC_2b3bb.dir\\ /FS -c H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-b0wxma\\CheckFunctionExists.c
+        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_2b3bb.dir --rc=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_2b3bb.dir\\CheckFunctionExists.c.obj  /out:cmTC_2b3bb.exe /implib:cmTC_2b3bb.lib /pdb:cmTC_2b3bb.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        FAILED: cmTC_2b3bb.exe 
+        C:\\Windows\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_2b3bb.dir --rc=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_2b3bb.dir\\CheckFunctionExists.c.obj  /out:cmTC_2b3bb.exe /implib:cmTC_2b3bb.lib /pdb:cmTC_2b3bb.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        LINK Pass 1: command "C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_2b3bb.dir\\CheckFunctionExists.c.obj /out:cmTC_2b3bb.exe /implib:cmTC_2b3bb.lib /pdb:cmTC_2b3bb.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTFILE:CMakeFiles\\cmTC_2b3bb.dir/intermediate.manifest CMakeFiles\\cmTC_2b3bb.dir/manifest.res" failed (exit code 1120) with the following output:
+        CheckFunctionExists.c.obj : error LNK2019: unresolved external symbol gmtime_r referenced in function main\x0d
+        cmTC_2b3bb.exe : fatal error LNK1120: 1 unresolved externals\x0d
+        ninja: build stopped: subcommand failed.
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CheckFunctionExists.cmake:86 (try_compile)"
+      - "CMakeLists.txt:122 (check_function_exists)"
+    checks:
+      - "Looking for inet_ntoa"
+    directories:
+      source: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-ohre3u"
+      binary: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-ohre3u"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/cmake/modules/"
+    buildResult:
+      variable: "HAVE_INET_NTOA"
+      cached: true
+      stdout: |
+        Change Dir: 'H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-ohre3u'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_2b557
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS -DCHECK_FUNCTION_EXISTS=inet_ntoa /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_2b557.dir\\CheckFunctionExists.c.obj /FdCMakeFiles\\cmTC_2b557.dir\\ /FS -c H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-ohre3u\\CheckFunctionExists.c
+        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_2b557.dir --rc=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_2b557.dir\\CheckFunctionExists.c.obj  /out:cmTC_2b557.exe /implib:cmTC_2b557.lib /pdb:cmTC_2b557.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        FAILED: cmTC_2b557.exe 
+        C:\\Windows\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_2b557.dir --rc=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_2b557.dir\\CheckFunctionExists.c.obj  /out:cmTC_2b557.exe /implib:cmTC_2b557.lib /pdb:cmTC_2b557.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        LINK Pass 1: command "C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_2b557.dir\\CheckFunctionExists.c.obj /out:cmTC_2b557.exe /implib:cmTC_2b557.lib /pdb:cmTC_2b557.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTFILE:CMakeFiles\\cmTC_2b557.dir/intermediate.manifest CMakeFiles\\cmTC_2b557.dir/manifest.res" failed (exit code 1120) with the following output:
+        CheckFunctionExists.c.obj : error LNK2019: unresolved external symbol inet_ntoa referenced in function main\x0d
+        cmTC_2b557.exe : fatal error LNK1120: 1 unresolved externals\x0d
+        ninja: build stopped: subcommand failed.
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CheckFunctionExists.cmake:86 (try_compile)"
+      - "CMakeLists.txt:123 (check_function_exists)"
+    checks:
+      - "Looking for memset"
+    directories:
+      source: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-klwrc9"
+      binary: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-klwrc9"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/cmake/modules/"
+    buildResult:
+      variable: "HAVE_MEMSET"
+      cached: true
+      stdout: |
+        Change Dir: 'H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-klwrc9'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_ecd97
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS -DCHECK_FUNCTION_EXISTS=memset /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_ecd97.dir\\CheckFunctionExists.c.obj /FdCMakeFiles\\cmTC_ecd97.dir\\ /FS -c H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-klwrc9\\CheckFunctionExists.c
+        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_ecd97.dir --rc=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_ecd97.dir\\CheckFunctionExists.c.obj  /out:cmTC_ecd97.exe /implib:cmTC_ecd97.lib /pdb:cmTC_ecd97.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CheckFunctionExists.cmake:86 (try_compile)"
+      - "CMakeLists.txt:124 (check_function_exists)"
+    checks:
+      - "Looking for socket"
+    directories:
+      source: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-1l6nqi"
+      binary: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-1l6nqi"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/cmake/modules/"
+    buildResult:
+      variable: "HAVE_SOCKET"
+      cached: true
+      stdout: |
+        Change Dir: 'H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-1l6nqi'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_bc8b9
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS -DCHECK_FUNCTION_EXISTS=socket /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_bc8b9.dir\\CheckFunctionExists.c.obj /FdCMakeFiles\\cmTC_bc8b9.dir\\ /FS -c H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-1l6nqi\\CheckFunctionExists.c
+        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_bc8b9.dir --rc=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_bc8b9.dir\\CheckFunctionExists.c.obj  /out:cmTC_bc8b9.exe /implib:cmTC_bc8b9.lib /pdb:cmTC_bc8b9.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        FAILED: cmTC_bc8b9.exe 
+        C:\\Windows\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_bc8b9.dir --rc=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_bc8b9.dir\\CheckFunctionExists.c.obj  /out:cmTC_bc8b9.exe /implib:cmTC_bc8b9.lib /pdb:cmTC_bc8b9.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        LINK Pass 1: command "C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_bc8b9.dir\\CheckFunctionExists.c.obj /out:cmTC_bc8b9.exe /implib:cmTC_bc8b9.lib /pdb:cmTC_bc8b9.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTFILE:CMakeFiles\\cmTC_bc8b9.dir/intermediate.manifest CMakeFiles\\cmTC_bc8b9.dir/manifest.res" failed (exit code 1120) with the following output:
+        CheckFunctionExists.c.obj : error LNK2019: unresolved external symbol socket referenced in function main\x0d
+        cmTC_bc8b9.exe : fatal error LNK1120: 1 unresolved externals\x0d
+        ninja: build stopped: subcommand failed.
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CheckFunctionExists.cmake:86 (try_compile)"
+      - "CMakeLists.txt:125 (check_function_exists)"
+    checks:
+      - "Looking for strftime"
+    directories:
+      source: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-bojnrt"
+      binary: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-bojnrt"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/cmake/modules/"
+    buildResult:
+      variable: "HAVE_STRFTIME"
+      cached: true
+      stdout: |
+        Change Dir: 'H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-bojnrt'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_3a50f
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS -DCHECK_FUNCTION_EXISTS=strftime /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_3a50f.dir\\CheckFunctionExists.c.obj /FdCMakeFiles\\cmTC_3a50f.dir\\ /FS -c H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-bojnrt\\CheckFunctionExists.c
+        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_3a50f.dir --rc=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_3a50f.dir\\CheckFunctionExists.c.obj  /out:cmTC_3a50f.exe /implib:cmTC_3a50f.lib /pdb:cmTC_3a50f.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CheckFunctionExists.cmake:86 (try_compile)"
+      - "CMakeLists.txt:126 (check_function_exists)"
+    checks:
+      - "Looking for __atomic_fetch_add"
+    directories:
+      source: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-tlmuny"
+      binary: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-tlmuny"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/cmake/modules/"
+    buildResult:
+      variable: "HAVE_C___ATOMIC"
+      cached: true
+      stdout: |
+        Change Dir: 'H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-tlmuny'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_cb1c6
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS -DCHECK_FUNCTION_EXISTS=__atomic_fetch_add /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_cb1c6.dir\\CheckFunctionExists.c.obj /FdCMakeFiles\\cmTC_cb1c6.dir\\ /FS -c H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-tlmuny\\CheckFunctionExists.c
+        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_cb1c6.dir --rc=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_cb1c6.dir\\CheckFunctionExists.c.obj  /out:cmTC_cb1c6.exe /implib:cmTC_cb1c6.lib /pdb:cmTC_cb1c6.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        FAILED: cmTC_cb1c6.exe 
+        C:\\Windows\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_cb1c6.dir --rc=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_cb1c6.dir\\CheckFunctionExists.c.obj  /out:cmTC_cb1c6.exe /implib:cmTC_cb1c6.lib /pdb:cmTC_cb1c6.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        LINK Pass 1: command "C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_cb1c6.dir\\CheckFunctionExists.c.obj /out:cmTC_cb1c6.exe /implib:cmTC_cb1c6.lib /pdb:cmTC_cb1c6.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTFILE:CMakeFiles\\cmTC_cb1c6.dir/intermediate.manifest CMakeFiles\\cmTC_cb1c6.dir/manifest.res" failed (exit code 1120) with the following output:
+        CheckFunctionExists.c.obj : error LNK2019: unresolved external symbol __atomic_fetch_add referenced in function main\x0d
+        cmTC_cb1c6.exe : fatal error LNK1120: 1 unresolved externals\x0d
+        ninja: build stopped: subcommand failed.
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CheckTypeSize.cmake:147 (try_compile)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CheckTypeSize.cmake:272 (__check_type_size_impl)"
+      - "CMakeLists.txt:130 (check_type_size)"
+    checks:
+      - "Check size of __uint128_t"
+    directories:
+      source: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-c61f0r"
+      binary: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-c61f0r"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/cmake/modules/"
+    buildResult:
+      variable: "HAVE___UINT128_T"
+      cached: true
+      stdout: |
+        Change Dir: 'H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-c61f0r'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_84165
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_84165.dir\\__UINT128_T.c.obj /FdCMakeFiles\\cmTC_84165.dir\\ /FS -c H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-c61f0r\\__UINT128_T.c
+        FAILED: CMakeFiles/cmTC_84165.dir/__UINT128_T.c.obj 
+        C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_84165.dir\\__UINT128_T.c.obj /FdCMakeFiles\\cmTC_84165.dir\\ /FS -c H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-c61f0r\\__UINT128_T.c
+        H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-c61f0r\\__UINT128_T.c(29): error C2065: '__uint128_t': undeclared identifier
+        H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-c61f0r\\__UINT128_T.c(30): error C2065: '__uint128_t': undeclared identifier
+        H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-c61f0r\\__UINT128_T.c(31): error C2065: '__uint128_t': undeclared identifier
+        H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-c61f0r\\__UINT128_T.c(32): error C2065: '__uint128_t': undeclared identifier
+        H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-c61f0r\\__UINT128_T.c(33): error C2065: '__uint128_t': undeclared identifier
+        ninja: build stopped: subcommand failed.
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CheckTypeSize.cmake:147 (try_compile)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CheckTypeSize.cmake:272 (__check_type_size_impl)"
+      - "CMakeLists.txt:131 (check_type_size)"
+    checks:
+      - "Check size of long long"
+    directories:
+      source: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-w0jkh5"
+      binary: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-w0jkh5"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/cmake/modules/"
+    buildResult:
+      variable: "HAVE_SIZEOF_LONG_LONG"
+      cached: true
+      stdout: |
+        Change Dir: 'H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-w0jkh5'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_1a51f
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_1a51f.dir\\SIZEOF_LONG_LONG.c.obj /FdCMakeFiles\\cmTC_1a51f.dir\\ /FS -c H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-w0jkh5\\SIZEOF_LONG_LONG.c
+        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_1a51f.dir --rc=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_1a51f.dir\\SIZEOF_LONG_LONG.c.obj  /out:cmTC_1a51f.exe /implib:cmTC_1a51f.lib /pdb:cmTC_1a51f.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CheckTypeSize.cmake:147 (try_compile)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CheckTypeSize.cmake:272 (__check_type_size_impl)"
+      - "CMakeLists.txt:132 (check_type_size)"
+    checks:
+      - "Check size of long"
+    directories:
+      source: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-hscbpo"
+      binary: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-hscbpo"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/cmake/modules/"
+    buildResult:
+      variable: "HAVE_SIZEOF_LONG"
+      cached: true
+      stdout: |
+        Change Dir: 'H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-hscbpo'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_9caf7
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_9caf7.dir\\SIZEOF_LONG.c.obj /FdCMakeFiles\\cmTC_9caf7.dir\\ /FS -c H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-hscbpo\\SIZEOF_LONG.c
+        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_9caf7.dir --rc=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_9caf7.dir\\SIZEOF_LONG.c.obj  /out:cmTC_9caf7.exe /implib:cmTC_9caf7.lib /pdb:cmTC_9caf7.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CheckTypeSize.cmake:147 (try_compile)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CheckTypeSize.cmake:272 (__check_type_size_impl)"
+      - "CMakeLists.txt:133 (check_type_size)"
+    checks:
+      - "Check size of time_t"
+    directories:
+      source: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-ke6bx2"
+      binary: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-ke6bx2"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/cmake/modules/"
+    buildResult:
+      variable: "HAVE_SIZEOF_TIME_T"
+      cached: true
+      stdout: |
+        Change Dir: 'H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-ke6bx2'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_8fd64
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_8fd64.dir\\SIZEOF_TIME_T.c.obj /FdCMakeFiles\\cmTC_8fd64.dir\\ /FS -c H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-ke6bx2\\SIZEOF_TIME_T.c
+        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_8fd64.dir --rc=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_8fd64.dir\\SIZEOF_TIME_T.c.obj  /out:cmTC_8fd64.exe /implib:cmTC_8fd64.lib /pdb:cmTC_8fd64.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CheckTypeSize.cmake:147 (try_compile)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CheckTypeSize.cmake:272 (__check_type_size_impl)"
+      - "CMakeLists.txt:134 (check_type_size)"
+    checks:
+      - "Check size of uintptr_t"
+    directories:
+      source: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-w8812j"
+      binary: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-w8812j"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/cmake/modules/"
+    buildResult:
+      variable: "HAVE_HAVE_UINTPTR_T"
+      cached: true
+      stdout: |
+        Change Dir: 'H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-w8812j'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_571d4
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_571d4.dir\\HAVE_UINTPTR_T.c.obj /FdCMakeFiles\\cmTC_571d4.dir\\ /FS -c H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-w8812j\\HAVE_UINTPTR_T.c
+        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_571d4.dir --rc=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_571d4.dir\\HAVE_UINTPTR_T.c.obj  /out:cmTC_571d4.exe /implib:cmTC_571d4.lib /pdb:cmTC_571d4.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CheckCSourceCompiles.cmake:52 (cmake_check_source_compiles)"
+      - "CMakeLists.txt:168 (check_c_source_compiles)"
+    checks:
+      - "Performing Test THREAD_LS_ON"
+    directories:
+      source: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-6onang"
+      binary: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-6onang"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/cmake/modules/"
+    buildResult:
+      variable: "THREAD_LS_ON"
+      cached: true
+      stdout: |
+        Change Dir: 'H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-6onang'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_14fa8
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\cl.exe  /nologo -DTHREAD_LS_ON  /DWIN32 /D_WINDOWS  /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_14fa8.dir\\src.c.obj /FdCMakeFiles\\cmTC_14fa8.dir\\ /FS -c H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-6onang\\src.c
+        FAILED: CMakeFiles/cmTC_14fa8.dir/src.c.obj 
+        C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\cl.exe  /nologo -DTHREAD_LS_ON  /DWIN32 /D_WINDOWS  /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_14fa8.dir\\src.c.obj /FdCMakeFiles\\cmTC_14fa8.dir\\ /FS -c H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-6onang\\src.c
+        H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-6onang\\src.c(3): error C2143: syntax error: missing ';' before 'type'
+        ninja: build stopped: subcommand failed.
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CheckCSourceCompiles.cmake:52 (cmake_check_source_compiles)"
+      - "CMakeLists.txt:168 (check_c_source_compiles)"
+    checks:
+      - "Performing Test THREAD_LS_ON"
+    directories:
+      source: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-kd0mye"
+      binary: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-kd0mye"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/cmake/modules/"
+    buildResult:
+      variable: "THREAD_LS_ON"
+      cached: true
+      stdout: |
+        Change Dir: 'H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-kd0mye'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_dee36
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\cl.exe  /nologo -DTHREAD_LS_ON  /DWIN32 /D_WINDOWS  /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_dee36.dir\\src.c.obj /FdCMakeFiles\\cmTC_dee36.dir\\ /FS -c H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-kd0mye\\src.c
+        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_dee36.dir --rc=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_dee36.dir\\src.c.obj  /out:cmTC_dee36.exe /implib:cmTC_dee36.lib /pdb:cmTC_dee36.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CheckCSourceCompiles.cmake:52 (cmake_check_source_compiles)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/FindThreads.cmake:97 (CHECK_C_SOURCE_COMPILES)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/FindThreads.cmake:163 (_threads_check_libc)"
+      - "CMakeLists.txt:185 (find_package)"
+    checks:
+      - "Performing Test CMAKE_HAVE_LIBC_PTHREAD"
+    directories:
+      source: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-57isnx"
+      binary: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-57isnx"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/cmake/modules/"
+    buildResult:
+      variable: "CMAKE_HAVE_LIBC_PTHREAD"
+      cached: true
+      stdout: |
+        Change Dir: 'H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-57isnx'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_830c7
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\cl.exe  /nologo -DCMAKE_HAVE_LIBC_PTHREAD  /DWIN32 /D_WINDOWS  /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_830c7.dir\\src.c.obj /FdCMakeFiles\\cmTC_830c7.dir\\ /FS -c H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-57isnx\\src.c
+        FAILED: CMakeFiles/cmTC_830c7.dir/src.c.obj 
+        C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\cl.exe  /nologo -DCMAKE_HAVE_LIBC_PTHREAD  /DWIN32 /D_WINDOWS  /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_830c7.dir\\src.c.obj /FdCMakeFiles\\cmTC_830c7.dir\\ /FS -c H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-57isnx\\src.c
+        H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-57isnx\\src.c(1): fatal error C1083: Cannot open include file: 'pthread.h': No such file or directory
+        ninja: build stopped: subcommand failed.
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CheckLibraryExists.cmake:69 (try_compile)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/FindThreads.cmake:112 (CHECK_LIBRARY_EXISTS)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/FindThreads.cmake:175 (_threads_check_lib)"
+      - "CMakeLists.txt:185 (find_package)"
+    checks:
+      - "Looking for pthread_create in pthreads"
+    directories:
+      source: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-ds68zq"
+      binary: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-ds68zq"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/cmake/modules/"
+    buildResult:
+      variable: "CMAKE_HAVE_PTHREADS_CREATE"
+      cached: true
+      stdout: |
+        Change Dir: 'H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-ds68zq'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_5dbdb
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS -DCHECK_FUNCTION_EXISTS=pthread_create /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_5dbdb.dir\\CheckFunctionExists.c.obj /FdCMakeFiles\\cmTC_5dbdb.dir\\ /FS -c H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-ds68zq\\CheckFunctionExists.c
+        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_5dbdb.dir --rc=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_5dbdb.dir\\CheckFunctionExists.c.obj  /out:cmTC_5dbdb.exe /implib:cmTC_5dbdb.lib /pdb:cmTC_5dbdb.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  pthreads.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        FAILED: cmTC_5dbdb.exe 
+        C:\\Windows\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_5dbdb.dir --rc=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_5dbdb.dir\\CheckFunctionExists.c.obj  /out:cmTC_5dbdb.exe /implib:cmTC_5dbdb.lib /pdb:cmTC_5dbdb.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  pthreads.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        LINK Pass 1: command "C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_5dbdb.dir\\CheckFunctionExists.c.obj /out:cmTC_5dbdb.exe /implib:cmTC_5dbdb.lib /pdb:cmTC_5dbdb.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console pthreads.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTFILE:CMakeFiles\\cmTC_5dbdb.dir/intermediate.manifest CMakeFiles\\cmTC_5dbdb.dir/manifest.res" failed (exit code 1104) with the following output:
+        LINK : fatal error LNK1104: cannot open file 'pthreads.lib'\x0d
+        ninja: build stopped: subcommand failed.
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/CheckLibraryExists.cmake:69 (try_compile)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/FindThreads.cmake:112 (CHECK_LIBRARY_EXISTS)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.30/Modules/FindThreads.cmake:176 (_threads_check_lib)"
+      - "CMakeLists.txt:185 (find_package)"
+    checks:
+      - "Looking for pthread_create in pthread"
+    directories:
+      source: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-ktbbrq"
+      binary: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-ktbbrq"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/cmake/modules/"
+    buildResult:
+      variable: "CMAKE_HAVE_PTHREAD_CREATE"
+      cached: true
+      stdout: |
+        Change Dir: 'H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-ktbbrq'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe" -v cmTC_9f9a7
+        [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS -DCHECK_FUNCTION_EXISTS=pthread_create /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_9f9a7.dir\\CheckFunctionExists.c.obj /FdCMakeFiles\\cmTC_9f9a7.dir\\ /FS -c H:\\Users\\Aalle\\Desktop\\ectf\\main\\2025-dream-team-design\\decoder\\inc\\wolfssl-5.7.6\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-ktbbrq\\CheckFunctionExists.c
+        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_9f9a7.dir --rc=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_9f9a7.dir\\CheckFunctionExists.c.obj  /out:cmTC_9f9a7.exe /implib:cmTC_9f9a7.lib /pdb:cmTC_9f9a7.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  pthread.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        FAILED: cmTC_9f9a7.exe 
+        C:\\Windows\\system32\\cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_9f9a7.dir --rc=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WINDOW~4\\10\\bin\\100261~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_9f9a7.dir\\CheckFunctionExists.c.obj  /out:cmTC_9f9a7.exe /implib:cmTC_9f9a7.lib /pdb:cmTC_9f9a7.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  pthread.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cd ."
+        LINK Pass 1: command "C:\\PROGRA~1\\MIB055~1\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1443~1.348\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_9f9a7.dir\\CheckFunctionExists.c.obj /out:cmTC_9f9a7.exe /implib:cmTC_9f9a7.lib /pdb:cmTC_9f9a7.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console pthread.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTFILE:CMakeFiles\\cmTC_9f9a7.dir/intermediate.manifest CMakeFiles\\cmTC_9f9a7.dir/manifest.res" failed (exit code 1104) with the following output:
+        LINK : fatal error LNK1104: cannot open file 'pthread.lib'\x0d
+        ninja: build stopped: subcommand failed.
+        
+      exitCode: 1
+...

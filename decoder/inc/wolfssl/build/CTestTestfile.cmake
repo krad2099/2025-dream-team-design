@@ -1,0 +1,36 @@
+# CMake generated Testfile for 
+# Source directory: H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6
+# Build directory: H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/build
+# 
+# This file includes the relevant testing commands required for 
+# testing this directory and lists subdirectories to be tested as well.
+if(CTEST_CONFIGURATION_TYPE MATCHES "^([Dd][Ee][Bb][Uu][Gg])$")
+  add_test(unit_test "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/build/tests/Debug/unit.test.exe")
+  set_tests_properties(unit_test PROPERTIES  WORKING_DIRECTORY "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6" _BACKTRACE_TRIPLES "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/CMakeLists.txt;2507;add_test;H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/CMakeLists.txt;0;")
+elseif(CTEST_CONFIGURATION_TYPE MATCHES "^([Rr][Ee][Ll][Ee][Aa][Ss][Ee])$")
+  add_test(unit_test "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/build/tests/Release/unit.test.exe")
+  set_tests_properties(unit_test PROPERTIES  WORKING_DIRECTORY "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6" _BACKTRACE_TRIPLES "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/CMakeLists.txt;2507;add_test;H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/CMakeLists.txt;0;")
+elseif(CTEST_CONFIGURATION_TYPE MATCHES "^([Mm][Ii][Nn][Ss][Ii][Zz][Ee][Rr][Ee][Ll])$")
+  add_test(unit_test "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/build/tests/MinSizeRel/unit.test.exe")
+  set_tests_properties(unit_test PROPERTIES  WORKING_DIRECTORY "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6" _BACKTRACE_TRIPLES "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/CMakeLists.txt;2507;add_test;H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/CMakeLists.txt;0;")
+elseif(CTEST_CONFIGURATION_TYPE MATCHES "^([Rr][Ee][Ll][Ww][Ii][Tt][Hh][Dd][Ee][Bb][Ii][Nn][Ff][Oo])$")
+  add_test(unit_test "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/build/tests/RelWithDebInfo/unit.test.exe")
+  set_tests_properties(unit_test PROPERTIES  WORKING_DIRECTORY "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6" _BACKTRACE_TRIPLES "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/CMakeLists.txt;2507;add_test;H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/CMakeLists.txt;0;")
+else()
+  add_test(unit_test NOT_AVAILABLE)
+endif()
+if(CTEST_CONFIGURATION_TYPE MATCHES "^([Dd][Ee][Bb][Uu][Gg])$")
+  add_test(wolfcrypttest "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/build/wolfcrypt/test/Debug/testwolfcrypt.exe")
+  set_tests_properties(wolfcrypttest PROPERTIES  WORKING_DIRECTORY "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6" _BACKTRACE_TRIPLES "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/CMakeLists.txt;2549;add_test;H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/CMakeLists.txt;0;")
+elseif(CTEST_CONFIGURATION_TYPE MATCHES "^([Rr][Ee][Ll][Ee][Aa][Ss][Ee])$")
+  add_test(wolfcrypttest "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/build/wolfcrypt/test/Release/testwolfcrypt.exe")
+  set_tests_properties(wolfcrypttest PROPERTIES  WORKING_DIRECTORY "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6" _BACKTRACE_TRIPLES "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/CMakeLists.txt;2549;add_test;H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/CMakeLists.txt;0;")
+elseif(CTEST_CONFIGURATION_TYPE MATCHES "^([Mm][Ii][Nn][Ss][Ii][Zz][Ee][Rr][Ee][Ll])$")
+  add_test(wolfcrypttest "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/build/wolfcrypt/test/MinSizeRel/testwolfcrypt.exe")
+  set_tests_properties(wolfcrypttest PROPERTIES  WORKING_DIRECTORY "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6" _BACKTRACE_TRIPLES "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/CMakeLists.txt;2549;add_test;H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/CMakeLists.txt;0;")
+elseif(CTEST_CONFIGURATION_TYPE MATCHES "^([Rr][Ee][Ll][Ww][Ii][Tt][Hh][Dd][Ee][Bb][Ii][Nn][Ff][Oo])$")
+  add_test(wolfcrypttest "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/build/wolfcrypt/test/RelWithDebInfo/testwolfcrypt.exe")
+  set_tests_properties(wolfcrypttest PROPERTIES  WORKING_DIRECTORY "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6" _BACKTRACE_TRIPLES "H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/CMakeLists.txt;2549;add_test;H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/CMakeLists.txt;0;")
+else()
+  add_test(wolfcrypttest NOT_AVAILABLE)
+endif()

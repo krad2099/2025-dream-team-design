@@ -1,0 +1,12 @@
+^H:\USERS\AALLE\DESKTOP\ECTF\MAIN\2025-DREAM-TEAM-DESIGN\DECODER\INC\WOLFSSL-5.7.6\WOLFCRYPT\SRC\AES_ASM.ASM
+ml64.exe /c /Zi /Fo"H:\Users\Aalle\Desktop\ectf\main\2025-dream-team-design\decoder\inc\wolfssl-5.7.6\Debug\x64\aes_asm.obj" wolfcrypt\src\aes_asm.asm
+^H:\USERS\AALLE\DESKTOP\ECTF\MAIN\2025-DREAM-TEAM-DESIGN\DECODER\INC\WOLFSSL-5.7.6\WOLFCRYPT\SRC\AES_GCM_ASM.ASM
+ml64.exe /c /Zi /Fo"H:\Users\Aalle\Desktop\ectf\main\2025-dream-team-design\decoder\inc\wolfssl-5.7.6\Debug\x64\aes_gcm_asm.obj" wolfcrypt\src\aes_gcm_asm.asm
+^H:\USERS\AALLE\DESKTOP\ECTF\MAIN\2025-DREAM-TEAM-DESIGN\DECODER\INC\WOLFSSL-5.7.6\WOLFCRYPT\SRC\AES_XTS_ASM.ASM
+ml64.exe /c /Zi /Fo"H:\Users\Aalle\Desktop\ectf\main\2025-dream-team-design\decoder\inc\wolfssl-5.7.6\Debug\x64\aes_xts_asm.obj" wolfcrypt\src\aes_xts_asm.asm
+^H:\USERS\AALLE\DESKTOP\ECTF\MAIN\2025-DREAM-TEAM-DESIGN\DECODER\INC\WOLFSSL-5.7.6\WOLFCRYPT\SRC\CHACHA_ASM.ASM
+ml64.exe /c /Zi /Fo"H:\Users\Aalle\Desktop\ectf\main\2025-dream-team-design\decoder\inc\wolfssl-5.7.6\Debug\x64\chacha_asm.obj" wolfcrypt\src\chacha_asm.asm
+^H:\USERS\AALLE\DESKTOP\ECTF\MAIN\2025-DREAM-TEAM-DESIGN\DECODER\INC\WOLFSSL-5.7.6\WOLFCRYPT\SRC\POLY1305_ASM.ASM
+ml64.exe /c /Zi /Fo"H:\Users\Aalle\Desktop\ectf\main\2025-dream-team-design\decoder\inc\wolfssl-5.7.6\Debug\x64\poly1305_asm.obj" wolfcrypt\src\poly1305_asm.asm
+^H:\USERS\AALLE\DESKTOP\ECTF\MAIN\2025-DREAM-TEAM-DESIGN\DECODER\INC\WOLFSSL-5.7.6\WOLFCRYPT\SRC\SP_X86_64_ASM.ASM
+ml64.exe /c /Zi /Fo"H:\Users\Aalle\Desktop\ectf\main\2025-dream-team-design\decoder\inc\wolfssl-5.7.6\Debug\x64\sp_x86_64_asm.obj" wolfcrypt\src\sp_x86_64_asm.asm

@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="H:\Users\Aalle\Desktop\ectf\main\2025-dream-team-design\decoder\inc\wolfssl-5.7.6\wolfcrypt\src\hmac.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\Users\Aalle\Desktop\ectf\main\2025-dream-team-design\decoder\inc\wolfssl-5.7.6\wolfcrypt\src\hash.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\Users\Aalle\Desktop\ectf\main\2025-dream-team-design\decoder\inc\wolfssl-5.7.6\wolfcrypt\src\cpuid.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\Users\Aalle\Desktop\ectf\main\2025-dream-team-design\decoder\inc\wolfssl-5.7.6\wolfcrypt\src\kdf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\Users\Aalle\Desktop\ectf\main\2025-dream-team-design\decoder\inc\wolfssl-5.7.6\wolfcrypt\src\random.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\Users\Aalle\Desktop\ectf\main\2025-dream-team-design\decoder\inc\wolfssl-5.7.6\wolfcrypt\src\sha256.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\Users\Aalle\Desktop\ectf\main\2025-dream-team-design\decoder\inc\wolfssl-5.7.6\wolfcrypt\src\rsa.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\Users\Aalle\Desktop\ectf\main\2025-dream-team-design\decoder\inc\wolfssl-5.7.6\wolfcrypt\src\sp_int.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\Users\Aalle\Desktop\ectf\main\2025-dream-team-design\decoder\inc\wolfssl-5.7.6\wolfcrypt\src\aes.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\Users\Aalle\Desktop\ectf\main\2025-dream-team-design\decoder\inc\wolfssl-5.7.6\wolfcrypt\src\sha.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\Users\Aalle\Desktop\ectf\main\2025-dream-team-design\decoder\inc\wolfssl-5.7.6\wolfcrypt\src\sha512.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\Users\Aalle\Desktop\ectf\main\2025-dream-team-design\decoder\inc\wolfssl-5.7.6\wolfcrypt\src\sha3.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\Users\Aalle\Desktop\ectf\main\2025-dream-team-design\decoder\inc\wolfssl-5.7.6\wolfcrypt\src\logging.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\Users\Aalle\Desktop\ectf\main\2025-dream-team-design\decoder\inc\wolfssl-5.7.6\wolfcrypt\src\wc_port.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\Users\Aalle\Desktop\ectf\main\2025-dream-team-design\decoder\inc\wolfssl-5.7.6\wolfcrypt\src\error.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\Users\Aalle\Desktop\ectf\main\2025-dream-team-design\decoder\inc\wolfssl-5.7.6\wolfcrypt\src\wc_encrypt.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\Users\Aalle\Desktop\ectf\main\2025-dream-team-design\decoder\inc\wolfssl-5.7.6\wolfcrypt\src\signature.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\Users\Aalle\Desktop\ectf\main\2025-dream-team-design\decoder\inc\wolfssl-5.7.6\wolfcrypt\src\wolfmath.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\Users\Aalle\Desktop\ectf\main\2025-dream-team-design\decoder\inc\wolfssl-5.7.6\wolfcrypt\src\memory.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\Users\Aalle\Desktop\ectf\main\2025-dream-team-design\decoder\inc\wolfssl-5.7.6\wolfcrypt\src\dh.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\Users\Aalle\Desktop\ectf\main\2025-dream-team-design\decoder\inc\wolfssl-5.7.6\wolfcrypt\src\asn.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\Users\Aalle\Desktop\ectf\main\2025-dream-team-design\decoder\inc\wolfssl-5.7.6\wolfcrypt\src\coding.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\Users\Aalle\Desktop\ectf\main\2025-dream-team-design\decoder\inc\wolfssl-5.7.6\wolfcrypt\src\poly1305.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\Users\Aalle\Desktop\ectf\main\2025-dream-team-design\decoder\inc\wolfssl-5.7.6\wolfcrypt\src\md5.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\Users\Aalle\Desktop\ectf\main\2025-dream-team-design\decoder\inc\wolfssl-5.7.6\wolfcrypt\src\pwdbased.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\Users\Aalle\Desktop\ectf\main\2025-dream-team-design\decoder\inc\wolfssl-5.7.6\wolfcrypt\src\pkcs12.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\Users\Aalle\Desktop\ectf\main\2025-dream-team-design\decoder\inc\wolfssl-5.7.6\wolfcrypt\src\chacha.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\Users\Aalle\Desktop\ectf\main\2025-dream-team-design\decoder\inc\wolfssl-5.7.6\wolfcrypt\src\chacha20_poly1305.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\Users\Aalle\Desktop\ectf\main\2025-dream-team-design\decoder\inc\wolfssl-5.7.6\wolfcrypt\src\integer.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\Users\Aalle\Desktop\ectf\main\2025-dream-team-design\decoder\inc\wolfssl-5.7.6\wolfcrypt\src\ecc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\Users\Aalle\Desktop\ectf\main\2025-dream-team-design\decoder\inc\wolfssl-5.7.6\src\internal.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\Users\Aalle\Desktop\ectf\main\2025-dream-team-design\decoder\inc\wolfssl-5.7.6\src\wolfio.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\Users\Aalle\Desktop\ectf\main\2025-dream-team-design\decoder\inc\wolfssl-5.7.6\src\keys.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\Users\Aalle\Desktop\ectf\main\2025-dream-team-design\decoder\inc\wolfssl-5.7.6\src\ssl.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\Users\Aalle\Desktop\ectf\main\2025-dream-team-design\decoder\inc\wolfssl-5.7.6\src\ocsp.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\Users\Aalle\Desktop\ectf\main\2025-dream-team-design\decoder\inc\wolfssl-5.7.6\src\tls.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="H:\Users\Aalle\Desktop\ectf\main\2025-dream-team-design\decoder\inc\wolfssl-5.7.6\src\tls13.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="H:\Users\Aalle\Desktop\ectf\main\2025-dream-team-design\decoder\inc\wolfssl-5.7.6\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{7F4EAFFC-B8FA-3D2D-AFF3-BCFB20E5C010}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

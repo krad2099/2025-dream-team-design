@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="H:\Users\Aalle\Desktop\ectf\main\2025-dream-team-design\decoder\inc\wolfssl-5.7.6\build\CMakeFiles\5c3af3830ca25a0b6905ebc2f534aa30\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{7BE95003-821A-35B2-93E7-E7C3F32E753D}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

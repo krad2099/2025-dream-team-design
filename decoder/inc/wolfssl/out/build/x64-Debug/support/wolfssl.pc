@@ -1,0 +1,11 @@
+prefix=H:/Users/Aalle/Desktop/ectf/main/2025-dream-team-design/decoder/inc/wolfssl-5.7.6/out/install/x64-Debug
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: wolfssl
+Description: wolfssl C library.
+Version: 5.7.6
+Libs: -L${libdir} -lwolfssl
+Libs.private: 
+Cflags: -I${includedir}
