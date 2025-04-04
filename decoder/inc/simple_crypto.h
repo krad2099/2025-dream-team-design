@@ -1,95 +1,70 @@
 /**
- * @file    simple_crypto.h
- * @author  Dream Team
- * @brief   Simplified Crypto API Header (Updated for AES-GCM & SHA-256)
- * @date    2025
+ * @file "simple_crypto.h"
+ * @author Ben Janis
+ * @brief Simplified Crypto API Header 
+ * @date 2025
  *
+ * This source file is part of an example system for MITRE's 2025 Embedded System CTF (eCTF).
+ * This code is being provided only for educational purposes for the 2025 MITRE eCTF competition,
+ * and may not meet MITRE standards for quality. Use this code at your own risk!
+ *
+ * @copyright Copyright (c) 2025 The MITRE Corporation
  */
 
+#if CRYPTO_EXAMPLE
 #ifndef ECTF_CRYPTO_H
 #define ECTF_CRYPTO_H
 
-#include <stdint.h>
-#include <stddef.h>
+#include "wolfssl/wolfcrypt/aes.h"
+#include "wolfssl/wolfcrypt/hash.h"
 
 /******************************** MACRO DEFINITIONS ********************************/
-// For AES-GCM, the output format for encryption is:
-//   [IV (12 bytes)] || [ciphertext (plaintext length bytes)] || [auth tag (16 bytes)]
-#define GCM_IV_SIZE    12
-#define GCM_TAG_SIZE   16
-
-#define KEY_SIZE       16
-// Use 32 bytes for SHA-256 digest output.
-#define HASH_SIZE      32
+#define BLOCK_SIZE AES_BLOCK_SIZE
+#define KEY_SIZE 16
+#define HASH_SIZE MD5_DIGEST_SIZE
 
 /******************************** FUNCTION PROTOTYPES ********************************/
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-/**
- * @brief Computes SHA-256 hash of the given data.
+/** @brief Encrypts plaintext using a symmetric cipher
  *
- * @param data Pointer to the data to hash.
- * @param len  Length of the data (in bytes).
- * @param hash_out Pointer to a buffer (32 bytes) where the resulting hash will be written.
+ * @param plaintext A pointer to a buffer of length len containing the
+ *          plaintext to encrypt
+ * @param len The length of the plaintext to encrypt. Must be a multiple of
+ *          BLOCK_SIZE (16 bytes)
+ * @param key A pointer to a buffer of length KEY_SIZE (16 bytes) containing
+ *          the key to use for encryption
+ * @param ciphertext A pointer to a buffer of length len where the resulting
+ *          ciphertext will be written to
  *
- * @return 0 on success, or a non-zero error code on failure.
- */
-int simple_sha256(const void *data, size_t len, uint8_t *hash_out);
-
-/**
- * @brief Encrypts plaintext using AES-GCM authenticated encryption.
- *
- * The output is formatted as:
- *   [IV (12 bytes)] || [ciphertext (plaintext length bytes)] || [auth tag (16 bytes)]
- * The caller must allocate a ciphertext buffer of size (plaintext length + 12 + 16) bytes.
- *
- * @param plaintext  Pointer to the plaintext to encrypt.
- * @param len        Length of the plaintext (in bytes).
- * @param key        Pointer to a 16-byte key.
- * @param ciphertext Pointer to the output buffer where the resulting ciphertext is written.
- *
- * @return 0 on success, or a non-zero error code on failure.
+ * @return 0 on success, -1 on bad length, other non-zero for other error
  */
 int encrypt_sym(uint8_t *plaintext, size_t len, uint8_t *key, uint8_t *ciphertext);
 
-/**
- * @brief Decrypts ciphertext that was produced by encrypt_sym.
+/** @brief Decrypts ciphertext using a symmetric cipher
  *
- * Expects input format:
- *   [IV (12 bytes)] || [ciphertext (plaintext length bytes)] || [auth tag (16 bytes)]
+ * @param ciphertext A pointer to a buffer of length len containing the
+ *           ciphertext to decrypt
+ * @param len The length of the ciphertext to decrypt. Must be a multiple of
+ *           BLOCK_SIZE (16 bytes)
+ * @param key A pointer to a buffer of length KEY_SIZE (16 bytes) containing
+ *           the key to use for decryption
+ * @param plaintext A pointer to a buffer of length len where the resulting
+ *           plaintext will be written to
  *
- * @param ciphertext Pointer to the input ciphertext buffer.
- * @param inLen      Total length of the input buffer (must be at least 12+16 bytes).
- * @param key        Pointer to a 16-byte key.
- * @param plaintext  Pointer to the output buffer for the decrypted plaintext.
- *                   This buffer must be at least (inLen - 12 - 16) bytes in size.
- *
- * @return 0 on success, or a non-zero error code on failure.
+ * @return 0 on success, -1 on bad length, other non-zero for other error
  */
-int decrypt_sym(uint8_t *ciphertext, size_t inLen, uint8_t *key, uint8_t *plaintext);
+int decrypt_sym(uint8_t *ciphertext, size_t len, uint8_t *key, uint8_t *plaintext);
 
-/**
- * @brief Hashes arbitrary-length data using SHA-256.
+/** @brief Hashes arbitrary-length data
  *
- * @param data     Pointer to the data to hash.
- * @param len      Length of the data (in bytes).
- * @param hash_out Pointer to a buffer (32 bytes) where the resulting hash will be written.
+ * @param data A pointer to a buffer of length len containing the data
+ *           to be hashed
+ * @param len The length of the plaintext to hash
+ * @param hash_out A pointer to a buffer of length HASH_SIZE (16 bytes) where the resulting
+ *           hash output will be written to
  *
- * @return 0 on success, or a non-zero error code on failure.
+ * @return 0 on success, non-zero for other error
  */
 int hash(void *data, size_t len, uint8_t *hash_out);
 
-#ifdef __cplusplus
-}
-#endif
-
-/* Macro mapping for compatibility with the decoder implementation.
- * If wolfSSL’s wc_Sha256Hash is not available, use our simple_sha256 instead.
- */
-#ifndef wc_Sha256Hash
-#define wc_Sha256Hash(data, len, out) simple_sha256(data, len, out)
-#endif
-
+#endif // CRYPTO_EXAMPLE
 #endif // ECTF_CRYPTO_H

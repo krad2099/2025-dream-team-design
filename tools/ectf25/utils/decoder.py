@@ -17,7 +17,6 @@ from typing import Optional, Iterator
 
 from loguru import logger
 from serial import Serial
-from serial.serialutil import SerialTimeoutException
 
 MAGIC = b"%"
 BLOCK_LEN = 256
@@ -228,8 +227,6 @@ class DecoderIntf:
         self._open()
         while (hdr := self.try_parse()) is None:
             b = self.ser.read(1)
-            if b == b'':
-                raise SerialTimeoutException('Read timeout')
             self.stream += b
         # Don't ACK an ACK or a debug message
         if hdr.opcode not in NACK_MSGS:
@@ -239,10 +236,7 @@ class DecoderIntf:
         while remaining > 0:
             block = b""
             while block_remaining := min(BLOCK_LEN, remaining) - len(block):
-                b = self.ser.read(block_remaining)
-                if b == b'':
-                    raise SerialTimeoutException('Read timeout')
-                block += b
+                block += self.ser.read(block_remaining)
             # Don't ACK an ACK or a debug message
             if hdr.opcode not in NACK_MSGS:
                 self.send_ack()

@@ -5,8 +5,8 @@
  * @date 2025
  *
  * This source file is part of an example system for MITRE's 2025 Embedded System CTF (eCTF).
- * The UART routines provided here are used for all serial communications. They remain unchanged
- * even though the overall design now employs AES-GCM and SHA-256 for cryptography in the upper layers.
+ * This code is being provided only for educational purposes for the 2025 MITRE eCTF competition,
+ * and may not meet MITRE standards for quality. Use this code at your own risk!
  *
  * @copyright Copyright (c) 2025 The MITRE Corporation
  */
@@ -20,6 +20,7 @@
 #include "host_messaging.h"
 #include "board.h"
 #include "mxc_device.h"
+
 
 /** @brief Initializes the UART Interrupt handler.
  * 
@@ -39,7 +40,8 @@ int uart_init(void){
 
 /** @brief Reads a byte from UART and reports an error if the read fails.
  * 
- *  @return The character read.  Otherwise see MAX78000 Error Codes for a list of return codes.
+ *  @return The character read.  Otherwise see MAX78000 Error Codes for
+ *      a list of return codes.
 */
 int uart_readbyte_raw(void){
     int data = MXC_UART_ReadCharacterRaw(MXC_UART_GET_UART(CONSOLE_UART));
@@ -48,7 +50,8 @@ int uart_readbyte_raw(void){
 
 /** @brief Reads the next available character from UART.
  * 
- *  @return The character read.  Otherwise see MAX78000 Error Codes for a list of return codes.
+ *  @return The character read.  Otherwise see MAX78000 Error Codes for
+ *      a list of return codes.
 */
 int uart_readbyte(void){
     int data = MXC_UART_ReadCharacter(MXC_UART_GET_UART(CONSOLE_UART));

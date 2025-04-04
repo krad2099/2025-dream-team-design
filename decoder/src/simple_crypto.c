@@ -1,19 +1,14 @@
 /**
- * @file    simple_crypto.c
- * @author  Dream Team
- * @brief   Simplified Crypto API Implementation (Updated for AES-GCM & SHA-256)
- * @date    2025
+ * @file "simple_crypto.c"
+ * @author Ben Janis
+ * @brief Simplified Crypto API Implementation
+ * @date 2025
  *
  * This source file is part of an example system for MITRE's 2025 Embedded System CTF (eCTF).
- * This version uses AES-GCM for authenticated encryption and SHA-256 for hashing.
+ * This code is being provided only for educational purposes for the 2025 MITRE eCTF competition,
+ * and may not meet MITRE standards for quality. Use this code at your own risk!
  *
- * The output format for encryption is:
- *    [IV (12 bytes)] || [ciphertext (plaintext length bytes)] || [auth tag (16 bytes)]
- *
- * The caller must provide an output buffer that is at least:
- *    plaintext length + 12 (IV) + 16 (auth tag) bytes.
- *
- * @copyright 
+ * @copyright Copyright (c) 2025 The MITRE Corporation
  */
 
 #if CRYPTO_EXAMPLE
@@ -21,99 +16,93 @@
 #include "simple_crypto.h"
 #include <stdint.h>
 #include <string.h>
-#include <stdlib.h>
 
-/* Remove wolfSSL includes */
-#include "aes_gcm.h"    // Minimal AES-GCM implementation (e.g. tiny-AES-GCM)
-#include "sha256.h"     // Minimal SHA-256 implementation providing simple_sha256()
 
-/* Use our own simple RNG function.
-   (For production, use a proper cryptographically secure RNG.) */
-static void generate_random_bytes(uint8_t *buf, size_t len) {
-    for (size_t i = 0; i < len; i++) {
-        buf[i] = rand() & 0xFF;
-    }
-}
-
-/**
- * @brief Encrypts plaintext using AES-GCM authenticated encryption.
+/******************************** FUNCTION PROTOTYPES ********************************/
+/** @brief Encrypts plaintext using a symmetric cipher
  *
- * The output format is: [IV (12 bytes)] || [ciphertext (plaintext length bytes)] || [auth tag (16 bytes)]
+ * @param plaintext A pointer to a buffer of length len containing the
+ *          plaintext to encrypt
+ * @param len The length of the plaintext to encrypt. Must be a multiple of
+ *          BLOCK_SIZE (16 bytes)
+ * @param key A pointer to a buffer of length KEY_SIZE (16 bytes) containing
+ *          the key to use for encryption
+ * @param ciphertext A pointer to a buffer of length len where the resulting
+ *          ciphertext will be written to
  *
- * @param plaintext Pointer to the plaintext to encrypt.
- * @param len Length of the plaintext.
- * @param key Pointer to the 16-byte key.
- * @param out Pointer to the output buffer. Must be at least (len + 12 + 16) bytes.
- *
- * @return 0 on success, non-zero error code on failure.
+ * @return 0 on success, -1 on bad length, other non-zero for other error
  */
-int encrypt_sym(uint8_t *plaintext, size_t len, uint8_t *key, uint8_t *out) {
-    int ret;
-    uint8_t iv[GCM_IV_SIZE];
-    uint8_t tag[GCM_TAG_SIZE];
+int encrypt_sym(uint8_t *plaintext, size_t len, uint8_t *key, uint8_t *ciphertext) {
+    Aes ctx; // Context for encryption
+    int result; // Library result
 
-    /* Generate a random IV */
-    generate_random_bytes(iv, GCM_IV_SIZE);
+    // Ensure valid length
+    if (len <= 0 || len % BLOCK_SIZE)
+        return -1;
 
-    /* Perform AES-GCM encryption.
-       This function is assumed to perform AES-GCM encryption with no AAD.
-       It should write the ciphertext into (out + GCM_IV_SIZE) and output a 16-byte auth tag in tag. */
-    ret = AESGCM_encrypt(key, iv, plaintext, (uint32_t)len, out + GCM_IV_SIZE, tag);
-    if (ret != 0) {
-        return ret;
+    // Set the key for encryption
+    result = wc_AesSetKey(&ctx, key, 16, NULL, AES_ENCRYPTION);
+    if (result != 0)
+        return result; // Report error
+
+
+    // Encrypt each block
+    for (int i = 0; i < len - 1; i += BLOCK_SIZE) {
+        result = wc_AesEncryptDirect(&ctx, ciphertext + i, plaintext + i);
+        if (result != 0)
+            return result; // Report error
     }
-
-    /* Prepend IV to output */
-    memcpy(out, iv, GCM_IV_SIZE);
-    /* Append auth tag after the ciphertext */
-    memcpy(out + GCM_IV_SIZE + len, tag, GCM_TAG_SIZE);
-
     return 0;
 }
 
-/**
- * @brief Decrypts ciphertext that was produced with encrypt_sym.
+/** @brief Decrypts ciphertext using a symmetric cipher
  *
- * Expects input format: [IV (12 bytes)] || [ciphertext (N bytes)] || [auth tag (16 bytes)]
+ * @param ciphertext A pointer to a buffer of length len containing the
+ *          ciphertext to decrypt
+ * @param len The length of the ciphertext to decrypt. Must be a multiple of
+ *          BLOCK_SIZE (16 bytes)
+ * @param key A pointer to a buffer of length KEY_SIZE (16 bytes) containing
+ *          the key to use for decryption
+ * @param plaintext A pointer to a buffer of length len where the resulting
+ *          plaintext will be written to
  *
- * @param in Pointer to the input data.
- * @param inLen Total length of the input data. Must be at least (12 + 16) bytes.
- * @param key Pointer to the 16-byte key.
- * @param plaintext Pointer to the output buffer for the decrypted plaintext.
- *                  Must be at least (inLen - 12 - 16) bytes.
- *
- * @return 0 on success, non-zero error code on failure.
+ * @return 0 on success, -1 on bad length, other non-zero for other error
  */
-int decrypt_sym(uint8_t *in, size_t inLen, uint8_t *key, uint8_t *plaintext) {
-    int ret;
-    if (inLen < (GCM_IV_SIZE + GCM_TAG_SIZE))
-        return -1;  /* Not enough data */
+int decrypt_sym(uint8_t *ciphertext, size_t len, uint8_t *key, uint8_t *plaintext) {
+    Aes ctx; // Context for decryption
+    int result; // Library result
 
-    size_t cipherLen = inLen - GCM_IV_SIZE - GCM_TAG_SIZE;
-    uint8_t iv[GCM_IV_SIZE];
-    uint8_t tag[GCM_TAG_SIZE];
+    // Ensure valid length
+    if (len <= 0 || len % BLOCK_SIZE)
+        return -1;
 
-    /* Extract the IV and auth tag */
-    memcpy(iv, in, GCM_IV_SIZE);
-    memcpy(tag, in + GCM_IV_SIZE + cipherLen, GCM_TAG_SIZE);
+    // Set the key for decryption
+    result = wc_AesSetKey(&ctx, key, 16, NULL, AES_DECRYPTION);
+    if (result != 0)
+        return result; // Report error
 
-    /* Perform AES-GCM decryption.
-       It should verify the auth tag and write the decrypted plaintext into 'plaintext'. */
-    ret = AESGCM_decrypt(key, iv, in + GCM_IV_SIZE, (uint32_t)cipherLen, tag, plaintext);
-    return ret;
+    // Decrypt each block
+    for (int i = 0; i < len - 1; i += BLOCK_SIZE) {
+        result = wc_AesDecryptDirect(&ctx, plaintext + i, ciphertext + i);
+        if (result != 0)
+            return result; // Report error
+    }
+    return 0;
 }
 
-/**
- * @brief Hashes arbitrary-length data using SHA-256.
+/** @brief Hashes arbitrary-length data
  *
- * @param data Pointer to the data to hash.
- * @param len Length of the data.
- * @param hash_out Pointer to the output buffer. Must be at least 32 bytes.
+ * @param data A pointer to a buffer of length len containing the data
+ *          to be hashed
+ * @param len The length of the plaintext to hash
+ * @param hash_out A pointer to a buffer of length HASH_SIZE (16 bytes) where the resulting
+ *          hash output will be written to
  *
- * @return 0 on success, non-zero error code on failure.
+ * @return 0 on success, non-zero for other error
  */
 int hash(void *data, size_t len, uint8_t *hash_out) {
-    return simple_sha256(data, len, hash_out);
+    // Pass values to hash
+    return wc_Md5Hash((uint8_t *)data, len, hash_out);
 }
 
-#endif  // CRYPTO_EXAMPLE
+#endif

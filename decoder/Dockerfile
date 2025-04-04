@@ -1,8 +1,3 @@
-# syntax=docker/dockerfile:1
-FROM docker
-COPY --from=docker/buildx-bin /buildx /usr/libexec/docker/cli-plugins/docker-buildx
-RUN docker buildx version
-
 # Dockerfile for the 2025 eCTF
 # Make any changes here to set up your build environment (e.g., installing crypto
 # libraries, dependencies, the compiler for a different language)
@@ -37,8 +32,6 @@ RUN apt-get install -y unzip && \
     rm -f v2024_02.zip
 
 ENV MAXIM_PATH=/root/msdk-2024_02
-# Add the real-time library linker option
-ENV LDFLAGS=-lrt
 
 WORKDIR /decoder
 
