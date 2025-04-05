@@ -21,7 +21,7 @@ MFLOAT_ABI=soft
 IPATH+=../deployment
 IPATH+=inc/
 VPATH+=src/
-#IPATH+=wolfssl
+IPATH+=inc/wolfssl
 
 # ****************** eCTF Bootloader *******************
 # DO NOT REMOVE
@@ -43,5 +43,5 @@ CRYPTO_EXAMPLE=1
 
 # WolfSSL Library Linking & configuration
 CFLAGS += -Iinc/wolfssl  # Fixed to include directory instead of specific file
-LIBPATH += inc/wolfssl/lib
+LIBPATH += inc/wolfssl
 # LIBS += -lwolfssl  # Commented out to avoid linker error
