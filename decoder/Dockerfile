@@ -44,7 +44,6 @@ ENV LDFLAGS=-lrt
 
 # Add your application source code
 WORKDIR /decoder
-COPY . /decoder
 
 # Run the build process
 CMD ["make"]
