@@ -27,7 +27,7 @@
 #ifdef CRYPTO_EXAMPLE
 #include "simple_crypto.h"
 // Using wolfSSL's SHA256 for simplified key derivation.
-#include "wolfssl/wolfcrypt/sha256.h"
+#include "../inc/wolfssl/wolfssl/wolfcrypt/sha256.h"
 #endif  // CRYPTO_EXAMPLE
 
 /**********************************************************
