@@ -29,9 +29,9 @@
 #include <stdint.h>
 #include <string.h>
 #include <stddef.h>
-#include "../lib/wolfssl/build/wolfssl/options.h"
-#include "../lib/wolfssl/wolfssl/wolfcrypt/aes.h"
-#include "../lib/wolfssl/wolfssl/wolfcrypt/sha256.h"
+#include "../inc/wolfssl/build/wolfssl/options.h"
+#include "../inc/wolfssl/wolfssl/wolfcrypt/aes.h"
+#include "../inc/wolfssl/wolfssl/wolfcrypt/sha256.h"
 
 /* Define sizes for IV and Tag */
 #define GCM_IV_SIZE    12
