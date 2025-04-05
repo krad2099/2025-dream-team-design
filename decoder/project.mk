@@ -45,3 +45,13 @@ CRYPTO_EXAMPLE=1
 CFLAGS += -I/inc/wolfssl/options.h
 LIBPATH += inc/wolfssl/lib
 LIBS += -lwolfssl
+
+# No configuration and hardening flags
+-DWOLFSSL_NO_OPTIONS_H
+-DTFM_TIMING_RESISTANT 
+-DECC_TIMING_RESISTANT
+-DWC_RSA_BLINDING
+
+#-DWOLFSSL_USER_SETTINGS
+
+#PROJ_CFLAGS += -DHAVE_AESGCM
