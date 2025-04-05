@@ -29,7 +29,7 @@
 #include <stdint.h>
 #include <string.h>
 #include <stddef.h>
-#include "../inc/wolfssl/build/wolfssl/options.h"
+#include "../inc/wolfssl/wolfssl/options.h"
 #include "../inc/wolfssl/wolfssl/wolfcrypt/aes.h"
 #include "../inc/wolfssl/wolfssl/wolfcrypt/sha256.h"
 

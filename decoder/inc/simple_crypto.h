@@ -10,7 +10,7 @@
 #ifndef ECTF_CRYPTO_H
 #define ECTF_CRYPTO_H
 
-#include "./wolfssl/build/wolfssl/options.h"
+#include "./wolfssl/wolfssl/options.h"
 #include "./wolfssl/wolfssl/wolfcrypt/settings.h"
 #include "./wolfssl/wolfssl/wolfcrypt/aes.h"
 #include "./wolfssl/wolfssl/wolfcrypt/hash.h"
