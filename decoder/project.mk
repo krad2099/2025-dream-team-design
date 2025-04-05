@@ -44,3 +44,11 @@ CRYPTO_EXAMPLE=1
 # WolfSSL Library Linking
 LIBPATH += inc/wolfssl/lib
 LIBS += -lwolfssl
+
+# No configuration and hardening flags
+-DWOLFSSL_NO_OPTIONS_H
+-DTFM_TIMING_RESISTANT 
+-DECC_TIMING_RESISTANT
+-DWC_RSA_BLINDING
+
+#PROJ_CFLAGS += -DHAVE_AESGCM
