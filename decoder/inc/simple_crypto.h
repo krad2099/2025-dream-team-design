@@ -15,6 +15,7 @@
 #include <wolfssl/wolfcrypt/aes.h>
 #include <wolfssl/wolfcrypt/hash.h>
 #include <wolfssl/wolfcrypt/types.h>
+#include <wolfssl/wolfssl/wolfcrypt/visibility.h>
 
 /******************************** MACRO DEFINITIONS ********************************/
 // For AES-GCM, plaintext can be any length.
