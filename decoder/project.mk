@@ -42,6 +42,15 @@ ENTRY=firmware_startup
 CRYPTO_EXAMPLE=1
 
 # WolfSSL Library Linking & configuration
-CFLAGS += -Iinc/wolfssl  # Fixed to include directory instead of specific file
-LIBPATH += inc/wolfssl
-LIBS += -l wolfssl  # Commented out to avoid linker error
+
+# Include the WolfSSL headers
+CFLAGS += -Iinc/wolfssl  
+
+# Ensure the library path points to the correct directory
+LIBPATH += /path/to/wolfssl/lib  # Update this path to where your libwolfssl.a or libwolfssl.so is located
+
+# Link the WolfSSL library (Uncommented to avoid linker error)
+LIBS += -l wolfssl  
+
+# ****************** Additional Configuration *******************
+# Add any other specific configurations you need here.
