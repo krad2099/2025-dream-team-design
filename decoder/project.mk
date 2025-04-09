@@ -44,4 +44,4 @@ CRYPTO_EXAMPLE=1
 # WolfSSL Library Linking & configuration
 CFLAGS += -Iinc/wolfssl  # Fixed to include directory instead of specific file
 LIBPATH += inc/wolfssl
-# LIBS += -lwolfssl  # Commented out to avoid linker error
+LIBS += -lwolfssl  # Commented out to avoid linker error
