@@ -47,10 +47,10 @@ CRYPTO_EXAMPLE=1
 CFLAGS += -Iinc/wolfssl  
 
 # Ensure the library path points to the correct directory
-LIBPATH += /path/to/wolfssl/lib  # Update this path to where your libwolfssl.a or libwolfssl.so is located
+LIBPATH += /inc/wolfssl/src/.libs  # Update this path to where your libwolfssl.a or libwolfssl.so is located
 
 # Link the WolfSSL library (Uncommented to avoid linker error)
-LIBS += -l wolfssl  
+LIBS += -lwolfssl  
 
 # ****************** Additional Configuration *******************
 # Add any other specific configurations you need here.
