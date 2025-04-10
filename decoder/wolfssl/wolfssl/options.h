@@ -29,6 +29,9 @@ extern "C" {
 #undef  NO_DO178
 #define NO_DO178
 
+#undef  WOLFSSL_X86_64_BUILD
+#define WOLFSSL_X86_64_BUILD
+
 #undef  WOLFSSL_ASN_TEMPLATE
 #define WOLFSSL_ASN_TEMPLATE
 
@@ -49,6 +52,9 @@ extern "C" {
 
 #undef  WOLFSSL_USE_ALIGN
 #define WOLFSSL_USE_ALIGN
+
+#undef  WOLFSSL_SHA224
+#define WOLFSSL_SHA224
 
 #undef  WOLFSSL_SHA512
 #define WOLFSSL_SHA512
@@ -83,6 +89,15 @@ extern "C" {
 #undef  WOLFSSL_PSS_LONG_SALT
 #define WOLFSSL_PSS_LONG_SALT
 
+#undef  WOLFSSL_ASN_PRINT
+#define WOLFSSL_ASN_PRINT
+
+#undef  WOLFSSL_BASE64_ENCODE
+#define WOLFSSL_BASE64_ENCODE
+
+#undef  WOLFSSL_SHA3
+#define WOLFSSL_SHA3
+
 #undef  WOLFSSL_NO_SHAKE128
 #define WOLFSSL_NO_SHAKE128
 
@@ -97,6 +112,12 @@ extern "C" {
 
 #undef  HAVE_HASHDRBG
 #define HAVE_HASHDRBG
+
+#undef  HAVE_TLS_EXTENSIONS
+#define HAVE_TLS_EXTENSIONS
+
+#undef  HAVE_SNI
+#define HAVE_SNI
 
 #undef  HAVE_TLS_EXTENSIONS
 #define HAVE_TLS_EXTENSIONS
@@ -134,8 +155,8 @@ extern "C" {
 #undef  WOLFSSL_SP_MATH_ALL
 #define WOLFSSL_SP_MATH_ALL
 
-#undef  WOLFSSL_SP_ARM32
-#define WOLFSSL_SP_ARM32
+#undef  WOLFSSL_SP_X86_64
+#define WOLFSSL_SP_X86_64
 
 #undef  WC_NO_ASYNC_THREADING
 #define WC_NO_ASYNC_THREADING
@@ -166,9 +187,6 @@ extern "C" {
 
 #undef  HAVE___UINT128_T
 #define HAVE___UINT128_T 1
-
-#undef  WOLFSSL_TEST_STATIC_BUILD
-#define WOLFSSL_TEST_STATIC_BUILD
 
 #undef  HAVE_WC_INTROSPECTION
 #define HAVE_WC_INTROSPECTION

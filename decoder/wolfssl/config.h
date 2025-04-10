@@ -90,7 +90,7 @@
 /* #undef HAVE_LIBHSM_LIB */
 
 /* Define to 1 if you have the `network' library (-lnetwork). */
-#define HAVE_LIBNETWORK 1
+/* #undef HAVE_LIBNETWORK */
 
 /* Define to 1 if you have the `pthread' library (-lpthread). */
 /* #undef HAVE_LIBPTHREAD */

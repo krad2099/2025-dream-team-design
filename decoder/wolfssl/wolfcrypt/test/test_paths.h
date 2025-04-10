@@ -20,6 +20,6 @@
  */
 
 #ifndef NO_FILESYSTEM
-    #define CERT_PREFIX "/Users/rad/2025-dream-team-design/decoder/wolfssl/"
-    #define CERT_WRITE_TEMP_DIR "/Users/rad/2025-dream-team-design/decoder/wolfssl/"
+    #define CERT_PREFIX "/home/rad/2025-dream-team-design/decoder/wolfssl/"
+    #define CERT_WRITE_TEMP_DIR "/home/rad/2025-dream-team-design/decoder/wolfssl/"
 #endif /* NO_FILESYSTEM */

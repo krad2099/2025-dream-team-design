@@ -2,7 +2,7 @@
  
 package="wolfssl"
 version="5.7.6"
-libs="-lwolfssl -lnetwork -lpthread"
+libs="-lwolfssl -lpthread"
  
 prefix="/usr/local"
 exec_prefix="${prefix}"
@@ -17,9 +17,9 @@ libdir="${exec_prefix}/lib"
 infodir="${datarootdir}/info"
 mandir="${datarootdir}/man"
 includedir="${prefix}/include"
-target="arm-none-eabi"
-host="arm-none-eabi"
-build="arm-apple-darwin22.6.0"
+target="x86_64-pc-linux-gnu"
+host="x86_64-pc-linux-gnu"
+build="x86_64-pc-linux-gnu"
  
 if test "$#" -eq 0; then
    cat <<EOF
