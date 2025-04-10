@@ -56,7 +56,7 @@ LDFLAGS += -Wl,-ereset_handler
 LIBS = -lm
 
 # Memory Map
-SRC_LD = -T./linker.ld
+#SRC_LD = -T./linker.ld
 
 # Optimization level and place functions / data into separate sections to allow dead code removal
 CFLAGS += -Os -ffunction-sections -fdata-sections -fno-builtin
