@@ -32,6 +32,7 @@
  *     wolfSSL_CTX_load_system_CA_certs.
  */
 
+/*
 #ifdef WOLFSSL_SYS_CA_CERTS
 
 #ifdef _WIN32
@@ -103,6 +104,7 @@
 
 
 #ifndef NO_CERTS
+*/
 
 /* Get DER encoding from data in a buffer as a DerBuffer.
  *
