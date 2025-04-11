@@ -44,11 +44,15 @@ CRYPTO_EXAMPLE=1
 # WolfSSL Library Linking & configuration
 CFLAGS += -I/inc/wolfssl/options.h
 LIBPATH += inc/wolfssl/lib
-LIBS += -lwolfssl
+
+# Add the library search flag to LDFLAGS. This tells the linker where to look for the library.
+LDFLAGS += -L$(LIBPATH) -Wl,--gc-sections
+
+#LIBS += -lwolfssl
 
 # No configuration and hardening CFLAGS
 CFLAGS += -DWOLFSSL_NO_OPTIONS_H -DTFM_TIMING_RESISTANT -DECC_TIMING_RESISTANT -DWC_RSA_BLINDING -DWOLFSSL_APPLE_NATIVE_CERT_VALIDATION -DWOLFSSL_NO_ASM
 
 #-DWOLFSSL_USER_SETTINGS
 
-PROJ_CFLAGS += -DHAVE_AESGCM -specs=rdimon.specs
+#PROJ_CFLAGS += -DHAVE_AESGCM -specs=rdimon.specs
