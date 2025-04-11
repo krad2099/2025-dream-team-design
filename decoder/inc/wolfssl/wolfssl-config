@@ -2,9 +2,9 @@
  
 package="wolfssl"
 version="5.7.6"
-libs="-lwolfssl -lpthread"
+libs="-lwolfssl -lnetwork -lpthread"
  
-prefix="/usr"
+prefix="/usr/local"
 exec_prefix="${prefix}"
 bindir="${exec_prefix}/bin"
 sbindir="${exec_prefix}/sbin"
@@ -17,9 +17,9 @@ libdir="${exec_prefix}/lib"
 infodir="${datarootdir}/info"
 mandir="${datarootdir}/man"
 includedir="${prefix}/include"
-target="x86_64-pc-msys"
-host="x86_64-pc-msys"
-build="x86_64-pc-msys"
+target="aarch64-apple-darwin22.6.0"
+host="aarch64-apple-darwin22.6.0"
+build="aarch64-apple-darwin22.6.0"
  
 if test "$#" -eq 0; then
    cat <<EOF
