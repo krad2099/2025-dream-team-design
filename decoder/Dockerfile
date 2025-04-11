@@ -40,7 +40,7 @@ RUN apt-get install -y unzip && \
 
 ENV MAXIM_PATH=/root/msdk-2024_02
 # Add the real-time library linker option
-ENV LDFLAGS=-lrt
+ENV LDFLAGS=-lrt -L$(LIBPATH)
 
 # Add your application source code
 WORKDIR /decoder
