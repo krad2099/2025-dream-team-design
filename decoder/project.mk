@@ -49,6 +49,9 @@ CFLAGS += -Iinc/wolfssl
 # Ensure the library path points to the correct directory
 LIBPATH += ./inc/wolfssl/src/.libs  # Update this path to where your libwolfssl.a or libwolfssl.so is located
 
+# Add the library search flag to LDFLAGS. This tells the linker where to look for the library.
+LDFLAGS += -L$(LIBPATH) -Wl,--gc-sections
+
 # Link the WolfSSL library (Uncommented to avoid linker error)
 LIBS += -lwolfssl  
 
