@@ -40,7 +40,7 @@ RUN apt-get install -y unzip && \
 
 ENV MAXIM_PATH=/root/msdk-2024_02
 # Add the real-time library linker option
-ENV LDFLAGS="-lrt -L/./inc/wolfssl/src/.libs"
+ENV LDFLAGS="-lrt -L./inc/wolfssl/src/.libs"
 
 # Add your application source code
 WORKDIR /decoder
