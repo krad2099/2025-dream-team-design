@@ -21,7 +21,7 @@ MFLOAT_ABI=soft
 IPATH+=../deployment
 IPATH+=inc/
 VPATH+=src/
-IPATH+=inc/wolfssl
+IPATH+=/opt/wolfssl
 
 # ****************** eCTF Bootloader *******************
 # DO NOT REMOVE
@@ -47,7 +47,7 @@ CRYPTO_EXAMPLE=1
 CFLAGS += -Iinc/wolfssl  
 
 # Ensure the library path points to the correct directory
-LIBPATH += ./inc/wolfssl/src/.libs  # Update this path to where your libwolfssl.a or libwolfssl.so is located
+LIBPATH := ./inc/wolfssl/src/.libs  # Update this path to where your libwolfssl.a or libwolfssl.so is located
 
 # Add the library search flag to LDFLAGS. This tells the linker where to look for the library.
 LDFLAGS += -L./inc/wolfssl/src/.libs -Wl,--gc--sections -lwolfssl
@@ -57,3 +57,4 @@ LDFLAGS += -L./inc/wolfssl/src/.libs -Wl,--gc--sections -lwolfssl
 
 # ****************** Additional Configuration *******************
 # Add any other specific configurations you need here.
+
