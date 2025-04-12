@@ -44,7 +44,7 @@ CRYPTO_EXAMPLE=1
 # WolfSSL Library Linking & configuration
 
 # Include the WolfSSL headers
-CFLAGS += -Iinc/wolfssl -DWOLFSSL_USER_SETTINGS #-specs=rdimon.specs
+CFLAGS += -Iinc/wolfssl 
 
 # Ensure the library path points to the correct directory
 LIBPATH += ./inc/wolfssl/src/.libs  # Update this path to where your libwolfssl.a or libwolfssl.so is located
@@ -57,4 +57,4 @@ LIBS += -lwolfssl
 
 # ****************** Additional Configuration *******************
 # Add any other specific configurations you need here.
-
+PROJ_CFLAGS += -DWOLFSSL_USER_SETTINGS #-specs=rdimon.specs
