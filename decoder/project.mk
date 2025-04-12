@@ -53,7 +53,7 @@ LIBPATH += ./inc/wolfssl/src/.libs  # Update this path to where your libwolfssl.
 LDFLAGS += -L./inc/wolfssl/src/.libs -Wl,--gc--sections
 
 # Link the WolfSSL library (Uncommented to avoid linker error)
-LIBS += -lwolfssl  
+#LIBS += -lwolfssl  
 
 # ****************** Additional Configuration *******************
 # Add any other specific configurations you need here.
