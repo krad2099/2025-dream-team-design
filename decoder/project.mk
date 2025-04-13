@@ -43,7 +43,7 @@ CRYPTO_EXAMPLE=1
 
 # WolfSSL Library Linking & configuration
 CFLAGS += -I/inc/wolfssl/options.h
-LIBPATH += inc/wolfssl/lib
+LIBPATH += ./wolfssl/src/.libs
 
 # Add the library search flag to LDFLAGS. This tells the linker where to look for the library.
 LDFLAGS += -L$(LIBPATH) -Wl,--gc-sections
