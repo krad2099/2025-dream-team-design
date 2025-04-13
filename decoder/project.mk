@@ -46,7 +46,8 @@ CFLAGS += -I/inc/wolfssl/options.h
 LIBPATH += ./wolfssl/src/.libs
 
 # Add the library search flag to LDFLAGS. This tells the linker where to look for the library.
-LDFLAGS += -L$(LIBPATH) -Wl,--gc-sections
+#LDFLAGS += -L$(LIBPATH) -Wl,--gc-sections
+PROJ_LDFLAGS += wolfssl
 
 #LIBS += -lwolfssl
 
