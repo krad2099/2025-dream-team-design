@@ -20,7 +20,7 @@ MFLOAT_ABI=soft
 
 IPATH+=../deployment
 IPATH+=inc/
-IPATH+=/opt/wolfssl
+#IPATH+=/opt/wolfssl
 VPATH+=src/
 
 # ****************** eCTF Bootloader *******************
@@ -41,5 +41,5 @@ ENTRY=firmware_startup
 # Enable Crypto Example
 CRYPTO_EXAMPLE=1
 
-LIBPATH += inc/wolfssl/lib
-LIBS += wolfssl
+#LIBPATH += inc/wolfssl/lib
+#LIBS += wolfssl
