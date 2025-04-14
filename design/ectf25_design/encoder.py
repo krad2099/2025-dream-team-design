@@ -13,7 +13,9 @@ Copyright: Copyright (c) 2025 The MITRE Corporation
 import argparse
 import struct
 import json
-
+import hashlib
+from Crypto.Cipher import AES
+from Crypto.Util.Padding import pad
 
 class Encoder:
     def __init__(self, secrets: bytes):
@@ -51,11 +53,18 @@ class Encoder:
 
         :returns: The encoded frame, which will be sent to the Decoder
         """
-        # TODO: encode the satellite frames so that they meet functional and
-        #  security requirements
-
-        return struct.pack("<IQ", channel, timestamp) + frame
-
+        # Derive a 16-byte key from the secret data (using SHA-256, truncated)
+        key = hashlib.sha256(self.some_secrets.encode()).digest()[:16]
+        # Derive the IV as the first 16 bytes of SHA-256(key)
+        iv = hashlib.sha256(key).digest()[:16]
+        # Pad the frame to a multiple of the AES block size
+        padded_frame = pad(frame, AES.block_size)
+        # Encrypt the padded frame in CBC mode
+        cipher = AES.new(key, AES.MODE_CBC, iv)
+        encrypted_frame = cipher.encrypt(padded_frame)
+        # Prepend header (channel and timestamp) in little-endian format
+        header = struct.pack("<IQ", channel, timestamp)
+        return header + encrypted_frame
 
 def main():
     """A test main to one-shot encode a frame
@@ -76,7 +85,6 @@ def main():
 
     encoder = Encoder(args.secrets_file.read())
     print(repr(encoder.encode(args.channel, args.frame.encode(), args.timestamp)))
-
 
 if __name__ == "__main__":
     main()
