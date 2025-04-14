@@ -10,7 +10,6 @@ requires-python = ">=3.11"
 # TODO: add your custom dependencies to this list
 dependencies = [
     "loguru",
-    "cryptography",
     "pycryptodome",
 ]
 
