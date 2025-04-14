@@ -1,6 +1,17 @@
+"""
+Author: Ben Janis
+Date: 2025
+
+This source file is part of an example system for MITRE's 2025 Embedded System CTF
+(eCTF). This code is being provided only for educational purposes for the 2025 MITRE
+eCTF competition, and may not meet MITRE standards for quality. Use this code at your
+own risk!
+
+Copyright: Copyright (c) 2025 The MITRE Corporation
+"""
+
 import argparse
 import json
-import os
 from pathlib import Path
 
 from loguru import logger
@@ -18,17 +29,20 @@ def gen_secrets(channels: list[int]) -> bytes:
 
     :returns: Contents of the secrets file
     """
-    # Generate a random encryption key (256-bit AES key)
-    encryption_key = os.urandom(32).hex()
+    # TODO: Update this function to generate any system-wide secrets needed by
+    #   your design
 
     # Create the secrets object
+    # You can change this to generate any secret material
+    # The secrets file will never be shared with attackers
     secrets = {
         "channels": channels,
         "some_secrets": "EXAMPLE",
-        "encryption_key": encryption_key,  # Store encryption key as hex
     }
 
-    # Return the JSON encoded secrets
+    # NOTE: if you choose to use JSON for your file type, you will not be able to
+    # store binary data, and must either use a different file type or encode the
+    # binary data to hex, base64, or another type of ASCII-only encoding
     return json.dumps(secrets).encode()
 
 
@@ -69,7 +83,10 @@ def main():
 
     secrets = gen_secrets(args.channels)
 
-    # Print the generated secrets for debugging (remove in production)
+    # Print the generated secrets for your own debugging
+    # Attackers will NOT have access to the output of this, but feel free to remove
+    #
+    # NOTE: Printing sensitive data is generally not good security practice
     logger.debug(f"Generated secrets: {secrets}")
 
     # Open the file, erroring if the file exists unless the --force arg is provided
@@ -77,7 +94,7 @@ def main():
         # Dump the secrets to the file
         f.write(secrets)
 
-    # Debugging log
+    # For your own debugging. Feel free to remove
     logger.success(f"Wrote secrets to {str(args.secrets_file.absolute())}")
 
 

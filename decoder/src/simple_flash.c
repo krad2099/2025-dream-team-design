@@ -1,10 +1,25 @@
+/**
+ * @file "simple_flash.c"
+ * @author Samuel Meyers
+ * @brief Simple Flash Interface Implementation 
+ * @date 2025
+ *
+ * This source file is part of an example system for MITRE's 2025 Embedded System CTF (eCTF).
+ * This code is being provided only for educational purposes for the 2025 MITRE eCTF competition,
+ * and may not meet MITRE standards for quality. Use this code at your own risk!
+ *
+ * @copyright Copyright (c) 2025 The MITRE Corporation
+ */
+
 #include "simple_flash.h"
 
 #include <stdio.h>
-#include <string.h>
+
 #include "flc.h"
 #include "icc.h"
 #include "nvic_table.h"
+
+#include <stdio.h>
 
 /**
  * @brief ISR for the Flash Controller
@@ -66,11 +81,11 @@ int flash_simple_erase_page(uint32_t address) {
  * with the specified amount of bytes
 */
 void flash_simple_read(uint32_t address, void* buffer, uint32_t size) {
-    memcpy(buffer, (void*)address, size);
+    MXC_FLC_Read(address, (uint32_t *)buffer, size);
 }
 
 /**
- * @brief Flash Simple Write with Error Handling
+ * @brief Flash Simple Write
  * 
  * @param address: uint32_t, address of flash page to write
  * @param buffer: void*, pointer to buffer to write data from
@@ -84,9 +99,5 @@ void flash_simple_read(uint32_t address, void* buffer, uint32_t size) {
  * flash_simple_erase_page documentation.
 */
 int flash_simple_write(uint32_t address, void* buffer, uint32_t size) {
-    if (size % 4 != 0) {
-        printf("Error: Flash write size must be a multiple of 4 bytes\n");
-        return -1;
-    }
     return MXC_FLC_Write(address, size, (uint32_t *)buffer);
 }

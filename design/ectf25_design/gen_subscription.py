@@ -1,10 +1,19 @@
+"""
+Author: Ben Janis
+Date: 2025
+
+This source file is part of an example system for MITRE's 2025 Embedded System CTF
+(eCTF). This code is being provided only for educational purposes for the 2025 MITRE
+eCTF competition, and may not meet MITRE standards for quality. Use this code at your
+own risk!
+
+Copyright: Copyright (c) 2025 The MITRE Corporation
+"""
+
 import argparse
 import json
 from pathlib import Path
 import struct
-from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
-from cryptography.hazmat.backends import default_backend
-import os
 
 from loguru import logger
 
@@ -22,27 +31,19 @@ def gen_subscription(
     :param end: Last timestamp the subscription is valid for
     :param channel: Channel to enable
     """
+    # TODO: Update this function to provide a Decoder with whatever data it needs to
+    #   subscribe to a new channel
+
     # Load the json of the secrets file
     secrets = json.loads(secrets)
-    
-    # Extract the encryption key
-    encryption_key = bytes.fromhex(secrets["encryption_key"])
-    
-    # Generate a random IV for encryption
-    iv = os.urandom(16)
-    
-    # Data to encrypt (device ID, start, end, and channel)
-    subscription_data = struct.pack("<IQQI", device_id, start, end, channel)
-    
-    # Create AES cipher in CBC mode
-    cipher = Cipher(algorithms.AES(encryption_key), modes.CBC(iv), backend=default_backend())
-    encryptor = cipher.encryptor()
-    
-    # Encrypt the subscription data
-    encrypted_subscription = encryptor.update(subscription_data) + encryptor.finalize()
-    
-    # Return the IV and encrypted subscription
-    return iv + encrypted_subscription
+
+    # You can use secrets generated using `gen_secrets` here like:
+    # secrets["some_secrets"]
+    # Which would return "EXAMPLE" in the reference design.
+    # Please note that the secrets are READ ONLY at this sage!
+
+    # Pack the subscription. This will be sent to the decoder with ectf25.tv.subscribe
+    return struct.pack("<IQQI", device_id, start, end, channel)
 
 
 def parse_args():
@@ -86,14 +87,18 @@ def main():
         args.secrets_file.read(), args.device_id, args.start, args.end, args.channel
     )
 
-    # Print the generated subscription for debugging (remove in production)
+    # Print the generated subscription for your own debugging
+    # Attackers will NOT have access to the output of this (although they may have
+    # subscriptions in certain scenarios), but feel free to remove
+    #
+    # NOTE: Printing sensitive data is generally not good security practice
     logger.debug(f"Generated subscription: {subscription}")
 
     # Open the file, erroring if the file exists unless the --force arg is provided
     with open(args.subscription_file, "wb" if args.force else "xb") as f:
         f.write(subscription)
 
-    # Debugging log
+    # For your own debugging. Feel free to remove
     logger.success(f"Wrote subscription to {str(args.subscription_file.absolute())}")
 
 

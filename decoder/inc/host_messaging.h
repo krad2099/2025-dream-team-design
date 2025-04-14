@@ -1,3 +1,16 @@
+/**
+ * @file host_messaging.h
+ * @author Samuel Meyers
+ * @brief eCTF Host Messaging Implementation 
+ * @date 2025
+ *
+ * This source file is part of an example system for MITRE's 2025 Embedded System CTF (eCTF).
+ * This code is being provided only for educational purposes for the 2025 MITRE eCTF competition,
+ * and may not meet MITRE standards for quality. Use this code at your own risk!
+ *
+ * @copyright Copyright (c) 2025 The MITRE Corporation
+ */
+
 #ifndef __HOST_MESSAGING__
 #define __HOST_MESSAGING__
 
@@ -13,11 +26,10 @@
 typedef enum {
     DECODE_MSG = 'D',     // 'D' - 0x44
     SUBSCRIBE_MSG = 'S',  // 'S' - 0x53
-    LIST_MSG = 'L',       // 'L' - 0x4C
+    LIST_MSG = 'L',       // 'L' - 0x4c
     ACK_MSG = 'A',        // 'A' - 0x41
     DEBUG_MSG = 'G',      // 'G' - 0x47
     ERROR_MSG = 'E',      // 'E' - 0x45
-    ENCRYPTED_MSG = 'C'   // 'C' - 0x43 (New type for encrypted messages)
 } msg_type_t;
 
 #pragma pack(push, 1) // Tells the compiler not to pad the struct members
@@ -26,6 +38,7 @@ typedef struct {
     char cmd;      // msg_type_t
     uint16_t len;
 } msg_header_t;
+
 #pragma pack(pop) // Tells the compiler to resume padding struct members
 
 #define MSG_HEADER_SIZE sizeof(msg_header_t)

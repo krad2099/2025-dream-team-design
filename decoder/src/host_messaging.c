@@ -1,10 +1,20 @@
-#include <stdio.h>
-#include <string.h>
-#include "host_messaging.h"
-#include "simple_crypto.h"  // Ensure encryption/decryption compatibility
+/**
+ * @file host_messaging.c
+ * @author Samuel Meyers
+ * @brief eCTF Host Messaging Implementation 
+ * @date 2025
+ *
+ * This source file is part of an example system for MITRE's 2025 Embedded System CTF (eCTF).
+ * This code is being provided only for educational purposes for the 2025 MITRE eCTF competition,
+ * and may not meet MITRE standards for quality. Use this code at your own risk!
+ *
+ * @copyright Copyright (c) 2025 The MITRE Corporation
+ */
 
-#define AES_KEY_SIZE 32
-#define AES_BLOCK_SIZE 16
+#include <stdio.h>
+
+#include "host_messaging.h"
+
 
 /** @brief Read len bytes from UART, acknowledging after every 256 bytes.
  * 
@@ -85,6 +95,41 @@ int write_bytes(const void *buf, uint16_t len, bool should_ack) {
     return 0;
 }
 
+/** @brief Write len bytes to UART in hex. 2 bytes will be printed for every byte.
+ * 
+ *  @param type Message type.
+ *  @param buf Pointer to the bytes that will be printed.
+ *  @param len The number of bytes to print.
+ * 
+ *  @return 0 on success. A negative value on error.
+*/
+int write_hex(msg_type_t type, const void *buf, size_t len) {
+    msg_header_t hdr;
+    int i;
+
+    hdr.magic = MSG_MAGIC;
+    hdr.cmd = type;
+    hdr.len = len*2;
+
+    write_bytes(&hdr, MSG_HEADER_SIZE, false /* should_ack */);
+    if (type != DEBUG_MSG && read_ack() < 0) {
+        // If the header was not ack'd, don't send the message
+        return -1;
+    }
+
+    for (i = 0; i < len; i++) {
+        if (i % (256 / 2) == 0 && i != 0) {
+            if (type != DEBUG_MSG && read_ack() < 0) {
+                // If the block was not ack'd, don't send the rest of the message
+                return -1;
+            }
+        }
+    	printf("%02x", ((uint8_t *)buf)[i]);
+        fflush(stdout);
+    }
+    return 0;
+}
+
 /** @brief Send a message to the host, expecting an ack after every 256 bytes.
  * 
  *  @param type The type of message to send.
@@ -122,7 +167,7 @@ int write_packet(msg_type_t type, const void *buf, uint16_t len) {
     return 0;
 }
 
-/** @brief Reads a packet from console UART, handling decryption if needed.
+/** @brief Reads a packet from console UART.
  * 
  *  @param cmd A pointer to the resulting opcode of the packet. Must not be null.
  *  @param buf A pointer to a buffer to store the incoming packet. Can be null.
@@ -159,6 +204,5 @@ int read_packet(msg_type_t* cmd, void *buf, uint16_t *len) {
             }
         }
     }
-
     return 0;
 }
