@@ -46,13 +46,13 @@ CRYPTO_EXAMPLE=1
 # Include the WolfSSL headers
 CFLAGS += -Iinc/wolfssl  
 
-PROJ_LDFLAGS += -lwolfssl
+PROJ_LDFLAGS += wolfssl
 
 # Ensure the library path points to the correct directory
 LIBPATH += ./inc/wolfssl/src/.libs  # Update this path to where your libwolfssl.a or libwolfssl.so is located
 
 # Link the WolfSSL library (Uncommented to avoid linker error)
-LIBS += -lwolfssl  
+#LIBS += -lwolfssl  
 
 # ****************** Additional Configuration *******************
 # Add any other specific configurations you need here.
