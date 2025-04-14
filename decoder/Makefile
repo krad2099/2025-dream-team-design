@@ -264,11 +264,11 @@ PROJ_CFLAGS += -DWOLFSSL_USER_IO
 PROJ_CFLAGS += -DNO_WRITEV -DTIME_T_NOT_64BIT                                                    
 endif
 
-PROJ_LDFLAGS += wolfssl
-
 ifeq ($(POST_BOOT_ENABLED), 1)
 	PROJ_CFLAGS += -DPOST_BOOT=$(POST_BOOT_CODE)
 endif
+
+#PROJ_LDFLAGS += -lwolfssl
 
 # Set hardware floating point acceleration.
 # Options are:
