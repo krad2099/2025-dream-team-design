@@ -15,6 +15,7 @@
 #ifndef ECTF_CRYPTO_H
 #define ECTF_CRYPTO_H
 
+#include "wolfssl/options.h"
 #include "wolfssl/wolfcrypt/aes.h"
 #include "wolfssl/wolfcrypt/sha256.h"  // Added for SHA-256 support
 
