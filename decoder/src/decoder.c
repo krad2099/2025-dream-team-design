@@ -235,18 +235,14 @@ int decode(pkt_len_t pkt_len, frame_packet_t *new_frame) {
     char output_buf[128] = {0};
     uint16_t frame_size;
     channel_id_t channel;
-    uint8_t decrypted[FRAME_SIZE];
+    uint8_t decrypted[FRAME_SIZE];  /* Buffer for decrypted frame data */
 
-    // Frame size is the size of the packet minus the size of non-frame elements
+    /* Calculate the frame size by subtracting the header (channel and timestamp) size */
     frame_size = pkt_len - (sizeof(new_frame->channel) + sizeof(new_frame->timestamp));
     channel = new_frame->channel;
 
-    // The reference design doesn't use the timestamp, but you may want to in your design
-    // timestamp_t timestamp = new_frame->timestamp;
-
-    // Check that we are subscribed to the channel...
     print_debug("Checking subscription\n");
-    if (is_subscribed(channel)) 
+    if (is_subscribed(channel)) {
         if (channel == EMERGENCY_CHANNEL) {
             /* For emergency channel we assume data is not encrypted */
             write_packet(DECODE_MSG, new_frame->data, frame_size);
@@ -264,13 +260,12 @@ int decode(pkt_len_t pkt_len, frame_packet_t *new_frame) {
         return 0;
     } else {
         STATUS_LED_RED();
-        sprintf(
-            output_buf,
-            "Receiving unsubscribed channel data.  %u\n", channel);
+        sprintf(output_buf, "Receiving unsubscribed channel data.  %u\n", channel);
         print_error(output_buf);
         return -1;
     }
 }
+
 
 /** @brief Initializes peripherals for system boot.
 */
