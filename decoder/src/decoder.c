@@ -235,6 +235,7 @@ int decode(pkt_len_t pkt_len, frame_packet_t *new_frame) {
     char output_buf[128] = {0};
     uint16_t frame_size;
     channel_id_t channel;
+    uint8_t decrypted[FRAME_SIZE];
 
     // Frame size is the size of the packet minus the size of non-frame elements
     frame_size = pkt_len - (sizeof(new_frame->channel) + sizeof(new_frame->timestamp));
@@ -245,11 +246,21 @@ int decode(pkt_len_t pkt_len, frame_packet_t *new_frame) {
 
     // Check that we are subscribed to the channel...
     print_debug("Checking subscription\n");
-    if (is_subscribed(channel)) {
-        print_debug("Subscription Valid\n");
-        /* The reference design doesn't need any extra work to decode, but your design likely will.
-        *  Do any extra decoding here before returning the result to the host. */
-        write_packet(DECODE_MSG, new_frame->data, frame_size);
+    if (is_subscribed(channel)) 
+        if (channel == EMERGENCY_CHANNEL) {
+            /* For emergency channel we assume data is not encrypted */
+            write_packet(DECODE_MSG, new_frame->data, frame_size);
+        } else {
+            /* For other channels, perform decryption before sending out the frame */
+            uint8_t key[KEY_SIZE] = {0};  /* Use a fixed zero key (matches crypto_example()) */
+            int ret = decrypt_sym(new_frame->data, frame_size, key, decrypted);
+            if (ret != 0) {
+                sprintf(output_buf, "Decryption failed with error %d\n", ret);
+                print_error(output_buf);
+                return ret;
+            }
+            write_packet(DECODE_MSG, decrypted, frame_size);
+        }
         return 0;
     } else {
         STATUS_LED_RED();
@@ -382,9 +393,9 @@ int main(void) {
 
             #ifdef CRYPTO_EXAMPLE
                 // Run the crypto example
-                // TODO: Remove this from your design
                 crypto_example();
             #endif // CRYPTO_EXAMPLE
+                    break;
 
 
         // Handle decode command
